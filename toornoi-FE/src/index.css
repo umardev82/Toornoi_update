@@ -1,0 +1,55 @@
+@import "tailwindcss";
+@font-face {
+  font-family: 'Lemon Milk Bold'; 
+  src: url('../src/assets/font/lemon_milk/LEMONMILK-Bold.otf') format('opentype');  
+  font-style: normal; 
+}
+@font-face {
+  font-family: 'Lemon Milk Regular'; 
+  src: url('../src/assets/font/lemon_milk/LEMONMILK-Regular.otf') format('opentype'); 
+  font-style: normal; 
+}
+@font-face {
+  font-family: 'Lemon Milk Medium'; 
+  src: url('../src/assets/font/lemon_milk/LEMONMILK-Medium.otf') format('opentype');  
+  font-style: normal; 
+}
+@font-face {
+  font-family: 'Lemon Milk Light'; 
+  src: url('../src/assets/font/lemon_milk/LEMONMILK-Light.otf') format('opentype'); 
+  font-style: normal; 
+}
+
+*{
+  box-sizing: border-box;
+  
+}
+:root {
+  --primary: #0C1D21;
+  --secondary: #0C4655;
+  --accent: #1496B6;
+  --background: #000000;
+  --textlight: #BEC0C9;
+  --textwhite: #FFFFFF;
+  --border: #434557;
+  --secondarybg: #171717;
+}
+#_rht_toaster{
+  text-transform: capitalize;
+}
+button, a{
+  cursor: pointer;
+}
+.lemon-milk-font {
+  font-family: 'Lemon Milk Bold', sans-serif;
+}
+.lemon-milk-medium{
+  font-family: 'Lemon Milk Medium';
+}
+
+.landing-wrapper {
+ 
+  background: 
+  linear-gradient(rgba(16, 18, 23, 0.6), rgba(16, 18, 23, 0.6)), /* Semi-transparent overlay */
+  url('/src/assets/images/toornoi-trophy.png') no-repeat center center / cover;
+}
