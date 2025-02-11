@@ -7,14 +7,20 @@ import AthleteDashboardLayout from "../layouts/athleteDashboardLayout";
 import Overview from "../adminDashboard/overview";
 import AddTournament from "../adminDashboard/addTournament";
 import TournamentList from "../adminDashboard/tournamentList";
+import AllTournaments from "../athleteDashboard/allTournaments";
 import Profile from "../adminDashboard/profile";
 import EditProfile from "../adminDashboard/editProfile";
 import EditTournament from "../adminDashboard/editTournament";
 import ViewTournament from "../adminDashboard/viewTournament";
+import SingleTournament from "../athleteDashboard/singleTournament";
 import NotFoundPage from "../pages/404";
 import VerifyEmail from "../pages/verifyEmail";
 import Login from "../pages/login";
 import PrivateRoute from "./privateRoutes";
+import ForgotPassword from "../pages/forgotPassword";
+import ResetPassword from "../pages/resetPassword";
+import AthleteProfile from "../athleteDashboard/athleteProfile";
+import EditAthleteProfile from "../athleteDashboard/editAtheleteProfile";
 
 
 const AppRoutes = () => {
@@ -27,6 +33,9 @@ const AppRoutes = () => {
         <Route path="/signup" element={<Signup />} />
         <Route path="/verify-email" element={<VerifyEmail />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+
 
         {/* Admin Protected Routes */}
         <Route
@@ -55,7 +64,10 @@ const AppRoutes = () => {
             </PrivateRoute>
           }
         >
-          
+          <Route  path="tournaments" element={<AllTournaments />} />
+          <Route path="tournament/:id" element={<SingleTournament/>} />
+          <Route path="profile" element={<AthleteProfile/>}/>
+          <Route path="settings" element={<EditAthleteProfile/>} />
         </Route>
 
         {/* Catch-all for unknown routes */}

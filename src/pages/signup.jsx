@@ -84,6 +84,16 @@ const Signup = () => {
                         onChange={handleChange}
                         required
                       />
+                       {/* <label htmlFor="confirm-password" className="block text-sm mb-2 text-(--textlight)">Confirm Password</label>  
+                      <input
+                        type="password"
+                        name="confirm_password"
+                        placeholder="Confirm Password"
+                        className="py-2 px-3 bg-(--secondarybg) w-full rounded-sm text-sm text-(--textlight)"
+                        value={formData.confirm_password}
+                        onChange={handleChange}
+                        required
+                      /> */}
                         <label htmlFor="date_of_birth" className="block text-sm mb-2 text-(--textlight)">Date Of Birth</label> 
                       <input
                         type="date"

@@ -91,11 +91,15 @@ const Login = () => {
                     <img src={google} className="w-4 h-4 inline mr-2" alt="google-img" />
                     Sign in with Google
                   </button>
-
+                  <div className="flex justify-between items-center">
                   <p className="mt-3 text-sm text-center text-(--textlight)">
                     Don't have an account?
                     <Link to="/signup" className="text-white font-medium ml-1">Sign up here</Link>
                   </p>
+                  <p className="mt-3 text-sm text-center text-(--accent)">
+                    <Link to="/forgot-password" className="text-(--accent) font-medium ml-1">Forgot Password?</Link>
+                  </p>
+                  </div>
                 </div>
               </div>
             </main>
