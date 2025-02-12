@@ -8,6 +8,8 @@ const SingleTournament = () => {
   const [tournamentData, setTournamentData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [showModal, setShowModal] = useState(false); // State to manage modal visibility
+
 
   // Use useCallback to prevent unnecessary function recreation
   const fetchTournamentData = useCallback(async () => {
@@ -53,7 +55,7 @@ const SingleTournament = () => {
         <p className="text-(--textlight)"><span className="text-(--textwhite) font-bold">Registration Fee:</span> {tournamentData?.registration_fee}</p>
         </div>
         <div className="text-end">
-        <button className="py-2 px-5 bg-(--accent) rounded">Register</button>
+        <button onClick={() => setShowModal(true)} className="py-2 px-5 bg-(--accent) rounded">Register</button>
         </div>
        
         <div>
@@ -132,10 +134,28 @@ const SingleTournament = () => {
         <img src={tournamentData?.code_of_conduct} alt="" className="h-60 w-full rounded"/>
         </div>
         <div className="">
-        <button className="py-2 px-5 bg-(--accent) rounded text-(--textwhite) mt-4">Register</button>
+        <button onClick={() => setShowModal(true)} className="py-2 px-5 bg-(--accent) rounded text-(--textwhite) mt-4">Register</button>
         </div>
 
       </div>
+
+      {showModal && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg w-96">
+            <h2 className="text-xl font-bold mb-3">Registration Details</h2>
+            <p><strong>Fee:</strong> ${tournamentData?.registration_fee}</p>
+            <p >
+            <p><strong>Terms and condition:</strong> {tournamentData?.rules_and_regulations}</p>
+            </p>
+            
+            <div className="mt-4 flex justify-end">
+              <button onClick={() => setShowModal(false)} className="mr-3 px-4 py-2 bg-gray-300 rounded">Cancel</button>
+              <button className="px-4 py-2 bg-(--accent) text-white rounded">Proceed to Checkout</button>
+            </div>
+          </div>
+        </div>
+      )}
+
 
     </>
   );

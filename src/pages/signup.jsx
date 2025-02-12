@@ -5,6 +5,7 @@ import logo from "../assets/images/logo.png";
 import trophy from "../assets/images/trophy.png";
 import google from "../assets/images/google.png";
 import { IoClose } from "react-icons/io5";
+import { Toaster } from "react-hot-toast";
 
 const Signup = () => {
   const { signup, loading, popupMessage, popupType, showPopup, setShowPopup } = useSignup();
@@ -15,33 +16,38 @@ const Signup = () => {
     username: "",
     email: "",
     password: "",
+    confirm_password: "",
     date_of_birth: "",
-    phone_number: "",
-    // device: "mobile",
-   
+    phone_number: "",   
   });
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    if (localError) {
+      setLocalError(null);
+    }
   };
 
   const handleSignup = async (e) => {
     e.preventDefault();
-    setLocalError(null);
-
-    if (!formData.username || !formData.email || !formData.password || !formData.date_of_birth || !formData.phone_number) {
+    
+    // Check if all fields are filled
+    if (!formData.username || !formData.email || !formData.password || !formData.confirm_password || !formData.date_of_birth || !formData.phone_number) {
       setLocalError("Please fill in all fields.");
       return;
     }
 
+  
     const result = await signup(formData);
     if (result.success) {
-    
+      // Handle success
     }
   };
+  
 
   return (
     <>
+    
       <div className="grid lg:grid-cols-2 min-h-screen bg-(--background) items-center">
         <main id="content" className="w-full max-w-md mx-auto py-10">
           <Link to="/" className="header-logo">
@@ -84,7 +90,7 @@ const Signup = () => {
                         onChange={handleChange}
                         required
                       />
-                       {/* <label htmlFor="confirm-password" className="block text-sm mb-2 text-(--textlight)">Confirm Password</label>  
+                       <label htmlFor="confirm-password" className="block text-sm mb-2 text-(--textlight)">Confirm Password</label>  
                       <input
                         type="password"
                         name="confirm_password"
@@ -93,7 +99,7 @@ const Signup = () => {
                         value={formData.confirm_password}
                         onChange={handleChange}
                         required
-                      /> */}
+                      />
                         <label htmlFor="date_of_birth" className="block text-sm mb-2 text-(--textlight)">Date Of Birth</label> 
                       <input
                         type="date"
@@ -131,6 +137,7 @@ const Signup = () => {
                   {loading ? "Signing up..." : "Sign Up"}
                 </button>
               </form>
+              {localError && <p className="text-red-500 text-sm mt-2">{localError}</p>}
 
               <button className="w-full py-2 px-3 bg-(--secondarybg) text-white rounded-sm text-sm mt-3">
                 <img src={google} className="w-4 h-4 inline mr-2" alt="google-img" />
@@ -152,9 +159,11 @@ const Signup = () => {
 
       {/* POPUP MODAL */}
       {showPopup && (
-      <div className="fixed inset-0 flex items-center pt-6 justify-center bg-black/50 ">
-      <div className="relative bg-white p-[50px] rounded-lg shadow-lg md:w-[40%] w-[90%] min-h-[30%] flex items-center justify-center text-center">
         
+      <div className="fixed inset-0 flex items-center pt-6 justify-center bg-black/50 ">
+
+      <div className="relative bg-white p-[50px] rounded-lg shadow-lg md:w-[40%] w-[90%] min-h-[30%] flex items-center justify-center text-center">
+        <Toaster/>
         {/* Close button at the top-right */}
         <button 
           onClick={() => setShowPopup(false)}

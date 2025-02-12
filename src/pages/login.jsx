@@ -98,8 +98,7 @@ const Login = () => {
                   </p>
                   <p className="mt-3 text-sm text-center text-(--accent)">
                     <Link to="/forgot-password" className="text-(--accent) font-medium ml-1">Forgot Password?</Link>
-                  </p>
-                  </div>
+                  </p></div>
                 </div>
               </div>
             </main>

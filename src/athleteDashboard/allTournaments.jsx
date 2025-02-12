@@ -5,82 +5,152 @@ import { FaEye } from "react-icons/fa";
 import API_BASE_URL from "../config";
 
 const AllTournaments = () => {
-  const [tournaments, setTournaments] = useState([]); // Ensure this is always an array
+  const [tournaments, setTournaments] = useState([]);
+  const [filteredTournaments, setFilteredTournaments] = useState([]);
+  const [search, setSearch] = useState("");
+  const [category, setCategory] = useState("");
+  const [priceRange, setPriceRange] = useState("");
+  const [categories, setCategories] = useState([]);
+  const [priceRanges, setPriceRanges] = useState([]);
+  const [loading, setLoading] = useState(false); // 🔹 Loader state
 
   useEffect(() => {
     fetchTournaments();
   }, []);
 
   const fetchTournaments = async () => {
+    setLoading(true);
     try {
       const response = await axios.get(`${API_BASE_URL}/tournament_user/`);
-      console.log("API Response:", response.data); // Debugging log
+      let data = Array.isArray(response.data) ? response.data : [response.data];
 
-      // Ensure response is always an array
-      if (Array.isArray(response.data)) {
-        setTournaments(response.data);
-      } else if (typeof response.data === "object") {
-        setTournaments([response.data]); // Wrap single object in an array
-      } else {
-        console.error("Unexpected response format:", response.data);
-        setTournaments([]); // Fallback to an empty array
-      }
+      setTournaments(data);
+      setFilteredTournaments(data);
+      extractCategories(data);
+      extractPriceRanges(data);
     } catch (error) {
       console.error("Error fetching tournaments:", error);
-      setTournaments([]); // Prevent breaking .map()
+      setTournaments([]);
+      setFilteredTournaments([]);
+    } finally {
+      setLoading(false);
     }
   };
 
+  const extractCategories = (data) => {
+    const uniqueCategories = [...new Set(data.map((tournament) => tournament.category))];
+    setCategories(uniqueCategories);
+  };
 
+  const extractPriceRanges = (data) => {
+    const fees = data.map((tournament) => parseInt(tournament.registration_fee)).filter(Boolean);
+    if (fees.length === 0) return;
 
- 
+    const minFee = Math.min(...fees);
+    const maxFee = Math.max(...fees);
+
+    const ranges = [
+      { label: `$${minFee} - $${minFee + 50}`, value: `${minFee}-${minFee + 50}` },
+      { label: `$${minFee + 51} - $${minFee + 100}`, value: `${minFee + 51}-${minFee + 100}` },
+      { label: `$${maxFee - 100} - $${maxFee}`, value: `${maxFee - 100}-${maxFee}` },
+      { label: `$${maxFee}+`, value: `${maxFee}+` },
+    ];
+
+    setPriceRanges(ranges);
+  };
+
+  useEffect(() => {
+    setLoading(true);
+    let filteredData = tournaments.filter((tournament) => {
+      return (
+        (search === "" || tournament.tournament_name.toLowerCase().includes(search.toLowerCase())) &&
+        (category === "" || tournament.category === category) &&
+        (priceRange === "" || checkPriceRange(tournament.registration_fee, priceRange))
+      );
+    });
+
+    setTimeout(() => {
+      setFilteredTournaments(filteredData);
+      setLoading(false);
+    }, 500); // Small delay for smooth transition
+  }, [search, category, priceRange, tournaments]);
+
+  const checkPriceRange = (fee, range) => {
+    if (!fee) return false;
+    const price = parseInt(fee);
+    const [min, max] = range.split("-").map(Number);
+    if (!max) return price >= min;
+    return price >= min && price <= max;
+  };
 
   return (
     <>
-      <div className="overflow-x-auto">
-        <table className="w-full table-auto text-left text-white border-separate border-spacing-y-2 border border-transparent">
-          <thead className="bg-(--secondary) p-2 rounded-sm text-white">
-            <tr className="rounded-2xl">
-              <th className="p-3 font-medium rounded-l-md whitespace-nowrap w-max">Tournament</th>
-              <th className="p-3 font-medium whitespace-nowrap w-max">Description</th>
-              <th className="p-3 font-medium whitespace-nowrap w-max">Status</th>
-              <th className="p-3 font-medium whitespace-nowrap w-max">Time</th>
-              <th className="p-3 font-medium whitespace-nowrap w-max">Date</th>
-              <th className="p-3 font-medium rounded-r-md whitespace-nowrap w-max">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {(tournaments || []).map((tournament, index) => (
-              <tr key={index} className="bg-(--primary) text-(--textlight)">
-                <td className="p-3 flex items-center space-x-3 rounded-r-md whitespace-nowrap w-max">
-                  <img
-                    src={tournament.cover_image}
-                    alt="Tournament"
-                    className="w-10 h-10 rounded-md object-cover"
-                  />
-                  <span>{tournament.tournament_name}</span>
-                </td>
-                <td className="p-3 truncate max-w-[50px] whitespace-nowrap">{tournament.description}</td>
-                <td className="p-3 whitespace-nowrap w-max">
-                  <span className="bg-[#433E29] text-[#E5BA18] px-3 pb-1 rounded-full">
-                    {tournament.status}
-                  </span>
-                </td>
-                <td className="p-3 whitespace-nowrap w-max">{tournament.time}</td>
-                <td className="p-3 whitespace-nowrap w-max">{tournament.start_date}</td>
-                <td className="p-3 whitespace-nowrap w-max">
-                  <div className="flex gap-3">
-                    <Link to={`/my-account/tournament/${tournament.id}`} className="flex items-center gap-2"> View
-                      <FaEye className="text-(--accent)" />
-                    </Link>                   
-                  </div>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      {/* 🔹 Search & Filter Section */}
+      <div className="grid md:grid-cols-3 gap-3 mb-4">
+        <input
+          type="text"
+          placeholder="Search tournament..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="border border-(--border) p-2 rounded text-white bg-(--primary)"
+        />
 
+        <select value={category} onChange={(e) => setCategory(e.target.value)} className="border border-(--border) p-2 rounded text-white bg-(--primary)">
+          <option value="">All Categories</option>
+          {categories.map((cat, index) => (
+            <option key={index} value={cat}>{cat}</option>
+          ))}
+        </select>
+
+        <select value={priceRange} onChange={(e) => setPriceRange(e.target.value)} className="border p-2 border-(--border) rounded text-white bg-(--primary)">
+          <option value="">All Prices</option>
+          {priceRanges.map((range, index) => (
+            <option key={index} value={range.value}>{range.label}</option>
+          ))}
+        </select>
       </div>
+
+     {/* 🔹 Tournament Cards or Loader */}
+{loading ? (
+  <div className="w-full flex justify-center items-center min-h-[300px]">
+    <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-blue-500"></div>
+  </div>
+) : filteredTournaments.length > 0 ? (
+  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+    {filteredTournaments.map((tournament, index) => (
+      <Link 
+        to={`/my-account/tournament/${tournament.id}`} 
+        key={index} 
+        className="bg-gray-900 text-white rounded-2xl border border-gray-700 shadow-lg overflow-hidden min-h-[350px] bg-center bg-cover bg-no-repeat flex flex-col justify-between relative"
+        style={{ backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.9)), url(${tournament.cover_image})` }}
+      >             
+        {/* Date Badge */}
+        <div className="absolute top-4 left-4 bg-black/80 text-white text-xs font-medium px-3 py-1 rounded-lg">
+          📅 {tournament.start_date}
+        </div>
+
+        {/* Content */}
+        <div className="p-4 mt-auto">
+          {/* Fee Badge */}
+          <div className="inline-block bg-(--secondary) text-white text-xs font-medium px-3 py-1 rounded-lg">
+            Time: {tournament.time}
+          </div>
+
+          {/* Title */}
+          <h3 className="mt-3 text-2xl lemon-milk-medium">{tournament.tournament_name}</h3>
+
+          {/* Description (2-line clamp) */}
+          <p className="text-gray-300 text-sm mt-1 line-clamp-2">{tournament.description}</p>
+        </div>
+      </Link>
+    ))}
+  </div>
+) : (
+  <div className="w-full flex justify-center items-center min-h-[300px] text-center font-bold text-white p-4">
+    No tournaments found.
+  </div>
+)}
+
     </>
   );
 };
