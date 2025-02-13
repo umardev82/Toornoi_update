@@ -61,7 +61,7 @@ const AddTournament = () => {
         <div className="grid md:grid-cols-2 gap-3">
         <div className="flex flex-col gap-2">
       <label className=" text-(--textwhite)">Tournament name</label>
-        <input type="text" name="tournament_name" value={formData.tournament_name} onChange={handleChange} placeholder="Tournament Name" className="w-full bg-(--secondary) text-white p-3 rounded-md" />
+        <input type="text" name="tournament_name" value={formData.tournament_name} onChange={handleChange} placeholder="Tournament Name" className="w-full bg-(--secondary) text-white p-3 rounded-md" required/>
         </div>
        <div className="flex flex-col gap-2">
         <label className=" text-(--textwhite)">Category</label>
@@ -81,7 +81,7 @@ const AddTournament = () => {
         </div>
          <div className="flex flex-col gap-2">
         <label className=" text-(--textwhite)">Registration Fee</label>
-        <input type="text" name="registration_fee" value={formData.registration_fee} onChange={handleChange} placeholder="Registration Fee" className="w-full bg-(--secondary) text-white p-3 rounded-md" />
+        <input type="number" name="registration_fee" value={formData.registration_fee} onChange={handleChange} placeholder="Registration Fee (€)" className="w-full bg-(--secondary) text-white p-3 rounded-md" />
         </div>
         <div className="flex flex-col gap-2">
         <label className=" text-(--textwhite)">Slots</label>
@@ -93,7 +93,7 @@ const AddTournament = () => {
         </div>
         <div className="flex flex-col gap-2">
         <label className=" text-(--textwhite)">Registration Deadline</label>
-        <input type="date" name="registration_deadline" value={formData.registration_deadline} onChange={handleChange} className="w-full bg-(--secondary) text-white p-3 rounded-md" />
+        <input type="datetime-local" name="registration_deadline" value={formData.registration_deadline} onChange={handleChange} className="w-full bg-(--secondary) text-white p-3 rounded-md" />
         </div>
          <div className="flex flex-col gap-2">
         <label className=" text-(--textwhite)">Start Date</label>

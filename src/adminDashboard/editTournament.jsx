@@ -47,6 +47,9 @@ const EditTournament = () => {
               setFormData((prevData) => ({
                 ...prevData,
                 ...tournament, // Merge with existing state
+                registration_deadline: tournament.registration_deadline 
+              ? new Date(tournament.registration_deadline).toISOString().slice(0, 16) // Convert to YYYY-MM-DDTHH:MM
+              : "",
               }));
               setIsFetched(true); // Mark as fetched
             }
@@ -139,11 +142,11 @@ const EditTournament = () => {
           <div className="flex flex-col gap-2">
             <label className="text-(--textwhite)">Registration Fee</label>
             <input
-              type="text"
+              type="number"
               name="registration_fee"
               value={formData.registration_fee}
               onChange={handleChange}
-              placeholder="Registration Fee"
+              placeholder="Registration Fee (€)"
               className="w-full bg-(--secondary) text-white p-3 rounded-md"
             />
           </div>
@@ -178,7 +181,7 @@ const EditTournament = () => {
           <div className="flex flex-col gap-2">
             <label className="text-(--textwhite)">Registration Deadline</label>
             <input
-              type="date"
+              type="datetime-local"
               name="registration_deadline"
               value={formData.registration_deadline}
               onChange={handleChange}

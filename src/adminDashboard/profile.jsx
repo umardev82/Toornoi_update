@@ -68,10 +68,7 @@ const Profile = () => {
               <p className="font-bold">Location:</p>
               <p className="text-(--textlight)">{profile.location || "Not provided"}</p>
             </div>
-            <div className="flex flex-col gap-0 text-(--textwhite)">
-              <p className="font-bold">Device:</p>
-              <p className="text-(--textlight)">{profile.device}</p>
-            </div>
+            
           </div>
         </div>
         </>

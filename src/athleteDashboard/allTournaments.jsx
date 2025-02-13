@@ -123,11 +123,21 @@ const AllTournaments = () => {
         key={index} 
         className="bg-gray-900 text-white rounded-2xl border border-gray-700 shadow-lg overflow-hidden min-h-[350px] bg-center bg-cover bg-no-repeat flex flex-col justify-between relative"
         style={{ backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.9)), url(${tournament.cover_image})` }}
-      >             
-        {/* Date Badge */}
-        <div className="absolute top-4 left-4 bg-black/80 text-white text-xs font-medium px-3 py-1 rounded-lg">
+      >  
+      <div className="p-4 space-y-2">
+        
+         <div className="w-fit  bg-black/80 text-white text-xs font-medium px-3 py-1 rounded-lg">
           📅 {tournament.start_date}
         </div>
+        <div className="w-fit  bg-black/80 text-white text-xs font-medium px-3 py-1 rounded-lg">
+        💳 Registration Fee: {tournament.registration_fee} €
+        </div>
+        
+        <div className="w-fit  bg-black/80 text-white text-xs font-medium px-3 py-1 rounded-lg">
+        🏆Prize: {tournament.prize_details}
+        </div>
+        </div>           
+       
 
         {/* Content */}
         <div className="p-4 mt-auto">

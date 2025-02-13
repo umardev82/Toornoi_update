@@ -50,7 +50,7 @@ const ViewTournament = () => {
         <h1 className="text-xl lemon-milk-font mb-4">{tournamentData?.tournament_name}</h1>
         <p className="text-(--textlight)"><span className="text-(--textwhite) font-bold">Date:</span> {tournamentData?.start_date} - {tournamentData?.end_date} </p>
          <p className=" text-(--textlight)"><span className="text-(--textwhite) font-bold">Registration Deadline:</span> {tournamentData?.registration_deadline} </p>
-        <p className="text-(--textlight)"><span className="text-(--textwhite) font-bold">Registration Fee:</span> {tournamentData?.registration_fee}</p>
+        <p className="text-(--textlight)"><span className="text-(--textwhite) font-bold">Registration Fee:</span> {tournamentData?.registration_fee} €</p>
         </div>
         <div className="text-end">
         <button className="p-1 bg-yellow-700 rounded">{tournamentData?.status}</button>
@@ -122,14 +122,14 @@ const ViewTournament = () => {
       <h6 className="mt-2">Position 3</h6>
       <p>{tournamentData?.positions_3}</p>      
       </div>
-      <div className="grid md:grid-cols-2 ">
+      <div className="grid md:grid-cols-2 gap-2 ">
         <div className="bg-(--primary) p-5 rounded text-(--textwhite) mt-5">
          <h2 className="lemon-milk-font mb-4">Sponsor Logos</h2>
-         <img src={tournamentData?.sponsor_logos} alt="" className="h-60 w-full rounded"/>
+         <img src={tournamentData?.sponsor_logos} alt="" className="h-60 w-full rounded object-cover"/>
         </div>
         <div className="bg-(--primary) p-5 rounded text-(--textwhite) mt-5">
         <h2 className="lemon-milk-font mb-4">Code of Conduct</h2>
-        <img src={tournamentData?.code_of_conduct} alt="" className="h-60 w-full rounded"/>
+        <img src={tournamentData?.code_of_conduct} alt="" className="h-60 w-full rounded object-cover"/>
         </div>
 
       </div>

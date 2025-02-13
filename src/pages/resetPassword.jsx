@@ -46,11 +46,11 @@ const ResetPassword = () => {
     <>
       <Toaster />
       <div className="grid lg:grid-cols-2 min-h-screen bg-(--background) items-center">
-        <main className="w-full max-w-md mx-auto py-10">
-          <Link to="/" className="header-logo">
-            <img src={logo} alt="logo" className="mx-auto block" />
+        <main className="w-full max-w-md mx-auto p-4 sm:p-7">
+          <Link to="/" className="header-logo ">
+            <img src={logo} alt="logo" className="mx-auto block mb-4" />
           </Link>
-          <div className="p-4 sm:p-7">
+          <div className="">
             <div className="text-center">
               <h1 className="block text-2xl font-bold text-white">Reset Password</h1>
               <p className="text-(--textlight)">Enter your new password.</p>

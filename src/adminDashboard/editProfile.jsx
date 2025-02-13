@@ -53,7 +53,6 @@ const EditProfile = () => {
     updatedData.append("phone_number", formData.phone_number || profile.phone_number);
     updatedData.append("location", formData.location || profile.location);
     updatedData.append("date_of_birth", formData.date_of_birth || profile.date_of_birth);
-    updatedData.append("device", formData.device || profile.device);
     updatedData.append("password", formData.password || profile.password);
     
     if (formData.photo) {
@@ -177,19 +176,7 @@ const EditProfile = () => {
             />
           </div>
            <hr  className="border-(--border)"/>
-          {/* Device */}
-          <div className="md:flex flex-row justify-between  text-nowrap">
-            <label className="flex items-center gap-x-2 md:mb-0 mb-2 text-(--textwhite) min-w-3xs"><MdImportantDevices />Device</label>
-            <input
-              type="text"
-              name="device"
-              defaultValue={profile.device}
-              onChange={handleChange}
-              className="w-full bg-(--secondary) text-white p-3 rounded-md"
-              required
-            />
-          </div>
-           <hr  className="border-(--border)"/>
+          
           {/* Profile Photo */}
           <div className="md:flex flex-row   text-nowrap">
             <label className="flex items-center gap-x-2 md:mb-0 mb-2 text-(--textwhite) min-w-3xs"><ImProfile />Profile Photo</label>
