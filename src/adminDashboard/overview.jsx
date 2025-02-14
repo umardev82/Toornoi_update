@@ -7,6 +7,7 @@ import { CgGames } from "react-icons/cg";
 import { GrCurrency } from "react-icons/gr";
 import { GiTargetPrize } from "react-icons/gi";
 import { FaUserShield } from "react-icons/fa";
+import useDashboardStats from '../hooks/useDashboardStats';
 
 // Register chart.js components
 ChartJS.register(
@@ -22,8 +23,10 @@ ChartJS.register(
 );
 
 const Overview = () => {
-  const totalAthletes = 1500;
-  const totalTournaments = 45;
+  const { totalAthletes, totalTournaments, loading, error } = useDashboardStats();
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error}</p>;
   const activeMatches = 12;
   const totalIncome = "$10,000";
   const totalPrizes = "$5,000";

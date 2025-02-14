@@ -35,6 +35,20 @@ const TournamentList = () => {
       setLoading(false);
     }
   };
+ 
+  // Function to format date as DD/MM/YYYY
+const formatDate = (dateString) => {
+  const date = new Date(dateString);
+  if (isNaN(date)) return "Invalid Date"; // Handle invalid dates
+  return date.toLocaleDateString("en-GB"); // Formats as DD/MM/YYYY
+};
+
+const formatOnlyTime = (timeString) => {
+  const [hours, minutes] = timeString.split(":"); // Extract HH and MM
+  if (!hours || !minutes) return "Invalid Time"; // Handle invalid input
+  return `${hours}:${minutes}`; // Format as HH:MM
+};
+
 
   const confirmDelete = (tournament) => {
     setSelectedTournament(tournament);
@@ -107,8 +121,10 @@ const TournamentList = () => {
                     {tournament.status}
                   </span>
                 </td>
-                <td className="p-3 whitespace-nowrap w-max">{tournament.time}</td>
-                <td className="p-3 whitespace-nowrap w-max">{tournament.start_date}</td>
+                <td className="p-3 whitespace-nowrap w-max">{tournament.time ? formatOnlyTime(tournament.time) : "Not Set"}</td>
+                <td className="p-3 whitespace-nowrap w-max">{tournament.start_date && tournament.end_date
+    ? `${formatDate(tournament.start_date)} - ${formatDate(tournament.end_date)}`
+    : "Not Set"}</td>
                 <td className="p-3 whitespace-nowrap w-max">
                   <div className="flex gap-3">
                     <Link to={`/dashboard/view-tournament/${tournament.id}`}>

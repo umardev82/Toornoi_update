@@ -29,6 +29,25 @@ const SingleTournament = () => {
     }
   }, [id, getTournament]);
 
+  // Function to format date as DD/MM/YYYY
+const formatDate = (dateString) => {
+  const date = new Date(dateString);
+  if (isNaN(date)) return "Invalid Date"; // Handle invalid dates
+  return date.toLocaleDateString("en-GB"); // Formats as DD/MM/YYYY
+};
+
+// Function to format date with time as DD/MM/YYYY - HH:MM
+const formatDateTime = (dateTimeString) => {
+  const date = new Date(dateTimeString);
+  if (isNaN(date)) return "Invalid Date"; // Handle invalid dates
+  return `${date.toLocaleDateString("en-GB")} - ${date.toLocaleTimeString("en-GB", {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  })}`;
+};
+
+
   useEffect(() => {
     fetchTournamentData();
   }, [fetchTournamentData]); // Ensures it runs only when needed
@@ -50,14 +69,18 @@ const SingleTournament = () => {
       <div className="bg-(--primary) p-5 rounded text-(--textwhite) grid grid-cols-2">
         <div>
         <h1 className="text-xl lemon-milk-font mb-4">{tournamentData?.tournament_name}</h1>
-        <p className="text-(--textlight)"><span className="text-(--textwhite) font-bold">Date:</span> {tournamentData?.start_date} - {tournamentData?.end_date} </p>
-         <p className=" text-(--textlight)"><span className="text-(--textwhite) font-bold">Registration Deadline:</span> {tournamentData?.registration_deadline} </p>
-        <p className="text-(--textlight)"><span className="text-(--textwhite) font-bold">Registration Fee:</span> {tournamentData?.registration_fee} €</p>
+        <p className="text-(--textlight)"><span className="text-(--textwhite) font-bold">Date:</span> {tournamentData.start_date && tournamentData.end_date
+    ? `${formatDate(tournamentData.start_date)} - ${formatDate(tournamentData.end_date)}`
+    : "Not Set"}</p>
+         <p className=" text-(--textlight)"><span className="text-(--textwhite) font-bold">Registration Deadline:</span>  {tournamentData.registration_deadline
+    ? formatDateTime(tournamentData.registration_deadline)
+    : "Not Set"} </p>
+        <p className="text-(--textlight)"><span className="text-(--textwhite) font-bold">Registration Fee:</span> {tournamentData?.registration_fee}€</p>
         </div>
         <div className="text-end">
         <button onClick={() => setShowModal(true)} className="py-2 px-5 bg-(--accent) rounded">Register</button>
-        <div className=" text-white mt-3 font-medium px-3 py-1 rounded-lg">
-        🏆Prize: {tournamentData.prize_details}
+        <div className=" text-white mt-3 px-3 py-1 rounded-lg">
+        🏆 <span className="font-bold">Prize:</span>  {tournamentData.prize_details}
         </div>
         </div>
        

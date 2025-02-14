@@ -58,6 +58,18 @@ const AllTournaments = () => {
 
     setPriceRanges(ranges);
   };
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    if (isNaN(date)) return "Invalid Date"; // Handle invalid dates
+    return date.toLocaleDateString("en-GB"); // Formats as DD/MM/YYYY
+  };
+
+  
+const formatOnlyTime = (timeString) => {
+  const [hours, minutes] = timeString.split(":"); // Extract HH and MM
+  if (!hours || !minutes) return "Invalid Time"; // Handle invalid input
+  return `${hours}:${minutes}`; // Format as HH:MM
+};
 
   useEffect(() => {
     setLoading(true);
@@ -127,14 +139,17 @@ const AllTournaments = () => {
       <div className="p-4 space-y-2">
         
          <div className="w-fit  bg-black/80 text-white text-xs font-medium px-3 py-1 rounded-lg">
-          📅 {tournament.start_date}
+          📅  {tournament.start_date 
+    ? `${formatDate(tournament.start_date)}`
+    : "Not Set"}
         </div>
+       
         <div className="w-fit  bg-black/80 text-white text-xs font-medium px-3 py-1 rounded-lg">
-        💳 Registration Fee: {tournament.registration_fee} €
+        💳 Registration Fee: {tournament.registration_fee}€
         </div>
         
         <div className="w-fit  bg-black/80 text-white text-xs font-medium px-3 py-1 rounded-lg">
-        🏆Prize: {tournament.prize_details}
+        🏆 Prize: {tournament.prize_details}
         </div>
         </div>           
        
@@ -143,7 +158,7 @@ const AllTournaments = () => {
         <div className="p-4 mt-auto">
           {/* Fee Badge */}
           <div className="inline-block bg-(--secondary) text-white text-xs font-medium px-3 py-1 rounded-lg">
-            Time: {tournament.time}
+            Time: {tournament.time ? formatOnlyTime(tournament.time) : "Not Set"}
           </div>
 
           {/* Title */}

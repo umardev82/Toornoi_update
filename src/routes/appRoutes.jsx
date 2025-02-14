@@ -21,6 +21,9 @@ import ForgotPassword from "../pages/forgotPassword";
 import ResetPassword from "../pages/resetPassword";
 import AthleteProfile from "../athleteDashboard/athleteProfile";
 import EditAthleteProfile from "../athleteDashboard/editAtheleteProfile";
+import AllAthletes from "../adminDashboard/allAthletes";
+import AddAthlete from "../adminDashboard/addAthlete";
+import EditAthlete from "../adminDashboard/editAthlete";
 
 
 const AppRoutes = () => {
@@ -35,7 +38,6 @@ const AppRoutes = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
-
 
         {/* Admin Protected Routes */}
         <Route
@@ -53,6 +55,9 @@ const AppRoutes = () => {
           <Route path="settings" element={<EditProfile />} />
           <Route path="edit-tournament/:id" element={<EditTournament />} />
           <Route path="view-tournament/:id" element={<ViewTournament />} />
+          <Route path="all-athletes" element={<AllAthletes/>}/>
+          <Route path="add-athlete" element={<AddAthlete/>}/>
+          <Route path="edit-athlete/:id" element={<EditAthlete/>}/>
         </Route>
 
         {/* User Protected Routes */}
