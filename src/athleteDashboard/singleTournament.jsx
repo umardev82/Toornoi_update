@@ -1,63 +1,106 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useTournament } from "../hooks/useTournament";
+import { IoMdCloseCircle } from "react-icons/io";
+import axios from "axios";
+import { Link } from "react-router-dom";
+import API_BASE_URL from "../config";
 
 const SingleTournament = () => {
   const { id } = useParams();
   const { getTournament } = useTournament();
   const [tournamentData, setTournamentData] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [showModal, setShowModal] = useState(false); // State to manage modal visibility
+  const [error, setError] = useState(null); // Tournament fetching error state
+  const [showModal, setShowModal] = useState(false);
+  const [registrationResponse, setRegistrationResponse] = useState(null);
+  const [registering, setRegistering] = useState(false);
+  const [hasFetched, setHasFetched] = useState(false);
 
-
-  // Use useCallback to prevent unnecessary function recreation
-  const fetchTournamentData = useCallback(async () => {
+  const fetchTournamentData = async () => {
     try {
       const tournament = await getTournament(id);
       setTournamentData((prevData) => {
-        // Avoid updating state if the data is the same
         if (prevData?.id !== tournament.id) {
           return tournament;
         }
-        return prevData; // return the current state if there's no change
+        return prevData;
       });
     } catch (err) {
       setError("Failed to fetch tournament data");
     } finally {
       setLoading(false);
+      setHasFetched(true);
     }
-  }, [id, getTournament]);
-
-  // Function to format date as DD/MM/YYYY
-const formatDate = (dateString) => {
-  const date = new Date(dateString);
-  if (isNaN(date)) return "Invalid Date"; // Handle invalid dates
-  return date.toLocaleDateString("en-GB"); // Formats as DD/MM/YYYY
-};
-
-// Function to format date with time as DD/MM/YYYY - HH:MM
-const formatDateTime = (dateTimeString) => {
-  const date = new Date(dateTimeString);
-  if (isNaN(date)) return "Invalid Date"; // Handle invalid dates
-  return `${date.toLocaleDateString("en-GB")} - ${date.toLocaleTimeString("en-GB", {
-    hour: "2-digit",
-    minute: "2-digit",
-    hour12: false,
-  })}`;
-};
-
+  };
 
   useEffect(() => {
-    fetchTournamentData();
-  }, [fetchTournamentData]); // Ensures it runs only when needed
+    if (!hasFetched) {
+      fetchTournamentData();
+    }
+  }, [id, hasFetched]);
+
+  const formatDateTime = (dateTimeString) => {
+    const date = new Date(dateTimeString);
+    if (isNaN(date)) return "Invalid Date";
+    return `${date.toLocaleDateString("en-GB")} - ${date.toLocaleTimeString("en-GB", {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false,
+    })}`;
+  };
+
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    if (isNaN(date)) return "Invalid Date";
+    return date.toLocaleDateString("en-GB");
+  };
+
+  const handleRegister = async () => {
+    setRegistering(true);
+    setError(null);  // Reset error for registration
+    setRegistrationResponse(null);
+  
+    const token = localStorage.getItem("userToken");
+  
+    if (!token) {
+      setError("Authentication error: Please log in first.");
+      setShowModal(true); // Ensure modal opens on error
+      setRegistering(false);
+      return;
+    }
+  
+    try {
+      const response = await axios.post(
+        `${API_BASE_URL}/tournament_user/${id}/register/`,
+        {},
+        {
+          headers: {
+            Authorization: `Token ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+  
+      if (response.data?.message) {
+        setRegistrationResponse(response.data);
+      } else {
+        setError("Registration failed. Please try again.");
+      }
+    } catch (err) {
+      setError(err.response?.data?.error || "Registration failed. You might already be registered.");
+    } finally {
+      setShowModal(true); // Show modal for errors
+      setRegistering(false);
+    }
+  };
 
   if (loading) return <p>Loading...</p>;
-  if (error) return <p>{error}</p>;
+  if (error && !showModal) return <p className="text-white">{error}</p>;  // Show fetch error outside the modal
 
   return (
-    <> 
-      {tournamentData?.cover_image && (
+    <>
+  {tournamentData?.cover_image && (
         <div>
           <img
             src={tournamentData.cover_image}
@@ -165,24 +208,57 @@ const formatDateTime = (dateTimeString) => {
         </div>
 
       </div>
-
+      {/* Modal */}
       {showModal && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
-          <div className="bg-white p-6 rounded-lg shadow-lg w-96">
-            <h2 className="text-xl font-bold mb-3">Registration Details</h2>
-            <p><strong>Fee:</strong> ${tournamentData?.registration_fee}</p>
-            <p >
-            <p><strong>Terms and condition:</strong> {tournamentData?.rules_and_regulations}</p>
-            </p>
-            
-            <div className="mt-4 flex justify-end">
-              <button onClick={() => setShowModal(false)} className="mr-3 px-4 py-2 bg-gray-300 rounded">Cancel</button>
-              <button className="px-4 py-2 bg-(--accent) text-white rounded">Proceed to Checkout</button>
-            </div>
-          </div>
-        </div>
+  <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50 p-5">
+    <div className="bg-white  rounded-lg shadow-lg w-96 relative p-6">
+    <Link to="/my-account/tournaments" className="absolute top-5 right-5">
+    <IoMdCloseCircle />
+            </Link>
+      <h2 className="text-xl font-bold mb-3">Registration Details</h2>
+
+      {/* Success message and checkout link */}
+      {registrationResponse && !error && (
+        <>
+          <p><strong>Status:</strong> {registrationResponse.message}</p>
+          {registrationResponse.sumup_link && (
+            <a
+              href={registrationResponse.sumup_link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block mt-3 px-4 py-2 bg-(--accent) text-white text-center rounded"
+            >
+              Proceed to Checkout
+            </a>
+          )}
+        </>
       )}
 
+      {/* Show registration error */}
+      {error && (
+        <p className="text-red-500 mb-4">{error}</p>
+      )}
+
+      {/* Default UI when neither error nor response exists */}
+      {!registrationResponse && !error && (
+        <>
+          <p><strong>Fee:</strong> ${tournamentData?.registration_fee}</p>
+          <p><strong>Terms and conditions:</strong> {tournamentData?.rules_and_regulations}</p>
+          <div className="mt-4 flex ">
+          
+            <button
+              onClick={handleRegister}
+              disabled={registering}
+              className="px-4 py-2 bg-(--accent) text-white rounded"
+            >
+              {registering ? "Processing..." : "Register"}
+            </button>
+          </div>
+        </>
+      )}
+    </div>
+  </div>
+)}
 
     </>
   );
