@@ -10,6 +10,7 @@ import logo from "../assets/images/logo.png";
 import { FiChevronsRight } from "react-icons/fi";
 import { TbLogout2 } from "react-icons/tb";
 import { FaPersonRunning } from "react-icons/fa6";
+import { GiAmericanFootballPlayer } from "react-icons/gi";
 
 const AdminDashboardLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -45,6 +46,14 @@ const AdminDashboardLayout = () => {
       subMenu: [
         { name: "All Athletes", path: "/dashboard/all-athletes", icon: <FiChevronsRight className="mr-2 w-5 h-5" /> },
         { name: "Add New Athlete", path: "/dashboard/add-athlete", icon: <FiChevronsRight className="mr-2 w-5 h-5" /> },
+      ],
+    },
+    {
+      name: "Matches",
+      icon: <GiAmericanFootballPlayer className="mr-2 w-5 h-5" />,
+      subMenu: [
+        { name: "All Matches", path: "/dashboard/all-matches", icon: <FiChevronsRight className="mr-2 w-5 h-5" /> },
+        { name: "Add New Match", path: "/dashboard/add-match", icon: <FiChevronsRight className="mr-2 w-5 h-5" /> },
       ],
     },
     { name: "Profile", path: "/dashboard/profile", icon: <BiSolidUserRectangle className="mr-2 w-5 h-5" /> },

@@ -24,6 +24,9 @@ import EditAthleteProfile from "../athleteDashboard/editAtheleteProfile";
 import AllAthletes from "../adminDashboard/allAthletes";
 import AddAthlete from "../adminDashboard/addAthlete";
 import EditAthlete from "../adminDashboard/editAthlete";
+import AddMatch from "../adminDashboard/addMatch";
+import AllMatches from "../adminDashboard/allMatches";
+import EditMatch from "../adminDashboard/editMatch";
 
 
 const AppRoutes = () => {
@@ -58,6 +61,9 @@ const AppRoutes = () => {
           <Route path="all-athletes" element={<AllAthletes/>}/>
           <Route path="add-athlete" element={<AddAthlete/>}/>
           <Route path="edit-athlete/:id" element={<EditAthlete/>}/>
+          <Route path="add-match" element={<AddMatch/>}/>
+          <Route path="all-matches" element={<AllMatches/>}/>
+          <Route path="edit-match/:id" element={<EditMatch/>} />
         </Route>
 
         {/* User Protected Routes */}
