@@ -46,6 +46,7 @@ const AdminDashboardLayout = () => {
       subMenu: [
         { name: "All Athletes", path: "/dashboard/all-athletes", icon: <FiChevronsRight className="mr-2 w-5 h-5" /> },
         { name: "Add New Athlete", path: "/dashboard/add-athlete", icon: <FiChevronsRight className="mr-2 w-5 h-5" /> },
+       
       ],
     },
     {
@@ -54,6 +55,7 @@ const AdminDashboardLayout = () => {
       subMenu: [
         { name: "All Matches", path: "/dashboard/all-matches", icon: <FiChevronsRight className="mr-2 w-5 h-5" /> },
         { name: "Add New Match", path: "/dashboard/add-match", icon: <FiChevronsRight className="mr-2 w-5 h-5" /> },
+        { name: "Registered Athletes", path: "/dashboard/registered-athletes", icon: <FiChevronsRight className="mr-2 w-5 h-5" /> },
       ],
     },
     { name: "Profile", path: "/dashboard/profile", icon: <BiSolidUserRectangle className="mr-2 w-5 h-5" /> },

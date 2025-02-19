@@ -9,6 +9,7 @@ import profile from "../assets/images/profile.png";
 import logo from "../assets/images/logo.png";
 import { FiChevronsRight } from "react-icons/fi";
 import { TbLogout2 } from "react-icons/tb";
+import { GiAmericanFootballPlayer } from "react-icons/gi";
 
 
 
@@ -38,7 +39,7 @@ const AthleteDashboardLayout = () => {
   // 🔹 Menu items with submenus
   const menuItems = [
     { name: "All Tournaments", path: "/my-account/tournaments", icon: <RiHome3Fill className="mr-2 w-5 h-5" /> },
-   
+    { name: "Matches", path: "/my-account/matches", icon: <GiAmericanFootballPlayer className="mr-2 w-5 h-5" /> },   
    { name: "Profile", path: "/my-account/profile", icon: <BiSolidUserRectangle className="mr-2 w-5 h-5" /> },
     { name: "Settings", path: "/my-account/settings", icon: <BiSolidUserRectangle className="mr-2 w-5 h-5" /> },
     { name: "Logout", path: "#", icon: <TbLogout2 className="mr-2 w-5 h-5" />, action: handleLogout },

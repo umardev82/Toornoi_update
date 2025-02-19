@@ -27,6 +27,8 @@ import EditAthlete from "../adminDashboard/editAthlete";
 import AddMatch from "../adminDashboard/addMatch";
 import AllMatches from "../adminDashboard/allMatches";
 import EditMatch from "../adminDashboard/editMatch";
+import RegisteredAthletes from "../adminDashboard/registeredAthletes";
+import UserMatches from "../athleteDashboard/userMatches";
 
 
 const AppRoutes = () => {
@@ -64,6 +66,7 @@ const AppRoutes = () => {
           <Route path="add-match" element={<AddMatch/>}/>
           <Route path="all-matches" element={<AllMatches/>}/>
           <Route path="edit-match/:id" element={<EditMatch/>} />
+          <Route path="registered-athletes" element={<RegisteredAthletes/>}/>
         </Route>
 
         {/* User Protected Routes */}
@@ -79,6 +82,7 @@ const AppRoutes = () => {
           <Route path="tournament/:id" element={<SingleTournament/>} />
           <Route path="profile" element={<AthleteProfile/>}/>
           <Route path="settings" element={<EditAthleteProfile/>} />
+          <Route path="matches" element={<UserMatches/>}/>
         </Route>
 
         {/* Catch-all for unknown routes */}
