@@ -13,7 +13,7 @@ const AddTournament = () => {
     registration_deadline: "",
     registration_fee: "",
     slots: "",
-    status: "Pending",
+    status: "",
     start_date: "",
     end_date: "",
     time: "",
@@ -88,9 +88,14 @@ const AddTournament = () => {
         <input type="number" name="slots" value={formData.slots} onChange={handleChange} placeholder="Slots" className="w-full bg-(--secondary) text-white p-3 rounded-md" />
         </div>
         <div className="flex flex-col gap-2">
-        <label className=" text-(--textwhite)">Status</label>
-        <input type="text" name="status" value={formData.status} onChange={handleChange} placeholder="Status" className="w-full bg-(--secondary) text-white p-3 rounded-md" />
+        <label className="text-(--textwhite)">Status</label>
+        <select name="status"  value={formData.status} onChange={handleChange} className="w-full bg-(--secondary) text-white p-3 rounded-md" >
+        <option value="Open">Open</option>
+        <option value="In Progress">In Progress</option>
+        <option value="Completed">Completed</option>
+        </select>
         </div>
+
         <div className="flex flex-col gap-2">
         <label className=" text-(--textwhite)">Registration Deadline</label>
         <input type="datetime-local" name="registration_deadline" value={formData.registration_deadline} onChange={handleChange} className="w-full bg-(--secondary) text-white p-3 rounded-md" />

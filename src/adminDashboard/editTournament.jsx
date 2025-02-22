@@ -14,7 +14,7 @@ const EditTournament = () => {
       registration_deadline: "",
       registration_fee: "",
       slots: "",
-      status: "Pending",
+      status: "",
       start_date: "",
       end_date: "",
       time: "",
@@ -165,17 +165,21 @@ const EditTournament = () => {
           </div>
 
           {/* Status */}
-          <div className="flex flex-col gap-2">
-            <label className="text-(--textwhite)">Status</label>
-            <input
-              type="text"
-              name="status"
-              value={formData.status}
-              onChange={handleChange}
-              placeholder="Status"
-              className="w-full bg-(--secondary) text-white p-3 rounded-md"
-            />
-          </div>
+         {/* Status Dropdown */}
+<div className="flex flex-col gap-2">
+  <label className="text-(--textwhite)">Status</label>
+  <select
+    name="status"
+    value={formData.status}
+    onChange={handleChange}
+    className="w-full bg-(--secondary) text-white p-3 rounded-md"
+  >
+       <option value="Open">Open</option>
+        <option value="In Progress">In Progress</option>
+        <option value="Completed">Completed</option>
+  </select>
+</div>
+
 
           {/* Registration Deadline */}
           <div className="flex flex-col gap-2">

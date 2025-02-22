@@ -29,6 +29,15 @@ import AllMatches from "../adminDashboard/allMatches";
 import EditMatch from "../adminDashboard/editMatch";
 import RegisteredAthletes from "../adminDashboard/registeredAthletes";
 import UserMatches from "../athleteDashboard/userMatches";
+import RegisteredAthletesTournaments from "../adminDashboard/regAthletesForTournaments";
+import Payments from "../adminDashboard/payments";
+import CheckoutForm from "../athleteDashboard/checkout";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+import MyTournaments from "../athleteDashboard/myTournaments";
+
+const stripePromise = loadStripe("your-publishable-key-here"); // Replace with your Stripe publishable key
+
 
 
 const AppRoutes = () => {
@@ -66,7 +75,12 @@ const AppRoutes = () => {
           <Route path="add-match" element={<AddMatch/>}/>
           <Route path="all-matches" element={<AllMatches/>}/>
           <Route path="edit-match/:id" element={<EditMatch/>} />
-          <Route path="registered-athletes" element={<RegisteredAthletes/>}/>
+          <Route path="registered-athletes" element={<RegisteredAthletes />} />
+          <Route path="tournaments/:tournament_id/registered-athletes" element={<RegisteredAthletesTournaments />} />
+          <Route path="payments" element={<Payments/>} />
+   
+
+
         </Route>
 
         {/* User Protected Routes */}
@@ -83,6 +97,8 @@ const AppRoutes = () => {
           <Route path="profile" element={<AthleteProfile/>}/>
           <Route path="settings" element={<EditAthleteProfile/>} />
           <Route path="matches" element={<UserMatches/>}/>
+          <Route path="checkout" element={<Elements stripe={stripePromise}><CheckoutForm /> </Elements>}/>
+          <Route path="my-tournaments" element={<MyTournaments/>}/>
         </Route>
 
         {/* Catch-all for unknown routes */}

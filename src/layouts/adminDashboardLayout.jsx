@@ -11,6 +11,8 @@ import { FiChevronsRight } from "react-icons/fi";
 import { TbLogout2 } from "react-icons/tb";
 import { FaPersonRunning } from "react-icons/fa6";
 import { GiAmericanFootballPlayer } from "react-icons/gi";
+import useProfile from '../hooks/useProfile';
+import { MdPayments } from "react-icons/md";
 
 const AdminDashboardLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -18,6 +20,7 @@ const AdminDashboardLayout = () => {
   const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+  const { profile} = useProfile(); 
 
   const handleLogout = () => {
     localStorage.removeItem("adminToken");
@@ -46,6 +49,7 @@ const AdminDashboardLayout = () => {
       subMenu: [
         { name: "All Athletes", path: "/dashboard/all-athletes", icon: <FiChevronsRight className="mr-2 w-5 h-5" /> },
         { name: "Add New Athlete", path: "/dashboard/add-athlete", icon: <FiChevronsRight className="mr-2 w-5 h-5" /> },
+        { name: "Registered Athletes", path: "/dashboard/registered-athletes", icon: <FiChevronsRight className="mr-2 w-5 h-5" /> },
        
       ],
     },
@@ -55,9 +59,10 @@ const AdminDashboardLayout = () => {
       subMenu: [
         { name: "All Matches", path: "/dashboard/all-matches", icon: <FiChevronsRight className="mr-2 w-5 h-5" /> },
         { name: "Add New Match", path: "/dashboard/add-match", icon: <FiChevronsRight className="mr-2 w-5 h-5" /> },
-        { name: "Registered Athletes", path: "/dashboard/registered-athletes", icon: <FiChevronsRight className="mr-2 w-5 h-5" /> },
+       
       ],
     },
+    { name: "Payments", path: "/dashboard/payments", icon: <MdPayments className="mr-2 w-5 h-5" /> },
     { name: "Profile", path: "/dashboard/profile", icon: <BiSolidUserRectangle className="mr-2 w-5 h-5" /> },
     { name: "Settings", path: "/dashboard/settings", icon: <BiSolidUserRectangle className="mr-2 w-5 h-5" /> },
     { name: "Logout", path: "#", icon: <TbLogout2 className="mr-2 w-5 h-5" />, action: handleLogout },
@@ -67,12 +72,14 @@ const AdminDashboardLayout = () => {
     <div className="flex h-screen bg-(--background)">
       <aside className={`fixed top-0 left-0 bg-(--primary) text-white w-64 p-4 transform z-50 ${sidebarOpen ? "translate-x-0" : "-translate-x-64"} transition-transform md:translate-x-0 h-full`}>
         <div className="flex justify-between items-center mb-4 h-20">
-          <img src={logo} alt="Logo" />
+          <Link to="/">
+          <img src={logo} alt="Logo" /></Link>
+          
           <button className="md:hidden" onClick={() => setSidebarOpen(false)}>
             <X className="w-6 h-6" />
           </button>
         </div>
-        <nav className="space-y-2">
+        <nav className="space-y-2 sidebar h-[80vh] overflow-auto pr-2">
           {menuItems.map((item) => (
             <div key={item.name}>
               {item.subMenu ? (
@@ -133,7 +140,9 @@ const AdminDashboardLayout = () => {
             <FaBell className="w-5 h-5 cursor-pointer text-(--textwhite)" />
             <div className="relative">
               <button className="flex items-center gap-2 text-(--textlight)" onClick={() => setProfileDropdownOpen(!profileDropdownOpen)}>
-                <img src={profile} alt="Profile" className="w-10 h-10 rounded-full" />
+                <img src={profile?.photo ||profile} alt="Profile" className="w-10 h-10 rounded-full border border-(--border) object-cover" />
+               
+                <span>{profile?.username || "Admin"}</span> {/* Show username */}
                 <ChevronDown className="w-5 h-5 cursor-pointer" />
               </button>
               {profileDropdownOpen && (

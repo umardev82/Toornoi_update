@@ -10,6 +10,7 @@ import logo from "../assets/images/logo.png";
 import { FiChevronsRight } from "react-icons/fi";
 import { TbLogout2 } from "react-icons/tb";
 import { GiAmericanFootballPlayer } from "react-icons/gi";
+import useAthleteProfile from "../hooks/useAtheleteProfile";
 
 
 
@@ -18,6 +19,9 @@ const AthleteDashboardLayout = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+  // Fetch athlete profile
+  const { profile} = useAthleteProfile();
+
 
   // 🔹 Logout function
   const handleLogout = () => {
@@ -38,7 +42,8 @@ const AthleteDashboardLayout = () => {
 
   // 🔹 Menu items with submenus
   const menuItems = [
-    { name: "All Tournaments", path: "/my-account/tournaments", icon: <RiHome3Fill className="mr-2 w-5 h-5" /> },
+    { name: "All Tournaments", path: "/my-account/tournaments", icon: <HiMiniTrophy  className="mr-2 w-5 h-5" /> },
+    { name: "My Tournaments", path: "/my-account/my-tournaments", icon: <HiMiniTrophy  className="mr-2 w-5 h-5" /> },
     { name: "Matches", path: "/my-account/matches", icon: <GiAmericanFootballPlayer className="mr-2 w-5 h-5" /> },   
    { name: "Profile", path: "/my-account/profile", icon: <BiSolidUserRectangle className="mr-2 w-5 h-5" /> },
     { name: "Settings", path: "/my-account/settings", icon: <BiSolidUserRectangle className="mr-2 w-5 h-5" /> },
@@ -53,12 +58,15 @@ const AthleteDashboardLayout = () => {
     <div className="flex h-screen bg-(--background)" onClick={handleMenuClick}>
       <aside className={`fixed top-0 left-0 bg-(--primary) text-white w-64 p-4 transform z-50 ${sidebarOpen ? "translate-x-0" : "-translate-x-64"} transition-transform md:translate-x-0 h-full`} onClick={(e) => e.stopPropagation()}>
         <div className="flex justify-between items-center mb-4 h-20">
+          <Link to="/">
           <img src={logo} alt="Logo" />
+          </Link>
+          
           <button className="md:hidden" onClick={() => setSidebarOpen(false)}>
             <X className="w-6 h-6" />
           </button>
         </div>
-        <nav className="space-y-2">
+        <nav className="space-y-2  sidebar h-[80vh] overflow-auto pr-2">
           {menuItems.map((item) => (
             <div key={item.name}>
               {item.subMenu ? (
@@ -123,7 +131,8 @@ const AthleteDashboardLayout = () => {
             {/* Profile Dropdown */}
             <div className="relative">
             <button className="flex items-center gap-2 text-(--textlight)" onClick={handleProfileDropdownToggle}>
-              <img src={profile} alt="Profile" className="w-10 h-10 rounded-full" />
+              <img src={profile?.photo || profile} alt="Profile" className="w-10 h-10 rounded-full object-cover border border-(--border) " />
+                <span>{profile?.username || "Athlete"}</span> {/* Fetch username from API */}
               <ChevronDown className="w-5 h-5 cursor-pointer" />
             </button>
             {dropdownOpen && (

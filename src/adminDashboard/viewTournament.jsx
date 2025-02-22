@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { useParams } from "react-router-dom";
+import { useParams,useNavigate } from "react-router-dom";
 import { useTournament } from "../hooks/useTournament";
 
 const ViewTournament = () => {
@@ -8,6 +8,7 @@ const ViewTournament = () => {
   const [tournamentData, setTournamentData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   // Use useCallback to prevent unnecessary function recreation
   const fetchTournamentData = useCallback(async () => {
@@ -78,7 +79,11 @@ const formatDateTime = (dateTimeString) => {
         <p className="text-(--textlight)"><span className="text-(--textwhite) font-bold">Registration Fee:</span> {tournamentData?.registration_fee} €</p>
         </div>
         <div className="text-end">
-        <button className="p-1 bg-yellow-700 rounded">{tournamentData?.status}</button>
+          <button  className="p-2 bg-(--accent) rounded mr-2 text-sm" onClick={() => navigate(`/dashboard/tournaments/${tournamentData?.id}/registered-athletes`)}>
+        View Registered Athletes
+      </button>
+
+        <button className="p-2 bg-yellow-700 rounded text-sm">{tournamentData?.status}</button>
         </div>
        
         <div>

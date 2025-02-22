@@ -26,7 +26,7 @@ const Login = () => {
 
     if (result.success) {
       setTimeout(() => {
-        navigate("/my-account"); 
+        navigate("/my-account/tournaments"); 
       }, 2000); 
 
     }

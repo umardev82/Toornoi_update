@@ -61,22 +61,30 @@ button, a{
   overflow: hidden;
 }
 
-
-
-
-
-
-/* Modal Overlay */
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999; /* Ensure it appears above other elements */
+/* Sidebar Scrollbar */
+.sidebar::-webkit-scrollbar {
+  width: 4px; /* Width of the scrollbar */
 }
 
+/* Track (Background) */
+.sidebar::-webkit-scrollbar-track {
+  background: var(--secondarybg); /* Dark background */
+  border-radius: 5px; /* Rounded edges */
+  margin: 10px 0; /* Adds space on top and bottom */
+}
+
+/* Thumb (Scroller) */
+.sidebar::-webkit-scrollbar-thumb {
+  background: var(--secondary); /* Gray color for scrollbar */
+  border-radius: 5px; /* Rounded scrollbar */
+  border: 2px solid var(--border); /* Space on the left */
+}
+
+/* Scrollbar on hover */
+.sidebar::-webkit-scrollbar-thumb:hover {
+  background: var(--secondary); /* Lighter color on hover */
+}
+
+.checkout-form input{
+  color: white !important;
+}
