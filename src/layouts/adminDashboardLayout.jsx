@@ -62,6 +62,14 @@ const AdminDashboardLayout = () => {
        
       ],
     },
+    {
+      name: "Pools",
+      icon: <GiAmericanFootballPlayer className="mr-2 w-5 h-5" />,
+      subMenu: [
+        { name: "Pools", path: "/dashboard/pools", icon: <FiChevronsRight className="mr-2 w-5 h-5" /> },   
+        { name: "Create Pools", path: "/dashboard/create-pools", icon: <FiChevronsRight className="mr-2 w-5 h-5" /> },       
+      ],
+    },
     { name: "Payments", path: "/dashboard/payments", icon: <MdPayments className="mr-2 w-5 h-5" /> },
     { name: "Profile", path: "/dashboard/profile", icon: <BiSolidUserRectangle className="mr-2 w-5 h-5" /> },
     { name: "Settings", path: "/dashboard/settings", icon: <BiSolidUserRectangle className="mr-2 w-5 h-5" /> },

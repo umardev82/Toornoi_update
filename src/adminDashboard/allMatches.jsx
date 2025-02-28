@@ -4,6 +4,11 @@ import { FaEye, FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { toast } from "react-hot-toast";
 import API_BASE_URL from "../config";
+import { TiArrowBackOutline } from "react-icons/ti";
+import { IoIosArrowForward } from "react-icons/io";
+import VsImg from "../assets/images/vs.png";
+import User1 from "../assets/images/user-1.png";
+import User2 from "../assets/images/user-2.png";
 import { Link } from "react-router-dom";
 
 const AllMatches = () => {
@@ -96,21 +101,24 @@ const AllMatches = () => {
             matches.map((match) => (
               <tr key={match.id} className="bg-(--primary) text-(--textlight)">
                 <td className="p-3">
-                  {typeof match.tournament === "object"
-                    ? match.tournament.name
-                    : match.tournament}
+                  {match.tournament?.tournament_name}
                 </td>
                 <td className="p-3">
-                  {typeof match.player_1 === "object"
-                    ? match.player_1.username
-                    : match.player_1}
+                  {match.player_1}
                 </td>
                 <td className="p-3">
-                  {typeof match.player_2 === "object"
-                    ? match.player_2.username
-                    : match.player_2}
+                  {match.player_2}
                 </td>
-                <td className="p-3">{match.status}</td>
+                <td className="p-3" 
+>
+  <span className={`whitespace-nowrap p-2 pt-1 text-sm rounded ${
+    match.status === "Completed" ? "text-green-400 bg-green-900" : "bg-[#433E29] text-[#E5BA18]"
+  }`}>
+  {match.status}
+  </span>
+  
+</td>
+
                 <td className="p-3">
                   {match.date ? new Date(match.date).toLocaleDateString() : ""}
                 </td>
@@ -138,13 +146,82 @@ const AllMatches = () => {
       {showViewModal && (
         <div className="fixed h-screen w-full inset-0 flex items-center justify-center bg-black/85 z-50 p-5">
           {/* Modal content for viewing match */}
-          <div className="text-(--textlight) bg-(--primary) p-6 rounded-lg shadow-lg md:w-[40%] w-full">
-            <h2 className="text-(--textwhite) mb-4 lemon-milk-font">Match Details</h2>
-            <p><strong>Tournament:</strong> {selectedMatch.tournament}</p>
-            <p><strong>Player 1:</strong> {selectedMatch.player_1}</p>
-            <p><strong>Player 2:</strong> {selectedMatch.player_2}</p>
-            <p><strong>Status:</strong> {selectedMatch.status}</p>
-            <p><strong>Date:</strong> {new Date(selectedMatch.date).toLocaleString()}</p>
+          <div className="text-(--textlight) bg-(--primary) p-6 rounded-lg shadow-lg md:w-[70%] w-full h-[80vh] overflow-auto">
+             {/* Header Section */}
+      <div>
+       
+        {/* Match Banner */}
+        <div className="bg-[url('/src/assets/images/header-1.png')] bg-center bg-cover bg-no-repeat rounded-lg p-10 text-center">
+          <div className="bg-white text-black py-1 w-fit mx-auto px-6 rounded-md mb-5">
+            <h1 className="">Score</h1>
+            <h1 className="font-bold">{selectedMatch.result?.player_1_score ?? "0"}-{selectedMatch.result?.player_2_score ?? "0"}</h1>
+          </div>
+          <div className="flex justify-center gap-3 items-center">
+            <div className="flex flex-col items-center">
+              <img src={selectedMatch.player_1_photo || User1} alt="Player 1" className="w-20 h-20 object-cover rounded-2xl" />
+              <p className="text-lg font-semibold">{selectedMatch.player_1 || "Player 1"}</p>
+            </div>
+            <div>
+              <img src={VsImg} alt="" />
+            </div>
+            <div className="flex flex-col items-center">
+              <img src={selectedMatch.player_2_photo || User2} alt="Player 2" className="w-20 h-20 object-cover rounded-2xl" />
+              <p className="text-lg font-semibold">{selectedMatch.player_2 || "Player 2"}</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Match Details */}
+        <div className="mt-10">
+          <div className="flex justify-between items-start">
+            <div>
+              <h2 className="text-2xl font-bold text-white"><span className="capitalize">{selectedMatch.player_1} </span>vs <span className="capitalize">{selectedMatch.player_2}</span></h2>
+              <p className="text-(--textlight) mt-1">Date: {selectedMatch.date ? new Date(selectedMatch.date).toLocaleDateString() : "TBD"}</p>
+              <p className="text-(--textlight)">Location: {selectedMatch.tournament?.country || "Unknown"}</p>
+            </div>           
+          </div>
+
+          <div className="mt-4 grid grid-cols-2 gap-6">
+            <div>
+              <p className="text-(--textwhite) font-semibold">Organizer</p>
+              <p className="text-(--textlight)">{selectedMatch.tournament?.sponsorship_details || "Unknown"}</p>
+            </div>
+            <div>
+              <p className="text-(--textwhite) font-semibold">Referee</p>
+              <p className="text-(--textlight)">{selectedMatch.admin_username || "Unknown"}</p>
+            </div>
+            <div>
+              <p className="text-(--textwhite) mb-2 font-semibold">Status</p>
+              <span className={`px-3 py-1 text-sm rounded-4xl ${
+                selectedMatch.status === "Pending" ? "bg-[#433E29] text-[#E5BA18]" :
+                selectedMatch.status === "Completed" ? "bg-[#003515] text-[#00BB4C]" : "bg-gray-600"
+              }`}>
+                {selectedMatch.status || "Pending"}
+              </span>
+            </div>
+            <div>
+              <p className="text-(--textwhite) font-semibold">Match Type</p>
+              <p className="text-(--textlight)">{selectedMatch.tournament?.bracket_type || "Unknown"}</p>
+            </div>
+          </div>
+
+          {/* Match Description */}
+          <div className="mt-6">
+            <h3 className="text-xl font-bold text-white">About</h3>
+            <p className="text-(--textlight) mt-2">
+              {selectedMatch.tournament?.description || "No additional information provided."}
+            </p>
+          </div>
+
+          {/* Rules & Regulations */}
+          <div className="mt-6">
+            <h3 className="text-xl font-bold text-white">Rules and Regulations</h3>
+            <p className="text-(--textlight) mt-2">
+              {selectedMatch.tournament?.rules_and_regulations || "Standard match rules apply. Please follow the game regulations strictly."}
+            </p>
+          </div>
+        </div>
+      </div>
             <button className="px-4 py-2 bg-(--accent) text-white rounded mt-4" onClick={() => setShowViewModal(false)}>Close</button>
           </div>
         </div>

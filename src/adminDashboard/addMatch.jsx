@@ -103,12 +103,7 @@ const AddMatch = () => {
                 ))}
               </select>
             </div>
-
-            {/* Stage Input */}
-            <div className="flex flex-col gap-2">
-              <label className="text-(--textwhite)">Stage</label>
-              <input type="number" name="stage" placeholder="Stage (e.g., 1, 2, 3...)" className="w-full bg-(--secondary) text-white p-3 rounded-md" required value={matchData.stage} onChange={handleChange} />
-            </div>
+            
 
             {/* Date Input */}
             <div className="flex flex-col gap-2">

@@ -23,7 +23,7 @@ ChartJS.register(
 );
 
 const Overview = () => {
-  const { totalAthletes, totalTournaments, loading, error } = useDashboardStats();
+  const { totalAthletes, totalTournaments,pendingCount,totalPaidAmount,totalPositions,totalClaim, loading, error } = useDashboardStats();
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
@@ -94,28 +94,28 @@ const Overview = () => {
           <CgGames  className='w-10 text-3xl text-(--textwhite)'/>
             <div>
             <h2 className="lemon-milk-medium text-(--textwhite)">Active Matches</h2>
-            <p className="text-xl lemon-milk-medium text-(--textwhite) ">{activeMatches}</p>
+            <p className="text-xl lemon-milk-medium text-(--textwhite) ">{pendingCount}</p>
             </div>
           </div>
           <div className="card flex gap-x-3 bg-(--primary) p-6 rounded-lg border border-(--border)">
           <GrCurrency  className='w-10 text-3xl text-(--textwhite)'/>
             <div>
             <h2 className="lemon-milk-medium text-(--textwhite)">Total Income</h2>
-            <p className="text-xl lemon-milk-medium text-(--textwhite) ">{totalIncome}</p>
+            <p className="text-xl lemon-milk-medium text-(--textwhite) ">{totalPaidAmount}</p>
             </div>
           </div>
           <div className="card flex gap-x-3 bg-(--primary) p-6 rounded-lg border border-(--border)">
           <GiTargetPrize  className='w-10 text-3xl text-(--textwhite)'/>
             <div>
             <h2 className="lemon-milk-medium text-(--textwhite)">Total Prizes</h2>
-            <p className="text-xl lemon-milk-medium text-(--textwhite) ">{totalPrizes}</p>
+            <p className="text-xl lemon-milk-medium text-(--textwhite) ">{totalPositions}</p>
             </div>
           </div>
           <div className="card flex gap-x-3 bg-(--primary) p-6 rounded-lg border border-(--border)">
           <FaUserShield  className='w-10 text-3xl text-(--textwhite)'/>
             <div>
             <h2 className="lemon-milk-medium text-(--textwhite)">Total Claims</h2>
-            <p className="text-xl lemon-milk-medium text-(--textwhite) ">{totalClaims}</p>
+            <p className="text-xl lemon-milk-medium text-(--textwhite) ">{totalClaim}</p>
             </div>
           </div>
         </div>

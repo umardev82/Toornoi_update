@@ -140,13 +140,17 @@ const Payments = () => {
           {filteredRegistrations.length > 0 &&
   filteredRegistrations.some(item => item.amount > 0) && (
     <tfoot>
-      <tr className="bg-(--secondary) text-white font-bold">
-        <td colSpan="4" className="p-3 text-right">Total Amount:</td>
-        <td className="p-3">
-          {Number(filteredRegistrations.reduce((sum, item) => sum + (item.amount || 0), 0)).toLocaleString("en-US")} €
-        </td>
-      </tr>
-    </tfoot>
+    <tr className="bg-(--secondary) text-white font-bold">
+      <td colSpan="4" className="p-3 text-right">Total Amount:</td>
+      <td className="p-3">
+        {filteredRegistrations
+          .filter((item) => item.amount) // Ensuring amount exists
+          .reduce((sum, item) => sum + parseFloat(item.amount || 0), 0)
+          .toLocaleString("en-GB")} €  
+      </td>
+    </tr>
+  </tfoot>
+  
   )
 }
 

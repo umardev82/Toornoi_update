@@ -35,6 +35,9 @@ import CheckoutForm from "../athleteDashboard/checkout";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import MyTournaments from "../athleteDashboard/myTournaments";
+import CreatePool from "../adminDashboard/createPools";
+import PoolList from "../adminDashboard/poolsList";
+import ViewMatch from "../athleteDashboard/viewMatch";
 
 const stripePromise = loadStripe("your-publishable-key-here"); // Replace with your Stripe publishable key
 
@@ -78,7 +81,8 @@ const AppRoutes = () => {
           <Route path="registered-athletes" element={<RegisteredAthletes />} />
           <Route path="tournaments/:tournament_id/registered-athletes" element={<RegisteredAthletesTournaments />} />
           <Route path="payments" element={<Payments/>} />
-   
+          <Route path="create-pools" element={<CreatePool/>}/>
+          <Route path="pools" element={<PoolList/>}/>  
 
 
         </Route>
@@ -99,6 +103,7 @@ const AppRoutes = () => {
           <Route path="matches" element={<UserMatches/>}/>
           <Route path="checkout" element={<Elements stripe={stripePromise}><CheckoutForm /> </Elements>}/>
           <Route path="my-tournaments" element={<MyTournaments/>}/>
+          <Route path="match/:id" element={<ViewMatch/>}/>
         </Route>
 
         {/* Catch-all for unknown routes */}

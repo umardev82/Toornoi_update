@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { useTournament } from "../hooks/useTournament";
 import { IoMdCloseCircle } from "react-icons/io";
 import { FaArrowCircleRight } from "react-icons/fa";
 import axios from "axios";
@@ -102,7 +101,6 @@ const CheckoutForm = ({ tournamentId, registrationFee, onSuccess }) => {
 
 const SingleTournament = () => {
   const { id } = useParams();
-  const { getTournament } = useTournament();
   const [tournament, setTournament] = useState(null);
   const [loading, setLoading] = useState(true);
   const [modalStep, setModalStep] = useState("details");
@@ -115,7 +113,25 @@ const SingleTournament = () => {
     })();
   }, [id]);
   
-
+  const getTournament = async (id) => {
+    setLoading(true);
+    try {
+      const token = localStorage.getItem("userToken"); // Get token from local storage
+      const response = await axios.get(`${API_BASE_URL}/tournament_user/${id}/`, {
+        headers: {
+          Authorization: `Token ${token}`, // Add token to headers
+        },
+      });
+      return response.data;
+    } catch (err) {
+      setError(err.message);
+      toast.error("Failed to fetch tournament");
+      throw err;
+    } finally {
+      setLoading(false);
+    }
+  };
+  
   const formatDateTime = (dateTimeString) => {
     const date = new Date(dateTimeString);
     if (isNaN(date)) return "Invalid Date";
@@ -133,7 +149,9 @@ const SingleTournament = () => {
   };
 
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <div className="w-full flex justify-center items-center min-h-[300px]">
+  <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-blue-500"></div>
+</div>;
 
   return (
    <>
@@ -158,7 +176,13 @@ const SingleTournament = () => {
         <p className="text-(--textlight)"><span className="text-(--textwhite) font-bold">Registration Fee:</span> {tournament?.registration_fee}€</p>
         </div>
         <div className="text-end">
-        <button onClick={() => setShowModal(true)} className="py-2 px-5 bg-(--accent) rounded">Register</button>
+        <button 
+         onClick={() => setShowModal(true)} 
+         className={`py-2 px-5 rounded ${tournament?.is_registered ? "bg-gray-500 cursor-not-allowed" : "bg-(--accent)"}`}
+         disabled={tournament?.is_registered}
+        >
+    {tournament?.is_registered ? "Already Registered" : "Register"}
+  </button>
         <div className=" text-white mt-3 px-3 py-1 rounded-lg">
         🏆 <span className="font-bold">Prize:</span>  {tournament.prize_details}
         </div>
@@ -240,7 +264,12 @@ const SingleTournament = () => {
         <img src={tournament?.code_of_conduct} alt="" className="h-60 w-full rounded object-cover"/>
         </div>
         <div className="">
-        <button onClick={() => setShowModal(true)} className="py-2 px-5 bg-(--accent) rounded text-(--textwhite) mt-4">Register</button>
+        <button 
+          onClick={() => setShowModal(true)} 
+          className={`py-2 px-5 rounded ${tournament?.is_registered ? "bg-gray-500 text-white cursor-not-allowed" : "bg-(--accent) text-white"}`}
+          disabled={tournament?.is_registered}  >
+         {tournament?.is_registered ? "Already Registered" : "Register"}
+        </button>
        
         </div>
 

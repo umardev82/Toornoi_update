@@ -11,6 +11,11 @@ const AllAthletes = () => {
   const [selectedUser, setSelectedUser] = useState(null);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [showViewModal, setShowViewModal] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [verifiedFilter, setVerifiedFilter] = useState("all");
+  const [activeFilter, setActiveFilter] = useState("all");
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
   const API_URL = `${API_BASE_URL}/users/`;
 
   useEffect(() => {
@@ -48,8 +53,38 @@ const AllAthletes = () => {
     }
   };
 
+  const filteredUsers = users.filter((user) => {
+    return (
+      (verifiedFilter === "all" || user.is_verified === (verifiedFilter === "verified")) &&
+      (activeFilter === "all" || user.is_active === (activeFilter === "active")) &&
+      (searchQuery === "" || user.username.toLowerCase().includes(searchQuery.toLowerCase()))
+    );
+  });
+
+  const paginatedUsers = filteredUsers.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+  const totalPages = Math.ceil(filteredUsers.length / itemsPerPage);
+
   return (
     <div className="overflow-x-auto">
+      <div className="flex flex-wrap md:justify-end gap-3 mb-4 ">
+        <input 
+          type="text" 
+          placeholder="Search by username" 
+          className="md:w-auto w-full border border-(--border) p-2 rounded text-white bg-(--primary)" 
+          value={searchQuery} 
+          onChange={(e) => setSearchQuery(e.target.value)} 
+        />
+        <select className="md:w-auto w-full border border-(--border) p-2 rounded text-white bg-(--primary)" value={verifiedFilter} onChange={(e) => setVerifiedFilter(e.target.value)}>
+          <option value="all">All</option>
+          <option value="verified">Verified</option>
+          <option value="not_verified">Not Verified</option>
+        </select>
+        <select className="md:w-auto w-full border border-(--border) p-2 rounded text-white bg-(--primary)" value={activeFilter} onChange={(e) => setActiveFilter(e.target.value)}>
+          <option value="all">All</option>
+          <option value="active">Active</option>
+          <option value="inactive">Inactive</option>
+        </select>
+      </div>
       <table className="w-full table-auto text-left whitespace-nowrap text-white border-separate border-spacing-y-2 border border-transparent">
         <thead className="bg-(--secondary) p-2 rounded-sm text-white">
           <tr>
@@ -64,61 +99,42 @@ const AllAthletes = () => {
         <tbody>
           {loading ? (
             <tr>
-              <td colSpan="6" className="text-center p-4">
-                Loading...
-              </td>
+              <td colSpan="6" className="text-center p-4">Loading...</td>
             </tr>
-          ) : users.length === 0 ? (
+          ) : paginatedUsers.length === 0 ? (
             <tr>
-              <td colSpan="6" className="text-center p-4">
-                No users found.
-              </td>
+              <td colSpan="6" className="text-center p-4">No users found.</td>
             </tr>
           ) : (
-            users.map((user) => (
+            paginatedUsers.map((user) => (
               <tr key={user.id} className="bg-(--primary) text-white">
                 <td className="p-3">{user.username}</td>
                 <td className="p-3">{user.email}</td>
                 <td className="p-3">{user.phone_number}</td>
                 <td className="p-3">
-                  <span
-                    className={`px-3 py-1 rounded-full text-xs ${
-                      user.is_verified ? "text-white bg-green-900" : "text-white bg-red-900"
-                    }`}
-                  >
+                  <span className={`px-3 py-1 rounded-full text-xs ${user.is_verified ? "text-white bg-green-900" : "text-white bg-red-900"}`}>
                     {user.is_verified ? "Verified" : "Not Verified"}
                   </span>
                 </td>
                 <td className="p-3">
-                  <span
-                    className={`px-3 py-1 rounded-full text-xs ${
-                      user.is_active ? "text-white bg-green-900" : "text-white bg-red-900"
-                    }`}
-                  >
+                  <span className={`px-3 py-1 rounded-full text-xs ${user.is_active ? "text-white bg-green-900" : "text-white bg-red-900"}`}>
                     {user.is_active ? "Active" : "Inactive"}
                   </span>
                 </td>
                 <td className="p-3 flex gap-3">
-                  <FaEye
-                    className="text-blue-400 cursor-pointer"
-                    onClick={() => {
-                      setSelectedUser(user);
-                      setShowViewModal(true);
-                    }}
-                  />
+                  <FaEye className="text-blue-400 cursor-pointer" onClick={() => { setSelectedUser(user); setShowViewModal(true); }} />
                   <a href={`/dashboard/edit-athlete/${user.id}`}>
                     <FaEdit className="text-yellow-400" />
                   </a>
-                  <MdDelete className="text-red-600 cursor-pointer" onClick={() => confirmDelete(user)} />
+                  <MdDelete className="text-red-600 cursor-pointer" onClick={() => { setSelectedUser(user); setShowConfirmModal(true); }} />
                 </td>
               </tr>
             ))
           )}
         </tbody>
       </table>
-
-      {/* View Athlete Modal */}
-      {showViewModal && selectedUser && (
+            {/* View Athlete Modal */}
+            {showViewModal && selectedUser && (
         <div className="fixed inset-0 flex items-center justify-center bg-black/80 p-5 z-50">
           <div className="bg-(--primary) p-6 rounded-lg shadow-lg w-96">
             <h1 className="text-white lemon-milk-font mb-4">Athlete Details</h1>
@@ -185,6 +201,25 @@ const AllAthletes = () => {
           </div>
         </div>
       )}
+         <div className="flex items-center justify-center mt-6 space-x-4">
+          <button
+            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+            disabled={currentPage === 1}
+            className="py-1 px-3 bg-(--primary) text-white rounded disabled:opacity-50"
+          >
+            Previous
+          </button>
+
+          <span className="text-(--accent) font-bold">{currentPage} / {totalPages}</span>
+
+          <button
+            onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+            disabled={currentPage === totalPages}
+            className="py-1 px-3 bg-(--primary) text-white rounded disabled:opacity-50"
+          >
+            Next
+          </button>
+        </div>
     </div>
   );
 };

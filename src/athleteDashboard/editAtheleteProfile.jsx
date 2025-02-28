@@ -18,7 +18,9 @@ const EditAthleteProfile = () => {
   const [photoPreview, setPhotoPreview] = useState(null);
 
   if (error) return <div className="text-center mt-10 text-red-500">{error}</div>;
-  if (!profile) return <div className="text-center mt-10 text-white">Loading...</div>;
+  if (!profile) return <div className="w-full flex justify-center items-center min-h-[300px]">
+  <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-blue-500"></div>
+</div>;
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -68,7 +70,7 @@ const EditAthleteProfile = () => {
     <>
       <Toaster />
       <div>
-      
+      <h2 className="lemon-milk-font mb-4 text-(--textwhite)">Edit Profile</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-7 bg-(--primary) md:p-7 p-4 rounded-md border border-(--border)">
           {/* Username */}
