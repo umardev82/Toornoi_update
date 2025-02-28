@@ -14,7 +14,7 @@ const useProfile = () => {
     }
 
     axios
-      .get(`${API_BASE_URL}/loge/superadmin/profile`, {
+      .get(`${API_BASE_URL}/loge/superadmin/profile/`, {
         headers: {
           Authorization: `Token ${token}`, // Attach token from localStorage
         },
