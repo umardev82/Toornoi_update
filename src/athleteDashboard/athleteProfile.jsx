@@ -4,6 +4,7 @@ import userProfileCover from "../assets/images/profile-bg.png";
 import { FaUser } from "react-icons/fa";
 import { Link } from "react-router";
 
+
 const AthleteProfile = () => {
   const { profile, error } = useAthleteProfile();
 

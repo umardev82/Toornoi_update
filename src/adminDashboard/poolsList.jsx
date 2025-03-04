@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import { FaEye, FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { toast } from "react-hot-toast";
@@ -102,11 +103,13 @@ const formatDateTime = (dateTimeString) => {
                 <td className="p-3">{pool.end_date
     ? formatDateTime(pool.end_date): "Not Set"}</td>
                 <td className="p-3">
-                  <div className="flex gap-3">                   
-                    <p
-                      className="text-white bg-red-700 px-4 py-1 rounded cursor-pointer"
+                  <div className="flex gap-3">  
+                  <Link to={`/dashboard/pools/${pool.id}`}>
+                  <FaEye className="text-(--accent)" />   </Link>              
+                    <MdDelete
+                      className="text-red-600 cursor-pointer"
                       onClick={() => confirmDelete(pool)}
-                    >Delete </p>
+                    />
                   </div>
                 </td>
               </tr>

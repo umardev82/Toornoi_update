@@ -8,6 +8,7 @@ import VsImg from "../assets/images/vs.png";
 import User1 from "../assets/images/user-1.png";
 import User2 from "../assets/images/user-2.png";
 import { Toaster,toast } from "react-hot-toast";
+import { Link } from "react-router-dom";
 
 
 const ViewMatch = () => {
@@ -104,9 +105,13 @@ const ViewMatch = () => {
 
       {/* Header Section */}
       <div>
+        <div className="md:flex justify-between items-center mb-4">
         <a href="/my-account/matches" className="text-sm mb-4 text-white flex flex-wrap items-center gap-2">
           <span><TiArrowBackOutline className="text-2xl" /> </span>Tournaments <span><IoIosArrowForward /></span> {match.tournament?.tournament_name} <span><IoIosArrowForward /></span> Match
         </a>
+        <Link to={`/my-account/matches/${match.id}/chat`} className="px-4 py-2 bg-(--accent) rounded text-white">Start Chat</Link>
+        </div>
+       
 
         {/* Match Banner */}
         <div className="bg-[url('/src/assets/images/header-1.png')] bg-center bg-cover bg-no-repeat rounded-lg p-10 text-center">
@@ -133,7 +138,7 @@ const ViewMatch = () => {
         <div className="mt-10">
           <div className="flex justify-between items-start">
             <div>
-              <h2 className="text-2xl font-bold"><span className="capitalize">{match.player_1} </span>vs <span className="capitalize">{match.player_2}</span></h2>
+              <h2 className="text-2xl font-bold md:w-full w-[50%]"><span className="capitalize">{match.player_1} </span>vs <span className="capitalize">{match.player_2}</span></h2>
               <p className="text-(--textlight) mt-1">Date: {match.date ? new Date(match.date).toLocaleDateString() : "TBD"}</p>
               <p className="text-(--textlight)">Location: {match.tournament?.country || "Unknown"}</p>
             </div>
@@ -182,7 +187,9 @@ const ViewMatch = () => {
             </p>
           </div>
         </div>
+      
       </div>
+      
 
       {/* Modal for Score Update */}
       {isModalOpen && (

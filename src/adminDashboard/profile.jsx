@@ -1,12 +1,14 @@
 import useProfile from "../hooks/useProfile";
 import userProfileImage from "../assets/images/profile.png";
 import userProfileCover from "../assets/images/profile-bg.png";
+console.log("Fallback Image:", userProfileImage);
 import { FaUser } from "react-icons/fa";
 import { Link } from "react-router";
 
 const Profile = () => {
   const { profile, error } = useProfile();
 
+  
   if (error) {
     return <div className="text-center mt-10 text-red-500">{error}</div>;
   }

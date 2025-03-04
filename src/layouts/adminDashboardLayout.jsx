@@ -5,7 +5,7 @@ import { BiSolidUserRectangle } from "react-icons/bi";
 import { RiHome3Fill, RiMessage2Fill } from "react-icons/ri";
 import { HiMiniTrophy } from "react-icons/hi2";
 import { FaBell } from "react-icons/fa";
-import profile from "../assets/images/profile.png";
+import profileImg from "../assets/images/profile.png";
 import logo from "../assets/images/logo.png";
 import { FiChevronsRight } from "react-icons/fi";
 import { TbLogout2 } from "react-icons/tb";
@@ -148,7 +148,7 @@ const AdminDashboardLayout = () => {
             <FaBell className="w-5 h-5 cursor-pointer text-(--textwhite)" />
             <div className="relative">
               <button className="flex items-center gap-2 text-(--textlight)" onClick={() => setProfileDropdownOpen(!profileDropdownOpen)}>
-                <img src={profile?.photo ||profile} alt="Profile" className="w-10 h-10 rounded-full border border-(--border) object-cover" />
+                <img src={profile?.photo || profileImg} alt="Profile" className="w-10 h-10 rounded-full border border-(--border) object-cover" />
                
                 <span>{profile?.username || "Admin"}</span> {/* Show username */}
                 <ChevronDown className="w-5 h-5 cursor-pointer" />

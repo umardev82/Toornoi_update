@@ -5,12 +5,16 @@ import logo from "../assets/images/logo.png";
 import trophy from "../assets/images/trophy.png";
 import google from "../assets/images/google.png";
 import { Toaster } from "react-hot-toast";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+
+
 
 const Login = () => {
   const { login, loading } = useSignin(); // Use Auth Hook
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [localError, setLocalError] = useState(null); // Local validation
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
@@ -25,6 +29,7 @@ const Login = () => {
     const result = await login(email, password);
 
     if (result.success) {
+      
       setTimeout(() => {
         navigate("/my-account/tournaments"); 
       }, 2000); 
@@ -61,18 +66,24 @@ const Login = () => {
                         />
                       </div>
 
-                      <div>
-                        <label htmlFor="password" className="block text-sm mb-2 text-(--textlight)">Password</label>
-                        <input
-                          type="password"
-                          id="password"
-                          placeholder="Enter password"
-                          className="py-2 px-3 block w-full bg-(--secondarybg) rounded-sm text-sm text-(--textlight)"
-                          value={password}
-                          onChange={(e) => setPassword(e.target.value)}
-                          required
-                        />
-                      </div>
+                      <div className="relative w-full">
+                       <input
+        type={showPassword ? "text" : "password"} // Hidden by default
+        id="password"
+        placeholder="Enter password"
+        className="py-2 px-3 block w-full bg-(--secondarybg) rounded-sm text-sm text-(--textlight) pr-10"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        required
+      />
+      <button
+        type="button"
+        onClick={() => setShowPassword(!showPassword)}
+        className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
+      >
+        {showPassword ? <FaEyeSlash size={18} /> : <FaEye size={18} />}
+      </button>
+    </div>
 
                       {/* Show Error Messages */}
                       {localError && <p className="text-red-500 text-sm">{localError}</p>}

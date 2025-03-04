@@ -18,7 +18,7 @@ const useEditAthleteProfile = () => {
     }
 
     axios
-      .get(`${API_BASE_URL}/loge/user/profile/`, {
+      .get(`${API_BASE_URL}/loge/user/profile`, {
         headers: { Authorization: `Token ${token}` },
       })
       .then((response) => {

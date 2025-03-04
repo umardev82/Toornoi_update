@@ -79,6 +79,7 @@ const AllMatches = () => {
         <thead className="whitespace-nowrap bg-(--secondary) p-2 rounded-sm text-white">
           <tr className="rounded-2xl">
             <th className="p-3 font-medium">Tournament</th>
+            <th className="p-3 font-medium">Pool No</th>
             <th className="p-3 font-medium">Player 1</th>
             <th className="p-3 font-medium">Player 2</th>
             <th className="p-3 font-medium">Status</th>
@@ -102,6 +103,9 @@ const AllMatches = () => {
               <tr key={match.id} className="bg-(--primary) text-(--textlight)">
                 <td className="p-3">
                   {match.tournament?.tournament_name}
+                </td>
+                <td className="p-3">
+                  {match.pool}
                 </td>
                 <td className="p-3">
                   {match.player_1}
@@ -202,6 +206,10 @@ const AllMatches = () => {
             <div>
               <p className="text-(--textwhite) font-semibold">Match Type</p>
               <p className="text-(--textlight)">{selectedMatch.tournament?.bracket_type || "Unknown"}</p>
+            </div>
+            <div>
+              <p className="text-(--textwhite) font-semibold">Pool No</p>
+              <p className="text-(--textlight)">{selectedMatch.pool || "Unknown"}</p>
             </div>
           </div>
 

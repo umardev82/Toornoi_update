@@ -38,6 +38,8 @@ import MyTournaments from "../athleteDashboard/myTournaments";
 import CreatePool from "../adminDashboard/createPools";
 import PoolList from "../adminDashboard/poolsList";
 import ViewMatch from "../athleteDashboard/viewMatch";
+import PoolDetails from "../adminDashboard/viewPool";
+import Chat from "../athleteDashboard/chat";
 
 const stripePromise = loadStripe("your-publishable-key-here"); // Replace with your Stripe publishable key
 
@@ -83,6 +85,8 @@ const AppRoutes = () => {
           <Route path="payments" element={<Payments/>} />
           <Route path="create-pools" element={<CreatePool/>}/>
           <Route path="pools" element={<PoolList/>}/>  
+          <Route path="pools/:poolId" element={<PoolDetails />} />
+       
 
 
         </Route>
@@ -104,6 +108,7 @@ const AppRoutes = () => {
           <Route path="checkout" element={<Elements stripe={stripePromise}><CheckoutForm /> </Elements>}/>
           <Route path="my-tournaments" element={<MyTournaments/>}/>
           <Route path="match/:id" element={<ViewMatch/>}/>
+          <Route path="matches/:id/chat" element={<Chat/>} />
         </Route>
 
         {/* Catch-all for unknown routes */}
