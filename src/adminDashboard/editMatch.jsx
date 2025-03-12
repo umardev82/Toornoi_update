@@ -33,13 +33,39 @@ const EditMatch = () => {
         const [tournamentRes, playerRes, matchRes] = await Promise.all([
           axios.get(`${API_BASE_URL}/tournaments/`),
           axios.get(`${API_BASE_URL}/users/`),
-          axios.get(`${API_BASE_URL}/matches/${id}/`)
+          axios.get(`${API_BASE_URL}/matches/${id}/`),
         ]);
-
+  
+        console.log("Match API Response:", matchRes.data); // Debugging
+  
         setTournaments(tournamentRes.data);
         setPlayers(playerRes.data);
+  
         if (matchRes.data) {
-          setMatchData(matchRes.data);  
+          // Find tournament ID based on name
+          const tournamentId = tournamentRes.data.find(t => t.tournament_name === matchRes.data.tournament?.tournament_name)?.id || "";
+  
+          // Find player IDs based on usernames
+          const player1Id = playerRes.data.find(p => p.username === matchRes.data.player_1)?.id || "";
+          const player2Id = playerRes.data.find(p => p.username === matchRes.data.player_2)?.id || "";
+          const winnerId = playerRes.data.find(p => p.username === matchRes.data.winner)?.id || "";
+  
+          // Update state with properly formatted data
+          setMatchData((prevData) => ({
+            ...prevData,
+            tournament: tournamentId,
+            player_1: player1Id,
+            player_2: player2Id,
+            winner: winnerId,
+            date: matchRes.data.date || "",
+            status: matchRes.data.status || "Pending",
+            result: {
+              player_1_score: matchRes.data.result?.player_1_score || 0,
+              player_2_score: matchRes.data.result?.player_2_score || 0,
+              player_1_screenshot: matchRes.data.result?.player_1_screenshot || null,
+              player_2_screenshot: matchRes.data.result?.player_2_screenshot || null,
+            },
+          }));
         }
       } catch (error) {
         toast.error("Failed to fetch data.");
@@ -47,13 +73,14 @@ const EditMatch = () => {
         setLoading(false);
       }
     };
-
+  
     if (id) {
       fetchData();
     } else {
       toast.error("Match ID is missing.");
     }
   }, [id]);
+  
 
   const handleChange = (e) => {
     const { name, value, type, files } = e.target;
@@ -125,7 +152,7 @@ const EditMatch = () => {
 
   return (
     <>
-      <Toaster />
+      {/* <Toaster toastOptions={{ duration: 5000 }} /> */}
       <h1 className="lemon-milk-font text-(--textwhite) mb-4">Edit Match</h1>
 
       {loading ? (

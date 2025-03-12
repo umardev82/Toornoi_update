@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { FaEye, FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { toast } from "react-hot-toast";
+import * as XLSX from "xlsx";  // Import XLSX for Excel export
 import API_BASE_URL from "../config";
 
 const TournamentList = () => {
@@ -17,7 +18,7 @@ const TournamentList = () => {
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5;
+  const itemsPerPage = 6;
 
   // 🔹 Filtered tournaments based on search and status
   const [filteredTournaments, setFilteredTournaments] = useState([]);
@@ -62,12 +63,23 @@ const TournamentList = () => {
     setCurrentPage(1); // Reset to first page after filtering
   }, [search, statusFilter, tournaments]);
 
-  // 🔹 Pagination logic
-  const totalPages = Math.ceil(filteredTournaments.length / itemsPerPage);
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const paginatedTournaments = filteredTournaments.slice(startIndex, endIndex);
+  const exportToExcel = () => {
+    const worksheet = XLSX.utils.json_to_sheet(tournaments); // Convert JSON data to sheet
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Tournaments");
 
+    // Generate Excel file and trigger download
+    XLSX.writeFile(workbook, "tournaments_list.xlsx");
+  };
+
+  // 🔹 Pagination logic
+ 
+
+  const totalPages = Math.ceil(filteredTournaments.length / itemsPerPage);
+  const paginatedTournaments = filteredTournaments.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+
+  const handlePrevPage = () => setCurrentPage((prev) => Math.max(prev - 1, 1));
+  const handleNextPage = () => setCurrentPage((prev) => Math.min(prev + 1, totalPages));
   // Function to format date as DD/MM/YYYY
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -114,7 +126,7 @@ const TournamentList = () => {
   return (
     <div>
       {/* 🔹 Search & Filter Section */}
-      <div className="flex flex-wrap md:justify-end gap-3 mb-4">
+      <div className="flex flex-wrap md:justify-end items-start gap-3 mb-4">
         <input
           type="text"
           placeholder="Search tournament..."
@@ -133,6 +145,13 @@ const TournamentList = () => {
           <option value="In Progress">In Progress</option>
           <option value="Pending">Pending</option>
         </select>
+
+        <button 
+        onClick={exportToExcel} 
+        className="mb-4 px-4 py-2 bg-(--accent) text-white rounded"
+      >
+        Export to Excel
+      </button>
       </div>
 
       <div className="overflow-x-auto">
@@ -140,9 +159,9 @@ const TournamentList = () => {
           <thead className="bg-(--secondary) p-2 rounded-sm text-white">
             <tr className="rounded-2xl">
               <th className="p-3 font-medium rounded-l-md whitespace-nowrap w-max">Tournament</th>
-              <th className="p-3 font-medium whitespace-nowrap w-max">Description</th>
+              <th className="p-3 font-medium whitespace-nowrap w-max">Registration Fee</th>
               <th className="p-3 font-medium whitespace-nowrap w-max">Status</th>
-              <th className="p-3 font-medium whitespace-nowrap w-max">Time</th>
+              <th className="p-3 font-medium whitespace-nowrap w-max">Slots</th>
               <th className="p-3 font-medium whitespace-nowrap w-max">Date</th>
               <th className="p-3 font-medium rounded-r-md whitespace-nowrap w-max">Actions</th>
             </tr>
@@ -173,13 +192,13 @@ const TournamentList = () => {
                     />
                     <span>{tournament.tournament_name}</span>
                   </td>
-                  <td className="p-3 truncate max-w-[50px] whitespace-nowrap">{tournament.description}</td>
+                  <td className="p-3 truncate max-w-[50px] whitespace-nowrap">{tournament.registration_fee}€</td>
                   <td className="p-3 whitespace-nowrap w-max">
                     <span className="bg-[#433E29] text-[#E5BA18] px-3 pb-1 rounded-full">
                       {tournament.status}
                     </span>
                   </td>
-                  <td className="p-3 whitespace-nowrap w-max">{tournament.time ? formatOnlyTime(tournament.time) : "Not Set"}</td>
+                  <td className="p-3 whitespace-nowrap w-max">{tournament.slots || "Not Set"}</td>
                   <td className="p-3 whitespace-nowrap w-max">
                     {tournament.start_date && tournament.end_date
                       ? `${formatDate(tournament.start_date)} - ${formatDate(tournament.end_date)}`
@@ -205,26 +224,25 @@ const TournamentList = () => {
           </tbody>
         </table>
 
-        {/* 🔹 Pagination Controls */}
-        <div className="flex items-center justify-center mt-6 space-x-4">
-          <button
-            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-            disabled={currentPage === 1}
-            className="py-1 px-3 bg-(--primary) text-white rounded disabled:opacity-50"
-          >
-            Previous
-          </button>
-
-          <span className="text-(--accent) font-bold">{currentPage} / {totalPages}</span>
-
-          <button
-            onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
-            disabled={currentPage === totalPages}
-            className="py-1 px-3 bg-(--primary) text-white rounded disabled:opacity-50"
-          >
-            Next
-          </button>
-        </div>
+        {totalPages > 1 && (   
+   <div className="flex items-center justify-center mt-6 space-x-4">
+     <button
+       onClick={handlePrevPage}
+       disabled={currentPage === 1}
+       className="py-1 px-3 bg-(--primary) text-white rounded disabled:opacity-50"
+     >
+       Previous
+     </button>
+     <span className="text-(--accent) font-bold">{currentPage} / {totalPages}</span>
+     <button
+       onClick={handleNextPage}
+       disabled={currentPage === totalPages}
+       className="py-1 px-3 bg-(--primary) text-white rounded disabled:opacity-50"
+     >
+       Next
+     </button>
+   </div>
+)}
 
         {/* Delete Confirmation Modal */}
         {showConfirmModal && selectedTournament && (

@@ -6,13 +6,15 @@ import { RiHome3Fill, RiMessage2Fill } from "react-icons/ri";
 import { HiMiniTrophy } from "react-icons/hi2";
 import { FaBell } from "react-icons/fa";
 import profileImg from "../assets/images/profile.png";
-import logo from "../assets/images/logo.png";
+import logo from "../assets/images/toornoi-logo.png";
 import { FiChevronsRight } from "react-icons/fi";
 import { TbLogout2 } from "react-icons/tb";
 import { FaPersonRunning } from "react-icons/fa6";
 import { GiAmericanFootballPlayer } from "react-icons/gi";
 import useProfile from '../hooks/useProfile';
 import { MdPayments } from "react-icons/md";
+import { GrNotes } from "react-icons/gr";
+import { GiTargetPrize } from "react-icons/gi";
 
 const AdminDashboardLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -20,7 +22,7 @@ const AdminDashboardLayout = () => {
   const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
-  const { profile} = useProfile(); 
+  const { profile } = useProfile();
 
   const handleLogout = () => {
     localStorage.removeItem("adminToken");
@@ -29,12 +31,22 @@ const AdminDashboardLayout = () => {
   };
 
   const handleDropdownToggle = (menuName) => {
-    setDropdowns((prev) => ({ ...prev, [menuName]: !prev[menuName] }));
+    setDropdowns((prev) => {
+      const newDropdowns = {};
+      Object.keys(prev).forEach((key) => {
+        newDropdowns[key] = key === menuName ? !prev[key] : false;
+      });
+      newDropdowns[menuName] = !prev[menuName];
+      return newDropdowns;
+    });
+  };
+
+  const handleLinkClick = () => {
+    setDropdowns({}); // Close all dropdowns when a top-level link is clicked
   };
 
   const menuItems = [
     { name: "Home", path: "/dashboard", icon: <RiHome3Fill className="mr-2 w-5 h-5" /> },
-    { name: "Messages", path: "/dashboard/messages", icon: <RiMessage2Fill className="mr-2 w-5 h-5" /> },
     {
       name: "Tournaments",
       icon: <HiMiniTrophy className="mr-2 w-5 h-5" />,
@@ -50,26 +62,19 @@ const AdminDashboardLayout = () => {
         { name: "All Athletes", path: "/dashboard/all-athletes", icon: <FiChevronsRight className="mr-2 w-5 h-5" /> },
         { name: "Add New Athlete", path: "/dashboard/add-athlete", icon: <FiChevronsRight className="mr-2 w-5 h-5" /> },
         { name: "Registered Athletes", path: "/dashboard/registered-athletes", icon: <FiChevronsRight className="mr-2 w-5 h-5" /> },
-       
       ],
     },
-    {
-      name: "Matches",
-      icon: <GiAmericanFootballPlayer className="mr-2 w-5 h-5" />,
-      subMenu: [
-        { name: "All Matches", path: "/dashboard/all-matches", icon: <FiChevronsRight className="mr-2 w-5 h-5" /> },
-        { name: "Add New Match", path: "/dashboard/add-match", icon: <FiChevronsRight className="mr-2 w-5 h-5" /> },
-       
-      ],
-    },
+    { name: "Matches", path: "/dashboard/all-matches", icon: <GiAmericanFootballPlayer className="mr-2 w-5 h-5" /> },
     {
       name: "Pools",
       icon: <GiAmericanFootballPlayer className="mr-2 w-5 h-5" />,
       subMenu: [
-        { name: "Pools", path: "/dashboard/pools", icon: <FiChevronsRight className="mr-2 w-5 h-5" /> },   
-        { name: "Create Pools", path: "/dashboard/create-pools", icon: <FiChevronsRight className="mr-2 w-5 h-5" /> },       
+        { name: "Pools", path: "/dashboard/pools", icon: <FiChevronsRight className="mr-2 w-5 h-5" /> },
+        { name: "Create Pools", path: "/dashboard/create-pools", icon: <FiChevronsRight className="mr-2 w-5 h-5" /> },
       ],
     },
+    { name: "All Support Tickets", path: "/dashboard/support-tickets", icon: <GrNotes className="mr-2 w-5 h-5" /> },
+    { name: "Prizes", path: "/dashboard/prizes", icon: <GiTargetPrize className="mr-2 w-5 h-5" /> },
     { name: "Payments", path: "/dashboard/payments", icon: <MdPayments className="mr-2 w-5 h-5" /> },
     { name: "Profile", path: "/dashboard/profile", icon: <BiSolidUserRectangle className="mr-2 w-5 h-5" /> },
     { name: "Settings", path: "/dashboard/settings", icon: <BiSolidUserRectangle className="mr-2 w-5 h-5" /> },
@@ -81,8 +86,8 @@ const AdminDashboardLayout = () => {
       <aside className={`fixed top-0 left-0 bg-(--primary) text-white w-64 p-4 transform z-50 ${sidebarOpen ? "translate-x-0" : "-translate-x-64"} transition-transform md:translate-x-0 h-full`}>
         <div className="flex justify-between items-center mb-4 h-20">
           <Link to="/">
-          <img src={logo} alt="Logo" /></Link>
-          
+            <img src={logo} alt="Logo" />
+          </Link>
           <button className="md:hidden" onClick={() => setSidebarOpen(false)}>
             <X className="w-6 h-6" />
           </button>
@@ -125,6 +130,7 @@ const AdminDashboardLayout = () => {
                     <Link
                       to={item.path}
                       className={`flex items-center p-3 rounded-md ${location.pathname === item.path ? "bg-(--secondary) text-white" : "hover:bg-(--secondary)"}`}
+                      onClick={handleLinkClick}
                     >
                       {item.icon} {item.name}
                     </Link>
@@ -141,16 +147,15 @@ const AdminDashboardLayout = () => {
             <Menu className="w-6 h-6" />
           </button>
           <h1 className="md:block hidden text-xl text-(--textlight)">
-            {menuItems.find((item) => item.path === location.pathname)?.name || "Dashboard"}
+            {menuItems.find((item) => item.path === location.pathname)?.name ||
+              menuItems.flatMap(item => item.subMenu || []).find(subItem => subItem.path === location.pathname)?.name ||
+              "Dashboard"}
           </h1>
           <div className="flex items-center gap-4 relative">
-            <Search className="w-5 h-5 cursor-pointer hidden sm:block text-(--textlight)" />
-            <FaBell className="w-5 h-5 cursor-pointer text-(--textwhite)" />
             <div className="relative">
               <button className="flex items-center gap-2 text-(--textlight)" onClick={() => setProfileDropdownOpen(!profileDropdownOpen)}>
                 <img src={profile?.photo || profileImg} alt="Profile" className="w-10 h-10 rounded-full border border-(--border) object-cover" />
-               
-                <span>{profile?.username || "Admin"}</span> {/* Show username */}
+                <span>{profile?.username || "Admin"}</span>
                 <ChevronDown className="w-5 h-5 cursor-pointer" />
               </button>
               {profileDropdownOpen && (

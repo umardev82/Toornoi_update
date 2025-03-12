@@ -30,11 +30,12 @@ const EditTournament = () => {
       prize_distribution: "",
       positions_1: "",
       positions_2: "",
-      positions_3: "",
+      // positions_3: "",
       sponsorship_details: "",
       sponsor_logos: null,
       partnership_info: "",
       refund_policy: "",
+      is_publish: false,
     });
     const [isFetched, setIsFetched] = useState(false); // To track if the data is already fetched
     const [preview, setPreview] = useState({});
@@ -108,7 +109,7 @@ const EditTournament = () => {
     
   return (
     <>
-      <Toaster />
+      {/* <Toaster toastOptions={{ duration: 5000 }} /> */}
       <h1 className="lemon-milk-font text-(--textwhite) mb-4">Edit Tournament</h1>
       <form onSubmit={handleSubmit} className="md:p-5 p-3 bg-(--primary) rounded-lg border border-(--border)">
         <div className="grid md:grid-cols-2 gap-3">
@@ -329,8 +330,8 @@ const EditTournament = () => {
           {/* Position 1 */}
           <div className="flex flex-col gap-2">
             <label className="text-(--textwhite)">Position 1</label>
-            <textarea
-              type="text"
+            <input
+              type="number"
               name="positions_1"
               value={formData.positions_1}
               onChange={handleChange}
@@ -342,8 +343,8 @@ const EditTournament = () => {
           {/* Position 2 */}
           <div className="flex flex-col gap-2">
             <label className="text-(--textwhite)">Position 2</label>
-            <textarea
-              type="text"
+            <input
+              type="number"
               name="positions_2"
               value={formData.positions_2}
               onChange={handleChange}
@@ -353,7 +354,7 @@ const EditTournament = () => {
           </div>
 
           {/* Position 3 */}
-          <div className="flex flex-col gap-2">
+          {/* <div className="flex flex-col gap-2">
             <label className="text-(--textwhite)">Position 3</label>
             <textarea
               type="text"
@@ -363,7 +364,7 @@ const EditTournament = () => {
               placeholder="Position 3 Prize"
               className="w-full bg-(--secondary) text-white p-3 rounded-md"
             />
-          </div>
+          </div> */}
 
           {/* Sponsorship Details */}
           <div className="flex flex-col gap-2">
@@ -421,7 +422,7 @@ const EditTournament = () => {
 
           {/* Sponsor Logos */}
           <div className="flex flex-col gap-2">
-            <label className="text-(--textwhite)">Sponsor Logos</label>
+            <label className="text-(--textwhite)">Sponsor Logo</label>
             <input
               type="file"
               name="sponsor_logos"
@@ -458,6 +459,16 @@ const EditTournament = () => {
     <img src={preview.code_of_conduct} alt="New Code Of Conduct" className="w-20 h-20 object-cover rounded-md mt-2" />
   )}
 </div>
+<div className="flex items-center gap-2">
+            <input
+              type="checkbox"
+              name="is_publish"
+              checked={formData.is_publish}
+              onChange={handleChange}
+              className="w-5 h-5"
+            />
+            <label className="text-(--textwhite)">Publish Tournament</label>
+          </div>
 
         </div>
 

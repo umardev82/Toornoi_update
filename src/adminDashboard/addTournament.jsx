@@ -29,18 +29,19 @@ const AddTournament = () => {
     prize_distribution: "",
     positions_1: "",
     positions_2: "",
-    positions_3: "",
+    // positions_3: "",
     sponsorship_details: "",
     sponsor_logos: null,
     partnership_info: "",
     refund_policy: "",
+    is_publish: false,
   });
 
   const handleChange = (e) => {
-    const { name, value, type, files } = e.target;
+    const { name, value, type, checked, files } = e.target;
     setFormData({
       ...formData,
-      [name]: type === "file" ? files[0] : value,
+      [name]: type === "file" ? files[0] : type === "checkbox" ? checked : value,
     });
   };
 
@@ -55,7 +56,7 @@ const AddTournament = () => {
 
   return (
     <>
-      <Toaster />
+     {/* <Toaster toastOptions={{ duration: 5000 }} /> */}
       <h1 className="lemon-milk-font text-(--textwhite) mb-4">Add Tournaments</h1>
       <form onSubmit={handleSubmit} className="p-5 bg-(--primary) rounded-lg border border-(--border) ">
         <div className="grid md:grid-cols-2 gap-3">
@@ -68,8 +69,8 @@ const AddTournament = () => {
         <input type="text" name="category" value={formData.category} onChange={handleChange} placeholder="Category" className="w-full bg-(--secondary) text-white p-3 rounded-md" />
         </div>
         <div className="flex flex-col gap-2">
-        <label className=" text-(--textwhite)">Bracket Type</label>
-        <input type="text" name="bracket_type" value={formData.bracket_type} onChange={handleChange} placeholder="Bracket Type" className="w-full bg-(--secondary) text-white p-3 rounded-md" />
+        <label className=" text-(--textwhite)">Tournamnet Type</label>
+        <input type="text" name="bracket_type" value={formData.bracket_type} onChange={handleChange} placeholder="Tournamnet Type" className="w-full bg-(--secondary) text-white p-3 rounded-md" />
         </div>
         <div className="flex flex-col gap-2">
         <label className=" text-(--textwhite)">Country</label>
@@ -117,7 +118,7 @@ const AddTournament = () => {
         <input type="file" name="cover_image" onChange={handleChange} className="w-full bg-(--secondary) text-white p-3 rounded-md" />
         </div>
          <div className="flex flex-col gap-2">
-        <label className=" text-(--textwhite)">Sponsor Logos</label>
+        <label className=" text-(--textwhite)">Sponsor Logo</label>
         <input type="file" name="sponsor_logos" onChange={handleChange} className="w-full bg-(--secondary) text-white p-3 rounded-md" />
         </div>
         <div className="flex flex-col gap-2">
@@ -153,17 +154,17 @@ const AddTournament = () => {
         <textarea name="prize_distribution" value={formData.prize_distribution} onChange={handleChange} placeholder="Prize Distribution" className="w-full bg-(--secondary) text-white p-3 rounded-md" />
         </div>
         <div className="flex flex-col gap-2">
-        <label className=" text-(--textwhite)">Position 1</label>
-        <textarea name="positions_1" value={formData.positions_1} onChange={handleChange} placeholder="Position 1" className="w-full bg-(--secondary) text-white p-3 rounded-md" />
+        <label className=" text-(--textwhite)">Winner</label>
+        <input type="number" name="positions_1" value={formData.positions_1} onChange={handleChange} placeholder="Prize (€)" className="w-full bg-(--secondary) text-white p-3 rounded-md" />
         </div>
          <div className="flex flex-col gap-2">
-        <label className=" text-(--textwhite)">Position 2</label>
-        <textarea name="positions_2" value={formData.positions_2} onChange={handleChange} placeholder="Position 2" className="w-full bg-(--secondary) text-white p-3 rounded-md" />
+        <label className=" text-(--textwhite)">Runner Up</label>
+        <input type="number" name="positions_2" value={formData.positions_2} onChange={handleChange} placeholder="Prize (€)" className="w-full bg-(--secondary) text-white p-3 rounded-md" />
         </div>
-         <div className="flex flex-col gap-2">
+         {/* <div className="flex flex-col gap-2">
         <label className=" text-(--textwhite)">Position 3</label>
         <textarea name="positions_3" value={formData.positions_3} onChange={handleChange} placeholder="Position 3" className="w-full bg-(--secondary) text-white p-3 rounded-md" />
-        </div>
+        </div> */}
         <div className="flex flex-col gap-2">
         <label className=" text-(--textwhite)">Sponsorship Details</label>
         <textarea name="sponsorship_details" value={formData.sponsorship_details} onChange={handleChange} placeholder="Sponsorship Details" className="w-full bg-(--secondary) text-white p-3 rounded-md" />
@@ -176,6 +177,17 @@ const AddTournament = () => {
         <label className=" text-(--textwhite)">Refund Policy</label>
         <textarea name="refund_policy" value={formData.refund_policy} onChange={handleChange} placeholder="Refund Policy" className="w-full bg-(--secondary) text-white p-3 rounded-md" />
         </div>
+        <div className="flex items-center gap-2">
+            <input
+              type="checkbox"
+              name="is_publish"
+              checked={formData.is_publish}
+              onChange={handleChange}
+              className="w-5 h-5"
+            />
+            <label className="text-(--textwhite)">Publish Tournament</label>
+          </div>
+
         </div>
         <button type="submit" className="px-4 py-2 bg-(--accent) mt-5 text-white rounded">Add Tournament</button>
       </form>

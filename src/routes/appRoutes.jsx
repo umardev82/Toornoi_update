@@ -19,6 +19,10 @@ import Login from "../pages/login";
 import PrivateRoute from "./privateRoutes";
 import ForgotPassword from "../pages/forgotPassword";
 import ResetPassword from "../pages/resetPassword";
+import CookiesPolicy from "../pages/cookiesPolicy";
+import TermsAndConditions from "../pages/termsAndConditions";
+import LegalInformationPage from "../pages/legalInformationPage";
+import Contact from "../pages/contact";
 import AthleteProfile from "../athleteDashboard/athleteProfile";
 import EditAthleteProfile from "../athleteDashboard/editAtheleteProfile";
 import AllAthletes from "../adminDashboard/allAthletes";
@@ -31,23 +35,28 @@ import RegisteredAthletes from "../adminDashboard/registeredAthletes";
 import UserMatches from "../athleteDashboard/userMatches";
 import RegisteredAthletesTournaments from "../adminDashboard/regAthletesForTournaments";
 import Payments from "../adminDashboard/payments";
-import CheckoutForm from "../athleteDashboard/checkout";
-import { Elements } from "@stripe/react-stripe-js";
-import { loadStripe } from "@stripe/stripe-js";
 import MyTournaments from "../athleteDashboard/myTournaments";
 import CreatePool from "../adminDashboard/createPools";
 import PoolList from "../adminDashboard/poolsList";
 import ViewMatch from "../athleteDashboard/viewMatch";
 import PoolDetails from "../adminDashboard/viewPool";
 import Chat from "../athleteDashboard/chat";
-
-const stripePromise = loadStripe("your-publishable-key-here"); // Replace with your Stripe publishable key
+import Claim from "../athleteDashboard/claim";
+import AllClaims from "../adminDashboard/allClaims";
+import ScrollToTop from "./scrollToTop";
+import AllFeaturedTournamentsPage from "../pages/allFeaturedTournamentsPage";
+import SingleTournamentLanding from "../pages/singleTournamentLanding";
+import MyTournamentView from "../athleteDashboard/myTournamentView";
+import AllPrizes from "../adminDashboard/prizes";
+import AthleteOverview from "../athleteDashboard/athleteOverview";
 
 
 
 const AppRoutes = () => {
   return (
     <BrowserRouter>
+    
+    <ScrollToTop/>
       <Routes>
         {/* Public Routes */}
         <Route path="/" element={<Home />} />
@@ -57,6 +66,12 @@ const AppRoutes = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/cookies-policy" element={<CookiesPolicy/>} />
+        <Route path="/terms-and-conditions" element={<TermsAndConditions/>} />   
+        <Route path="/legal-information" element={<LegalInformationPage/>} />      
+        <Route path="/contact-us" element={<Contact/>} />  
+        <Route path="/all-tournaments" element={<AllFeaturedTournamentsPage/>}/>  
+        <Route path="/tournament/:id" element={<SingleTournamentLanding />} />          
 
         {/* Admin Protected Routes */}
         <Route
@@ -85,8 +100,9 @@ const AppRoutes = () => {
           <Route path="payments" element={<Payments/>} />
           <Route path="create-pools" element={<CreatePool/>}/>
           <Route path="pools" element={<PoolList/>}/>  
-          <Route path="pools/:poolId" element={<PoolDetails />} />
-       
+          <Route path="pools/:poolId" element={<PoolDetails />} />  
+          <Route path="support-tickets" element={<AllClaims />} />   
+          <Route path="prizes" element={<AllPrizes />} />     
 
 
         </Route>
@@ -100,15 +116,17 @@ const AppRoutes = () => {
             </PrivateRoute>
           }
         >
+          <Route index element={<AthleteOverview/>} />
           <Route  path="tournaments" element={<AllTournaments />} />
           <Route path="tournament/:id" element={<SingleTournament/>} />
           <Route path="profile" element={<AthleteProfile/>}/>
           <Route path="settings" element={<EditAthleteProfile/>} />
           <Route path="matches" element={<UserMatches/>}/>
-          <Route path="checkout" element={<Elements stripe={stripePromise}><CheckoutForm /> </Elements>}/>
           <Route path="my-tournaments" element={<MyTournaments/>}/>
+          <Route path="my-tournaments/:id" element={<MyTournamentView/>} />
           <Route path="match/:id" element={<ViewMatch/>}/>
           <Route path="matches/:id/chat" element={<Chat/>} />
+          <Route path="support-ticket" element={<Claim/>} />
         </Route>
 
         {/* Catch-all for unknown routes */}

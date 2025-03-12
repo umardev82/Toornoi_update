@@ -68,7 +68,7 @@ const EditAthleteProfile = () => {
 
   return (
     <>
-      <Toaster />
+      {/* <Toaster toastOptions={{ duration: 5000 }} /> */}
       <div>
       <h2 className="lemon-milk-font mb-4 text-(--textwhite)">Edit Profile</h2>
       <form onSubmit={handleSubmit} className="space-y-4">

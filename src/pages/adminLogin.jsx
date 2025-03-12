@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from '../hooks/adminAuth';
-import logo from "../assets/images/logo.png";
+import logo from "../assets/images/toornoi-logo.png";
 import trophy from "../assets/images/trophy.png";
 import { Toaster } from "react-hot-toast";
 
@@ -33,7 +33,7 @@ const AdminLogin = () => {
 
   return (
     <>
-      <Toaster className="capitalize"/>
+      {/* <Toaster toastOptions={{ duration: 5000 }} /> */}
       <div className="grid lg:grid-cols-2 min-h-screen bg-(--background) items-center">
       <main id="content" className="w-full max-w-md mx-auto py-10">
               <Link to="/" className="header-logo">

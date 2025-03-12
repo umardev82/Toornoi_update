@@ -66,7 +66,7 @@ const EditProfile = () => {
 
   return (
     <>
-      <Toaster />
+      {/* <Toaster toastOptions={{ duration: 5000 }} /> */}
       <div>
       
       <form onSubmit={handleSubmit} className="space-y-4">

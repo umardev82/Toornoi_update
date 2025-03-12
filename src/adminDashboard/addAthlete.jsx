@@ -70,7 +70,7 @@ const AddAthlete = () => {
 
   return (
     <>
-      <Toaster />
+     
       <div>
         <h1 className="lemon-milk-font text-(--textwhite) mb-4">Add New Athlete</h1>
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -177,7 +177,7 @@ const AddAthlete = () => {
                 <FaPhoneSquareAlt /> Phone Number
               </label>
               <input
-                type="text"
+                type="number"
                 name="phone_number"
                 value={formData.phone_number}
                 onChange={handleChange}

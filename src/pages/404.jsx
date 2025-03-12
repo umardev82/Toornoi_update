@@ -1,5 +1,6 @@
 import React from "react";
-import logo from '../assets/images/logo.png';
+import logo from '../assets/images/toornoi-logo.png';
+import { Link } from "react-router-dom";
 
 const NotFoundPage = () => {
   return (
@@ -12,12 +13,12 @@ const NotFoundPage = () => {
       <p className="text-(--textlight) mt-2 max-w-md">
         The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.
       </p>
-      <a
-        href="/"
+      <Link
+        to="/"
         className="mt-6 px-6 py-3 bg-(--accent) text-white font-semibold rounded-lg shadow-lg  transition"
       >
         GO TO HOMEPAGE
-      </a>
+      </Link>
     </div>
   );
 };

@@ -62,7 +62,7 @@ const AddMatch = () => {
 
   return (
     <>
-      <Toaster />
+      
       <h1 className="lemon-milk-font text-(--textwhite) mb-4">Add Match</h1>
 
       {loading ? (

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { Link } from "react-router-dom";
-import logo from "../assets/images/logo.png";
+import logo from "../assets/images/toornoi-logo.png";
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -26,23 +26,21 @@ export default function Header() {
         </button>
 
         {/* Logo */}
-        <div className="text-xl font-bold flex items-center space-x-2">
+        <Link to="/" className="text-xl font-bold flex items-center space-x-2">
           <img src={logo} alt="Logo" />
-        </div>
+        </Link>
 
         {/* Desktop Menu */}
         <nav className="hidden md:flex space-x-6 bg-black/70 p-5 rounded-full">
-          <a href="#">Products</a>
-          <a href="#">Solutions</a>
-          <a href="#">Showcase</a>
-          <a href="#">Pricing</a>
-          <a href="#">Resources</a>
+            <Link to="/">Home</Link>
+            <Link to="/all-tournaments">All tournaments</Link>
+            <Link to="/contact-us">Contact</Link>
         </nav>
 
         {/* Conditional Buttons */}
         {adminToken ? (
           <Link to="/dashboard" className="bg-white text-black p-3 py-2 sm:px-6 rounded-lg shadow">
-            Admin Dashboard
+            Dashboard
           </Link>
         ) : userToken ? (
           <Link to="/my-account" className="bg-white text-black p-3 py-2 sm:px-6 rounded-lg shadow">
@@ -57,11 +55,9 @@ export default function Header() {
         {/* Mobile Menu */}
         {menuOpen && (
           <nav className="absolute top-16 left-0 w-full bg-black text-white flex flex-col items-start space-y-4 p-5 shadow-md md:hidden">
-            <a href="#">Products</a>
-            <a href="#">Solutions</a>
-            <a href="#">Showcase</a>
-            <a href="#">Pricing</a>
-            <a href="#">Resources</a>
+            <Link to="/">Home</Link>
+            <Link to="/all-tournaments">All tournaments</Link>
+            <Link to="/contact-us">Contact</Link>
           </nav>
         )}
       </header>

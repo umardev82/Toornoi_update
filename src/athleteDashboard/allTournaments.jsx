@@ -103,10 +103,12 @@ const formatOnlyTime = (timeString) => {
   };
 
   // Pagination logic
+ 
   const totalPages = Math.ceil(filteredTournaments.length / itemsPerPage);
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const paginatedTournaments = filteredTournaments.slice(startIndex, endIndex);
+  const paginatedTournaments = filteredTournaments.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+
+  const handlePrevPage = () => setCurrentPage((prev) => Math.max(prev - 1, 1));
+  const handleNextPage = () => setCurrentPage((prev) => Math.min(prev + 1, totalPages));
 
   return (
     <>
@@ -171,7 +173,7 @@ const formatOnlyTime = (timeString) => {
             </div>
             
             <div className="w-fit  bg-black/80 text-white text-xs font-medium px-3 py-1 rounded-lg">
-            🏆 Prize: {tournament.prize_details}
+            🏆 Prize: {tournament.positions_1}€
             </div>
             </div>           
            
@@ -194,25 +196,25 @@ const formatOnlyTime = (timeString) => {
           </div>
 
           {/* Pagination Buttons */}
-          <div className="flex items-center justify-center mt-6 space-x-4">
-            <button
-              onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-              disabled={currentPage === 1}
-              className="py-1 px-3 bg-(--primary) text-white rounded disabled:opacity-50"
-            >
-              Previous
-            </button>
-
-            <span className="text-(--accent) font-bold">{currentPage} / {totalPages}</span>
-
-            <button
-              onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
-              disabled={currentPage === totalPages}
-              className="py-1 px-3 bg-(--primary) text-white rounded disabled:opacity-50"
-            >
-              Next
-            </button>
-          </div>
+          {totalPages > 1 && (   
+   <div className="flex items-center justify-center mt-6 space-x-4">
+     <button
+       onClick={handlePrevPage}
+       disabled={currentPage === 1}
+       className="py-1 px-3 bg-(--primary) text-white rounded disabled:opacity-50"
+     >
+       Previous
+     </button>
+     <span className="text-(--accent) font-bold">{currentPage} / {totalPages}</span>
+     <button
+       onClick={handleNextPage}
+       disabled={currentPage === totalPages}
+       className="py-1 px-3 bg-(--primary) text-white rounded disabled:opacity-50"
+     >
+       Next
+     </button>
+   </div>
+)}
         </>
       ) : (
         <div className="w-full text-center font-bold text-white p-4">No tournaments found.</div>

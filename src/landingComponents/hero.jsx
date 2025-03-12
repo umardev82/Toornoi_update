@@ -5,10 +5,11 @@ import rocket from '../assets/images/rocket.png';
 import participants from '../assets/images/participants.png';
 import prizes from '../assets/images/prizes.png';
 import features from '../assets/images/features.png';
-import opponentChat from '../assets/images/opponent-chat.png';
+import opponentChat from '../assets/images/toornoi-chat.png';
 import communityImg from '../assets/images/community.png';
 import gloryImg from '../assets/images/glory-img.png';
 import { Link } from 'react-router-dom';
+import FeaturedTournaments from './featuredTournaments';
 
 const Hero = () => {
   return (
@@ -36,11 +37,9 @@ const Hero = () => {
 										</div>
 									
 										<div className="mt-10 flex gap-3 sm:justify-start justify-center sm:space-x-2  rtl:space-x-reverse">
-											<Link to="/login" className="py-3 px-5 bg-cyan-600 text-white rounded-sm">
-											Get Started 
-											</Link>
-											<Link to="#" className="py-3 px-5 btn bg-white text-black rounded-sm">
-											See Plans 
+											
+											<Link to="/login" className="py-3 px-5 btn bg-white text-black rounded-sm">
+											Register 
 											</Link>
 										</div>
 									</div>
@@ -59,11 +58,12 @@ const Hero = () => {
 								</h2>
 									<p className="text-white">Join the fray in your favorite game and claim glory!</p>
 								</div>
-								<Link to="#" className="py-3 px-5 bg-cyan-600 text-white rounded-sm">
+								<Link to="all-tournaments" className="py-3 px-5 bg-cyan-600 text-white rounded-sm">
 								All Tournaments
 											</Link>
 								
 							</div>
+							<FeaturedTournaments/>
 						
 						</div>
 					</div>
@@ -96,7 +96,7 @@ const Hero = () => {
 											<p className="lemon-milk-medium">Wins prizes</p>
 										</div>
 										<div className="flex mt-8">
-										<Link to="/signup" className="py-3 px-5 bg-cyan-600 text-white rounded-sm">
+										<Link to="/login" className="py-3 px-5 bg-cyan-600 text-white rounded-sm">
 								          Register
 											</Link>	
 										</div>
@@ -131,31 +131,33 @@ const Hero = () => {
 										<div className="grid md:grid-cols-2 gap-2">
 											<div>
 												<div className="mb-4">
-												<h6 className="lemon-milk-medium text-white">Edit or cancel registration</h6>
-												<p className="text-white">To edit your information in a tournament, or cancel a registration.</p>
+												<h6 className="lemon-milk-medium text-white">🎮 Easy Tournament Participation</h6>
+												<p className="text-white"> Seamless registration, automatic matchmaking, and a
+												user-friendly interface for hassle-free gameplay.</p>
 												</div>
 												<div className="mb-4">
-												<h6 className="lemon-milk-medium text-white">Edit or cancel registration</h6>
-												<p className="text-white">To edit your information in a tournament, or cancel a registration.</p>
+												<h6 className="lemon-milk-medium text-white">🏆 Fair & Competitive Play</h6>
+												<p className="text-white">Skill-based matchmaking, anti-cheat systems, and verified
+												competitions ensure a level playing field.</p>
 												</div>
 												<div className="mb-4">
-												<h6 className="lemon-milk-medium text-white">Edit or cancel registration</h6>
-												<p className="text-white">To edit your information in a tournament, or cancel a registration.</p>
+												<h6 className="lemon-milk-medium text-white">💰 Earning Opportunities</h6>
+												<p className="text-white">Win cash prizes, sponsorships, and in-game rewards through
+												official and community-driven tournaments.</p>
 												</div>												
 											</div>
 											<div>
 												<div className="mb-4">
-												<h6 className="lemon-milk-medium text-white">Edit or cancel registration</h6>
-												<p className="text-white">To edit your information in a tournament, or cancel a registration.</p>
+												<h6 className="lemon-milk-medium text-white">📊 Performance Tracking & Analytics</h6>
+												<p className="text-white">Detailed stats, leaderboards, and insights help players
+												improve their skills and track progress.</p>
 												</div>
 												<div className="mb-4">
-												<h6 className="lemon-milk-medium text-white">Edit or cancel registration</h6>
-												<p className="text-white">To edit your information in a tournament, or cancel a registration.</p>
+												<h6 className="lemon-milk-medium text-white">🌍 Community & Networking</h6>
+												<p className="text-white">Connect with fellow gamers, form teams, and engage in social
+												features like chat, forums, and live streams.</p>
 												</div>
-												<div className="mb-4">
-												<h6 className="lemon-milk-medium text-white">Edit or cancel registration</h6>
-												<p className="text-white">To edit your information in a tournament, or cancel a registration.</p>
-												</div>												
+																							
 											</div>
 										</div>
 									</div>
@@ -175,7 +177,7 @@ const Hero = () => {
 										</h2>
 										<p className="text-white mb-4">Participants will have access to a Tchat before the match to speak with his opponent.
 										Also, a chat box will be available for the players to join organizers if they have any questions regarding an issue or the tournament.</p>
-										<p className="text-cyan-600">Discover how organizers use Toornament </p>
+										
 										
 																		
 									</div>
@@ -200,9 +202,9 @@ const Hero = () => {
 											className="text-3xl mb-4 font-bold lemon-milk-font text-white">
 											join an exclusive community
 										</h2>
-										<p className="text-white mb-4">Participants will have access to a Tchat before the match to speak with his opponent.
-										Also, a chat box will be available for the players to join organizers if they have any questions regarding an issue or the tournament.</p>
-										<p className="text-cyan-600">Discover how organizers use Toornament </p>
+										<p className="text-white mb-4">"Join the community and connect with fellow players! 🎮 Chat, strategize, and share your
+										victories in a vibrant gaming space. Play, compete, and grow together!" 🚀🔥</p>
+										
 										
 																		
 									</div>
@@ -215,13 +217,12 @@ const Hero = () => {
 						<div className="sm:w-10/12 w-full mx-auto p-0 border border-neutral-600 rounded-md bg-[#060606] grid sm:grid-cols-2">
 						<div className="sm:p-10 p-5">
 							<h2 className="lemon-milk-font text-white mb-4">Start Your Journey to Glory</h2>
-							<p className="text-white">Whether you're here to make your mark as a legendary organizer or to  rise through the ranks as a champion competitor, your path begins with a  single click.</p>
+							<p className="text-white">Compete, connect, and rise to the top in the
+							ultimate gaming arena!" 🚀</p>
 							<div className="mt-5 flex justify-start gap-2">
-											<Link to="/login" className="py-3 px-5 bg-cyan-600 text-white rounded-sm">
-											Get Started 
-											</Link>
-											<Link to="#" className="py-3 px-5 btn bg-white text-black rounded-sm">
-											See Plans 
+											
+											<Link to="/login" className="py-3 px-5 btn bg-white text-black rounded-sm">
+											Register 
 											</Link>
 										</div>
 						</div>

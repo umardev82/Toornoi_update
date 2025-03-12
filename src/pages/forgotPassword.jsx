@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import logo from "../assets/images/logo.png";
+import logo from "../assets/images/toornoi-logo.png";
 import { Link } from "react-router-dom";
 import trophy from "../assets/images/trophy.png";
 import { Toaster } from "react-hot-toast";
@@ -16,7 +16,7 @@ const ForgotPassword = () => {
 
   return (
     <>
-      <Toaster />
+      {/* <Toaster toastOptions={{ duration: 5000 }} /> */}
       <div className="grid lg:grid-cols-2 min-h-screen bg-(--background) items-center">
         <main className="w-full max-w-md mx-auto py-10">
           <Link to="/" className="header-logo">

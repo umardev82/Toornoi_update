@@ -61,11 +61,14 @@ const PoolDetails = () => {
     <>
       <div className="flex justify-between items-center mb-5">
         <h2 className="text-2xl font-bold  text-white">Pool Details</h2>
-        <button 
+      
+        <button
+          type="submit"
+          disabled={loading}
           className="bg-(--accent) text-white py-2 px-5 rounded"
           onClick={handleFinalizeMatches}
         >
-          Finalize Matches
+          {loading ? "Finalizing..." : " Finalize Matches"}
         </button>
       </div>
       <div className="bg-[url('/src/assets/images/header-1.png')] bg-center bg-cover bg-no-repeat rounded-lg md:p-10 px-3 py-6 text-center">
@@ -86,9 +89,35 @@ const PoolDetails = () => {
         </h1>
       </div>
 
-      <div className="md:flex gap-x-3 mt-5">
+      <div className="md:grid grid-cols-3 gap-x-3 mt-5">
+         {/* Winner Players Table */}
+         <div className="">
+          <h3 className="text-xl font-bold mb-2 text-white">All Players</h3>
+          <table className="w-full table-auto text-left text-white border-separate border-spacing-y-2 border border-transparent">
+            <thead className="bg-(--secondary) p-2 rounded-sm text-white">
+              <tr>
+                <th className="p-3 font-medium w-[60px]">#</th>
+                <th className="p-3 font-medium">Name</th>
+              </tr>
+            </thead>
+            <tbody>
+              {(pool.all_players ?? []).length > 0 ? (
+                pool.all_players.map((player, index) => (
+                  <tr key={index} className="bg-(--primary) text-(--textlight)">
+                    <td className="p-3 font-medium w-[60px]">{index + 1}</td>
+                    <td className="p-3 font-medium">{player}</td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td className="text-center p-2" colSpan="2">No Players</td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
         {/* Winner Players Table */}
-        <div className="md:w-1/2">
+        <div className="">
           <h3 className="text-xl font-bold mb-2 text-white">Winner Players</h3>
           <table className="w-full table-auto text-left text-white border-separate border-spacing-y-2 border border-transparent">
             <thead className="bg-(--secondary) p-2 rounded-sm text-white">
@@ -115,7 +144,7 @@ const PoolDetails = () => {
         </div>
 
         {/* Loser Players Table */}
-        <div className="md:w-1/2 md:mt-0 mt-3">
+        <div className=" md:mt-0 mt-3">
           <h3 className="text-xl font-bold mb-2 text-white">Loser Players</h3>
           <table className="w-full table-auto text-left text-white border-separate border-spacing-y-2 border border-transparent">
             <thead className="bg-(--secondary) p-2 rounded-sm text-white">

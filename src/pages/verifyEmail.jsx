@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { useSearchParams, Link } from "react-router-dom";
-import logo from "../assets/images/logo.png";
+import logo from "../assets/images/toornoi-logo.png";
 import API_BASE_URL from "../config";
 
 const VerifyEmail = () => {

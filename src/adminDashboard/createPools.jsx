@@ -13,39 +13,41 @@ const CreatePool = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-
+  
     const payload = {
       tournament: tournamentId,
       start_date: startDate,
       end_date: endDate,
     };
-
+  
     try {
       const response = await axios.post(`${API_BASE_URL}/pools/`, payload);
       
-      if (response.data && response.data.message) {
-        toast.success(response.data.message);
-      } else {
-        toast.success("Pool created successfully!");
-      }
-      
+      // Show success message
+      toast.success(response.data?.message || "Pool created successfully!", { duration: 5000 });
+  
       // Reset form
       setTournamentId("");
       setStartDate("");
       setEndDate("");
     } catch (error) {
-      const errorMessage = 
-        error.response?.data?.message || 
-        "An error occurred while creating the pool.";
-      toast.error(errorMessage);
+      if (error.response?.data) {
+        const errorData = error.response.data;
+        const firstError = Object.values(errorData)?.[0]?.[0] || "An error occurred while creating the pool.";
+        
+        toast.error(firstError, { duration: 5000 }); // Show error for 5 seconds
+      } else {
+        toast.error("An unexpected error occurred.", { duration: 5000 });
+      }
     } finally {
       setLoading(false);
     }
   };
+  
 
   return (
     <div>
-      <Toaster />
+      {/* <Toaster toastOptions={{ duration: 5000 }} /> */}
       <h2 className="lemon-milk-font text-(--textwhite) mb-4">Create Pool</h2>
       <form onSubmit={handleSubmit} className="space-y-2">
         <div className="grid md:grid-cols-2 gap-3">

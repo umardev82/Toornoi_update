@@ -3,6 +3,8 @@ import axios from "axios";
 import { FaEye, FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { toast } from "react-hot-toast";
+import * as XLSX from "xlsx";  // Import XLSX for Excel export
+
 import API_BASE_URL from "../config";
 
 const AllAthletes = () => {
@@ -15,7 +17,22 @@ const AllAthletes = () => {
   const [verifiedFilter, setVerifiedFilter] = useState("all");
   const [activeFilter, setActiveFilter] = useState("all");
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5;
+  const itemsPerPage = 6;
+
+  const filteredUsers = users.filter((user) => {
+    return (
+      (verifiedFilter === "all" || user.is_verified === (verifiedFilter === "verified")) &&
+      (activeFilter === "all" || user.is_active === (activeFilter === "active")) &&
+      (searchQuery === "" || user.username.toLowerCase().includes(searchQuery.toLowerCase()))
+    );
+  });
+
+  const totalPages = Math.ceil(filteredUsers.length / itemsPerPage);
+  const paginatedUsers = filteredUsers.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+
+  const handlePrevPage = () => setCurrentPage((prev) => Math.max(prev - 1, 1));
+  const handleNextPage = () => setCurrentPage((prev) => Math.min(prev + 1, totalPages));
+
   const API_URL = `${API_BASE_URL}/users/`;
 
   useEffect(() => {
@@ -33,6 +50,15 @@ const AllAthletes = () => {
     } finally {
       setLoading(false);
     }
+  };
+
+  const exportToExcel = () => {
+    const worksheet = XLSX.utils.json_to_sheet(users); // Convert JSON data to sheet
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Athletes");
+
+    // Generate Excel file and trigger download
+    XLSX.writeFile(workbook, "athletes_list.xlsx");
   };
 
   const confirmDelete = (user) => {
@@ -53,38 +79,38 @@ const AllAthletes = () => {
     }
   };
 
-  const filteredUsers = users.filter((user) => {
-    return (
-      (verifiedFilter === "all" || user.is_verified === (verifiedFilter === "verified")) &&
-      (activeFilter === "all" || user.is_active === (activeFilter === "active")) &&
-      (searchQuery === "" || user.username.toLowerCase().includes(searchQuery.toLowerCase()))
-    );
-  });
-
-  const paginatedUsers = filteredUsers.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
-  const totalPages = Math.ceil(filteredUsers.length / itemsPerPage);
-
   return (
-    <div className="overflow-x-auto">
-      <div className="flex flex-wrap md:justify-end gap-3 mb-4 ">
+    
+       <div >
+      
+      <div className="flex flex-wrap md:justify-end gap-3 mb-4 items-start">
+      
         <input 
           type="text" 
           placeholder="Search by username" 
-          className="md:w-auto w-full border border-(--border) p-2 rounded text-white bg-(--primary)" 
+          className="md:w-auto w-full border border-(--border) p-2  rounded text-white bg-(--primary)" 
           value={searchQuery} 
           onChange={(e) => setSearchQuery(e.target.value)} 
         />
-        <select className="md:w-auto w-full border border-(--border) p-2 rounded text-white bg-(--primary)" value={verifiedFilter} onChange={(e) => setVerifiedFilter(e.target.value)}>
+        <select className="md:w-auto  w-full border border-(--border) p-2 rounded text-white bg-(--primary)" value={verifiedFilter} onChange={(e) => setVerifiedFilter(e.target.value)}>
           <option value="all">All</option>
           <option value="verified">Verified</option>
           <option value="not_verified">Not Verified</option>
         </select>
-        <select className="md:w-auto w-full border border-(--border) p-2 rounded text-white bg-(--primary)" value={activeFilter} onChange={(e) => setActiveFilter(e.target.value)}>
+        <select className="md:w-auto  w-full border border-(--border) p-2 rounded text-white bg-(--primary)" value={activeFilter} onChange={(e) => setActiveFilter(e.target.value)}>
           <option value="all">All</option>
           <option value="active">Active</option>
           <option value="inactive">Inactive</option>
         </select>
+       
+        <button 
+        onClick={exportToExcel} 
+        className="mb-4 px-4 py-2 bg-(--accent) text-white rounded"
+      >
+        Export to Excel
+      </button>
       </div>
+      <div className="overflow-x-auto">
       <table className="w-full table-auto text-left whitespace-nowrap text-white border-separate border-spacing-y-2 border border-transparent">
         <thead className="bg-(--secondary) p-2 rounded-sm text-white">
           <tr>
@@ -132,7 +158,7 @@ const AllAthletes = () => {
             ))
           )}
         </tbody>
-      </table>
+      </table>  </div>
             {/* View Athlete Modal */}
             {showViewModal && selectedUser && (
         <div className="fixed inset-0 flex items-center justify-center bg-black/80 p-5 z-50">
@@ -201,25 +227,26 @@ const AllAthletes = () => {
           </div>
         </div>
       )}
-         <div className="flex items-center justify-center mt-6 space-x-4">
-          <button
-            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-            disabled={currentPage === 1}
-            className="py-1 px-3 bg-(--primary) text-white rounded disabled:opacity-50"
-          >
-            Previous
-          </button>
-
-          <span className="text-(--accent) font-bold">{currentPage} / {totalPages}</span>
-
-          <button
-            onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
-            disabled={currentPage === totalPages}
-            className="py-1 px-3 bg-(--primary) text-white rounded disabled:opacity-50"
-          >
-            Next
-          </button>
-        </div>
+        {totalPages > 1 && (   
+   <div className="flex items-center justify-center mt-6 space-x-4">
+     <button
+       onClick={handlePrevPage}
+       disabled={currentPage === 1}
+       className="py-1 px-3 bg-(--primary) text-white rounded disabled:opacity-50"
+     >
+       Previous
+     </button>
+     <span className="text-(--accent) font-bold">{currentPage} / {totalPages}</span>
+     <button
+       onClick={handleNextPage}
+       disabled={currentPage === totalPages}
+       className="py-1 px-3 bg-(--primary) text-white rounded disabled:opacity-50"
+     >
+       Next
+     </button>
+   </div>
+)}
+      {/* Rest of your JSX remains the same */}
     </div>
   );
 };

@@ -114,7 +114,7 @@ const formatDateTime = (dateTimeString) => {
           <p className="text-(--textlight)">{tournamentData?.region}</p>
         </div>
         <div>
-          <h2 className="font-bold text-(--textwhite)">Bracket Type</h2>
+          <h2 className="font-bold text-(--textwhite)">Tournamnet Type</h2>
           <p className="text-(--textlight)">{tournamentData?.bracket_type}</p>
         </div>
        
@@ -125,9 +125,6 @@ const formatDateTime = (dateTimeString) => {
       <hr className="my-5  border-(--border)"/>
       <h2 className="font-xl font-bold">Match Rules</h2>
       <p>{tournamentData?.match_rules}</p>
-      <hr className="my-5  border-(--border)"/>
-      <h2 className="font-xl font-bold">Prize Details</h2>
-      <p>{tournamentData?.prize_details}</p>
       <hr className="my-5  border-(--border)"/>
       <h2 className="font-xl font-bold">Dispute Resolution Process</h2>
       <p>{tournamentData?.dispute_resolution_Process}</p>
@@ -145,24 +142,45 @@ const formatDateTime = (dateTimeString) => {
       <h2 className="lemon-milk-font">Prize Distribution</h2>
       <p>{tournamentData?.prize_distribution}</p>
       <hr className="my-5  border-(--border)"/>
-      <h6 className="mt-2">Position 1</h6>
-      <p>{tournamentData?.positions_1}</p>
-      <h6 className="mt-2">Position 2</h6>
-      <p>{tournamentData?.positions_2}</p>
-      <h6 className="mt-2">Position 3</h6>
-      <p>{tournamentData?.positions_3}</p>      
+      <h6 className="mt-2">Winner</h6>
+      <p>{tournamentData?.positions_1}€</p>
+      <h6 className="mt-2">Runner Up</h6>
+      <p>{tournamentData?.positions_2}€</p>
+     
       </div>
       <div className="grid md:grid-cols-2 gap-2 ">
         <div className="bg-(--primary) p-5 rounded text-(--textwhite) mt-5">
-         <h2 className="lemon-milk-font mb-4">Sponsor Logos</h2>
+         <h2 className="lemon-milk-font mb-4">Sponsor Logo</h2>
          <img src={tournamentData?.sponsor_logos} alt="" className="h-60 w-full rounded object-cover"/>
         </div>
-        <div className="bg-(--primary) p-5 rounded text-(--textwhite) mt-5">
-        <h2 className="lemon-milk-font mb-4">Code of Conduct</h2>
-        <img src={tournamentData?.code_of_conduct} alt="" className="h-60 w-full rounded object-cover"/>
-        </div>
-
       </div>
+     
+      <div className="text-(--textwhite) mt-5">
+      <h2 className="lemon-milk-font">Notes:</h2>
+      <p className="italic">{tournamentData?.prize_details}</p>      
+      </div>
+   
+        <div className=" text-(--textwhite) my-8 text-right">
+ 
+  {tournamentData?.code_of_conduct ? (
+    <a 
+      href={tournamentData.code_of_conduct} 
+      target="_blank" 
+      rel="noopener noreferrer" 
+      className="bg-(--accent) text-white px-5 py-3 rounded"
+    >
+      Code of Conduct
+    </a>
+  ) : (
+    <button 
+      disabled 
+      className="bg-gray-400 px-5 py-3 cursor-not-allowed rounded"
+    >
+      Code of Conduct (Unavailable)
+    </button>
+  )}
+</div>
+
 
     </>
   );

@@ -6,11 +6,13 @@ import { RiHome3Fill, RiMessage2Fill } from "react-icons/ri";
 import { HiMiniTrophy } from "react-icons/hi2";
 import { FaBell } from "react-icons/fa";
 import profileImg from "../assets/images/profile.png";
-import logo from "../assets/images/logo.png";
+import logo from "../assets/images/toornoi-logo.png";
 import { FiChevronsRight } from "react-icons/fi";
 import { TbLogout2 } from "react-icons/tb";
 import { GiAmericanFootballPlayer } from "react-icons/gi";
 import useAthleteProfile from "../hooks/useAtheleteProfile";
+import { GrNotes } from "react-icons/gr";
+
 
 
 
@@ -42,9 +44,11 @@ const AthleteDashboardLayout = () => {
 
   // 🔹 Menu items with submenus
   const menuItems = [
+    { name: "Overview", path: "/my-account", icon: <RiHome3Fill  className="mr-2 w-5 h-5" /> },
     { name: "All Tournaments", path: "/my-account/tournaments", icon: <HiMiniTrophy  className="mr-2 w-5 h-5" /> },
     { name: "My Tournaments", path: "/my-account/my-tournaments", icon: <HiMiniTrophy  className="mr-2 w-5 h-5" /> },
     { name: "Matches", path: "/my-account/matches", icon: <GiAmericanFootballPlayer className="mr-2 w-5 h-5" /> },   
+    { name: "Support Ticket", path: "/my-account/support-ticket", icon: <GrNotes className="mr-2 w-5 h-5" /> }, 
    { name: "Profile", path: "/my-account/profile", icon: <BiSolidUserRectangle className="mr-2 w-5 h-5" /> },
     { name: "Settings", path: "/my-account/settings", icon: <BiSolidUserRectangle className="mr-2 w-5 h-5" /> },
     { name: "Logout", path: "#", icon: <TbLogout2 className="mr-2 w-5 h-5" />, action: handleLogout },
@@ -126,8 +130,8 @@ const AthleteDashboardLayout = () => {
             {menuItems.find((item) => item.path === location.pathname)?.name || "Dashboard"}
           </h1>
           <div className="flex items-center gap-4 relative">
-            <Search className="w-5 h-5 cursor-pointer hidden sm:block text-(--textlight)" />
-            <FaBell className="w-5 h-5 cursor-pointer text-(--textwhite)" />
+            {/* <Search className="w-5 h-5 cursor-pointer hidden sm:block text-(--textlight)" />
+            <FaBell className="w-5 h-5 cursor-pointer text-(--textwhite)" /> */}
             {/* Profile Dropdown */}
             <div className="relative">
             <button className="flex items-center gap-2 text-(--textlight)" onClick={handleProfileDropdownToggle}>

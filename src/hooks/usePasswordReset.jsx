@@ -7,6 +7,27 @@ const usePasswordReset = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  // Function to extract error messages properly
+  const extractErrorMessage = (error) => {
+    let errorMessage = "Something went wrong. Try again!";
+    
+    if (error.response?.data) {
+      if (typeof error.response.data === "string") {
+        errorMessage = error.response.data;
+      } else if (typeof error.response.data === "object") {
+        // Extract error message from the first key in the response object
+        const firstKey = Object.keys(error.response.data)[0];
+        if (Array.isArray(error.response.data[firstKey])) {
+          errorMessage = error.response.data[firstKey].join(" ");
+        } else {
+          errorMessage = error.response.data[firstKey];
+        }
+      }
+    }
+    
+    return errorMessage;
+  };
+
   // Forgot Password
   const forgotPassword = async (email) => {
     setLoading(true);
@@ -17,8 +38,7 @@ const usePasswordReset = () => {
       toast.success("Reset link sent! Check your email.", { id: toastId });
       return { success: true };
     } catch (error) {
-      const errorMessage =
-        error.response?.data?.error || "Something went wrong. Try again!";
+      const errorMessage = extractErrorMessage(error);
       setError(errorMessage);
       toast.error(errorMessage, { id: toastId });
       return { success: false, error: errorMessage };
@@ -26,10 +46,11 @@ const usePasswordReset = () => {
       setLoading(false);
     }
   };
+
+  // Reset Password
   const resetPassword = async (password, confirmPassword, token) => {
     setLoading(true);
     setError(null);
-
     let toastId = toast.loading("Resetting password...");
 
     try {
@@ -40,11 +61,9 @@ const usePasswordReset = () => {
       );
 
       toast.success("Password reset successful! Redirecting...", { id: toastId });
-
       return { success: true, data: response.data };
     } catch (error) {
-      const errorMessage =
-        error.response?.data?.error || "Password reset failed! Please try again.";
+      const errorMessage = extractErrorMessage(error);
       setError(errorMessage);
       toast.error(errorMessage, { id: toastId });
 
@@ -53,9 +72,6 @@ const usePasswordReset = () => {
       setLoading(false);
     }
   };
-  
-  
-  
 
   return { forgotPassword, resetPassword, loading, error };
 };

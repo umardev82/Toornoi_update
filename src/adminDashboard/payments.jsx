@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { toast, Toaster } from "react-hot-toast";
 import API_BASE_URL from "../config";
+import * as XLSX from "xlsx";
 
 const Payments = () => {
   const [registrations, setRegistrations] = useState([]);
@@ -10,6 +11,9 @@ const Payments = () => {
   const [selectedTournament, setSelectedTournament] = useState("");
   const [loading, setLoading] = useState(false);
   const [loadingId, setLoadingId] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 6;
 
   const API_URL = `${API_BASE_URL}/register_athletes_tournament/`;
 
@@ -29,6 +33,21 @@ const Payments = () => {
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleSearch = (event) => {
+    const value = event.target.value.toLowerCase();
+    setSearchTerm(value);
+
+    const filtered = registrations.filter(
+      (item) =>
+        item.username.toLowerCase().includes(value) ||
+        item.tournament_name.toLowerCase().includes(value) ||
+        item.payment_status.toLowerCase().includes(value)
+    );
+
+    setFilteredRegistrations(filtered);
+    setCurrentPage(1); // Reset pagination when filters change
   };
 
   const fetchTournaments = async () => {
@@ -51,6 +70,7 @@ const Payments = () => {
         registrations.filter((item) => item.tournament_name === selectedValue)
       );
     }
+    setCurrentPage(1); // Reset pagination when filters change
   };
 
   const handleStatusChange = async (id, newStatus) => {
@@ -74,29 +94,49 @@ const Payments = () => {
     }
   };
 
+  const exportToExcel = () => {
+    const worksheet = XLSX.utils.json_to_sheet(registrations);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Payments");
+    XLSX.writeFile(workbook, "payments_list.xlsx");
+  };
+
+  const totalPages = Math.ceil(filteredRegistrations.length / itemsPerPage);
+  const paginatedRegistrations = filteredRegistrations.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+
   return (
     <>
-      <Toaster />
-      <div className="md:flex justify-between items-center">
-      <h1 className="lemon-milk-font text-(--textwhite) mb-4">Payments</h1>
-
-{/* 🔹 Tournament Filter Dropdown */}
-<div className="mb-4">
-  <select
-    value={selectedTournament}
-    onChange={handleTournamentFilter}
-    className="p-2 border border-(--border) rounded bg-(--secondary) text-(--textwhite) w-full"
-  >
-    <option value="">All Tournaments</option>
-    {tournaments.map((tournament) => (
-      <option key={tournament.id} value={tournament.tournament_name}>
-        {tournament.tournament_name}
-      </option>
-    ))}
-  </select>
-</div>
+      {/* <Toaster toastOptions={{ duration: 5000 }} /> */}
+      <div className="md:flex justify-end gap-2 items-start">
+        <input
+          type="text"
+          value={searchTerm}
+          onChange={handleSearch}
+          placeholder="Search by username, tournament, or status"
+          className="md:w-auto w-full border border-(--border) p-2 rounded text-white bg-(--primary)"
+        />
+        <select
+          value={selectedTournament}
+          onChange={handleTournamentFilter}
+          className="md:w-auto w-full border border-(--border) p-2 rounded text-white bg-(--primary)"
+        >
+          <option value="">All Tournaments</option>
+          {tournaments.map((tournament) => (
+            <option key={tournament.id} value={tournament.tournament_name}>
+              {tournament.tournament_name}
+            </option>
+          ))}
+        </select>
+        <button
+          onClick={exportToExcel}
+          className="mb-4 px-4 py-2 bg-(--accent) text-white rounded text-nowrap"
+        >
+          Export to Excel
+        </button>
       </div>
-     
 
       <div className="overflow-x-auto">
         {loading ? (
@@ -105,60 +145,63 @@ const Payments = () => {
           </div>
         ) : (
           <table className="w-full table-auto text-left text-white border-separate border-spacing-y-2 border border-transparent">
-          <thead className="bg-(--secondary) p-2 rounded-sm text-white">
-            <tr className="rounded-2xl">
-              <th className="p-3 font-medium rounded-l-md whitespace-nowrap w-max">Username</th>
-              <th className="p-3 font-medium whitespace-nowrap w-max">Tournament</th>
-              <th className="p-3 font-medium whitespace-nowrap w-max">Registered At</th>
-              <th className="p-3 font-medium whitespace-nowrap w-max">Payment Status</th>
-              <th className="p-3 font-medium whitespace-nowrap w-max rounded-r-md">Amount</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredRegistrations.length === 0 ? (
-              <tr>
-                <td colSpan="5" className="text-center font-bold text-white p-4">
-                  No registrations found.
-                </td>
+            <thead className="bg-(--secondary) p-2 rounded-sm text-white">
+              <tr className="rounded-2xl">
+                <th className="p-3 font-medium rounded-l-md whitespace-nowrap w-max">Username</th>
+                <th className="p-3 font-medium  whitespace-nowrap w-max">Email</th>
+                <th className="p-3 font-medium whitespace-nowrap w-max">Tournament</th>
+                <th className="p-3 font-medium whitespace-nowrap w-max">Registered At</th>
+                <th className="p-3 font-medium whitespace-nowrap w-max">Payment Status</th>
+                <th className="p-3 font-medium whitespace-nowrap w-max rounded-r-md">Amount</th>
               </tr>
-            ) : (
-              filteredRegistrations.map((item) => (
-                <tr key={item.id} className="bg-(--primary) text-(--textlight)">
-                  <td className="p-3 whitespace-nowrap">{item.username}</td>
-                  <td className="p-3 whitespace-nowrap">{item.tournament_name}</td>
-                  <td className="p-3 whitespace-nowrap">
-                    {new Date(item.created_at).toLocaleString("en-GB")}
+            </thead>
+            <tbody>
+              {paginatedRegistrations.length === 0 ? (
+                <tr>
+                  <td colSpan="5" className="text-center font-bold text-white p-4">
+                    No registrations found.
                   </td>
-                  <td className="p-3 whitespace-nowrap">
-                    <span className="bg-green-900 rounded text-white text-sm py-1 px-4">{item.payment_status}</span>
-                  </td>
-                  <td className="p-3 whitespace-nowrap">{item.amount} €</td>
                 </tr>
-              ))
-            )}
-          </tbody>
-          {filteredRegistrations.length > 0 &&
-  filteredRegistrations.some(item => item.amount > 0) && (
-    <tfoot>
-    <tr className="bg-(--secondary) text-white font-bold">
-      <td colSpan="4" className="p-3 text-right">Total Amount:</td>
-      <td className="p-3">
-        {filteredRegistrations
-          .filter((item) => item.amount) // Ensuring amount exists
-          .reduce((sum, item) => sum + parseFloat(item.amount || 0), 0)
-          .toLocaleString("en-GB")} €  
-      </td>
-    </tr>
-  </tfoot>
-  
-  )
-}
-
-
-        </table>
-        
+              ) : (
+                paginatedRegistrations.map((item) => (
+                  <tr key={item.id} className="bg-(--primary) text-(--textlight)">
+                    <td className="p-3 whitespace-nowrap">{item.username}</td>
+                    <td className="p-3 whitespace-nowrap">{item.email}</td>
+                    <td className="p-3 whitespace-nowrap">{item.tournament_name}</td>
+                    <td className="p-3 whitespace-nowrap">
+                      {new Date(item.created_at).toLocaleString("en-GB")}
+                    </td>
+                    <td className="p-3 whitespace-nowrap">
+                      <span className="bg-green-900 rounded text-white text-sm py-1 px-4">{item.payment_status}</span>
+                    </td>
+                    <td className="p-3 whitespace-nowrap">{item.amount} €</td>
+                  </tr>
+                ))
+              )}
+            </tbody>
+          </table>
         )}
       </div>
+
+      {totalPages > 1 && (
+        <div className="flex items-center justify-center mt-6 space-x-4">
+          <button
+            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+            disabled={currentPage === 1}
+            className="py-1 px-3 bg-(--primary) text-white rounded disabled:opacity-50"
+          >
+            Previous
+          </button>
+          <span className="text-(--accent) font-bold">{currentPage} / {totalPages}</span>
+          <button
+            onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+            disabled={currentPage === totalPages}
+            className="py-1 px-3 bg-(--primary) text-white rounded disabled:opacity-50"
+          >
+            Next
+          </button>
+        </div>
+      )}
     </>
   );
 };

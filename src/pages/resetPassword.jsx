@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import logo from "../assets/images/logo.png";
+import logo from "../assets/images/toornoi-logo.png";
 import { Link, useNavigate } from "react-router-dom";
 import trophy from "../assets/images/trophy.png";
-import { Toaster } from "react-hot-toast";
+import { Toaster, toast } from "react-hot-toast";
 import usePasswordReset from "../hooks/usePasswordReset";
 
 const ResetPassword = () => {
@@ -44,7 +44,7 @@ const ResetPassword = () => {
 
   return (
     <>
-      <Toaster />
+      {/* <Toaster  /> */}
       <div className="grid lg:grid-cols-2 min-h-screen bg-(--background) items-center">
         <main className="w-full max-w-md mx-auto p-4 sm:p-7">
           <Link to="/" className="header-logo ">

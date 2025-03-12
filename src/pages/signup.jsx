@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import useSignup from "../hooks/useSignup";
-import logo from "../assets/images/logo.png";
+import logo from "../assets/images/toornoi-logo.png";
 import trophy from "../assets/images/trophy.png";
-import google from "../assets/images/google.png";
+// import google from "../assets/images/google.png";
 import { IoClose } from "react-icons/io5";
 import { Toaster } from "react-hot-toast";
 
@@ -139,10 +139,10 @@ const Signup = () => {
               </form>
               {localError && <p className="text-red-500 text-sm mt-2">{localError}</p>}
 
-              <button className="w-full py-2 px-3 bg-(--secondarybg) text-white rounded-sm text-sm mt-3">
+              {/* <button className="w-full py-2 px-3 bg-(--secondarybg) text-white rounded-sm text-sm mt-3">
                 <img src={google} className="w-4 h-4 inline mr-2" alt="google-img" />
                 Sign up with Google
-              </button>
+              </button> */}
 
               <p className="mt-3 text-sm text-center text-(--textlight)">
                 Already have an account?
@@ -163,7 +163,7 @@ const Signup = () => {
       <div className="fixed inset-0 flex items-center pt-6 justify-center bg-black/50 ">
 
       <div className="relative bg-white p-[50px] rounded-lg shadow-lg md:w-[40%] w-[90%] min-h-[30%] flex items-center justify-center text-center">
-        <Toaster/>
+        {/* <Toaster toastOptions={{ duration: 5000 }} /> */}
         {/* Close button at the top-right */}
         <button 
           onClick={() => setShowPopup(false)}

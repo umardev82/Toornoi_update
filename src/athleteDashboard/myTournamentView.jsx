@@ -99,7 +99,7 @@ const CheckoutForm = ({ tournamentId, registrationFee, onSuccess }) => {
   );
 };
 
-const SingleTournament = () => {
+const MyTournamentView = () => {
   const { id } = useParams();
   const [tournament, setTournament] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -117,7 +117,7 @@ const SingleTournament = () => {
     setLoading(true);
     try {
       const token = localStorage.getItem("userToken"); // Get token from local storage
-      const response = await axios.get(`${API_BASE_URL}/tournament_user/${id}/`, {
+      const response = await axios.get(`${API_BASE_URL}/my_tournaments/${id}/tournament_details/`, {
         headers: {
           Authorization: `Token ${token}`, // Add token to headers
         },
@@ -158,7 +158,7 @@ const SingleTournament = () => {
   {tournament?.cover_image && (
         <div>
           <img
-            src={tournament.cover_image}
+            src={`${API_BASE_URL}${tournament.cover_image}`}
             alt="Cover"
             className="w-full h-64 mb-5 rounded-md object-cover"
           />
@@ -174,15 +174,18 @@ const SingleTournament = () => {
     ? formatDateTime(tournament.registration_deadline)
     : "Not Set"} </p>
         <p className="text-(--textlight)"><span className="text-(--textwhite) font-bold">Registration Fee:</span> {tournament?.registration_fee}€</p>
+        <p className="text-(--textlight)"><span className="text-(--textwhite) font-bold">Total No of Pools:</span> {tournament?.total_pool}</p>
+        <p className="text-(--textlight)"><span className="text-(--textwhite) font-bold">Round:</span> {tournament?.pool_number} / {tournament?.total_pool}
+        </p>
        
         </div>
         <div className="text-end">
         <button 
-         onClick={() => setShowModal(true)} 
-         className={`py-2 px-5 rounded ${tournament?.is_registered ? "bg-gray-500 cursor-not-allowed" : "bg-(--accent)"}`}
-         disabled={tournament?.is_registered}
+        
+         className="py-2 px-5 rounded bg-gray-500 cursor-not-allowed"
+
         >
-    {tournament?.is_registered ? "Already Registered" : "Register"}
+    Already Registered
   </button>
         <div className=" text-white mt-3 px-3 py-1 rounded-lg">
         🏆 <span className="font-bold">Prize:</span>  {tournament.positions_1}€
@@ -249,26 +252,23 @@ const SingleTournament = () => {
       <p>{tournament?.positions_1}€</p>
       <h6 className="mt-2">Runner Up</h6>
       <p>{tournament?.positions_2}€</p>
-     
+         
       </div>
-     
       <div className="grid md:grid-cols-2 gap-2">
         <div className="bg-(--primary) p-5 rounded text-(--textwhite) mt-5">
          <h2 className="lemon-milk-font mb-4">Sponsor Logo</h2>
          <img src={tournament?.sponsor_logos} alt="" className="h-60 w-full rounded object-cover"/>
         </div>
-       
-        <div className="">
-      
-       
-        </div>      
+          
+        
 
       </div>
       <div className="text-(--textwhite) mt-5">
       <h2 className="lemon-milk-font">Notes:</h2>
       <p className="italic">{tournament?.prize_details}</p>      
       </div>
-      <div className=" text-(--textwhite) my-8 text-right flex gap-2 flex-wrap">
+     
+        <div className=" text-(--textwhite) my-8 text-right flex gap-2 flex-wrap">
  
  {tournament?.code_of_conduct ? (
    <a 
@@ -287,18 +287,13 @@ const SingleTournament = () => {
      Code of Conduct (Unavailable)
    </button>
  )}
-   <button 
-          onClick={() => setShowModal(true)} 
-          className={`py-2 px-5  rounded ${tournament?.is_registered ? "bg-gray-500  text-white cursor-not-allowed" : "bg-(--accent) text-white"}`}
-          disabled={tournament?.is_registered}  >
-         {tournament?.is_registered ? "Already Registered" : "Register"}
-        </button>
+ 
+       
 </div>
-    
       {/* Modal */}
       {showModal && (
         <div className="fixed inset-0 flex items-center justify-center bg-black/50 p-5 z-50 ">
-          <div className="bg-(--primary) text-(--textwhite) rounded-lg shadow-lg w-96 relative p-6 overflow-y-auto  max-h-[80vh]">
+          <div className="bg-(--primary) text-(--textwhite) rounded-lg shadow-lg w-96 relative p-6 flex flex-col items-center justify-center min-h-[30vh]">
             <button onClick={() => setShowModal(false)} className="absolute top-5 right-5">
               <IoMdCloseCircle />
             </button>
@@ -339,4 +334,4 @@ const SingleTournament = () => {
   );
 };
 
-export default SingleTournament;
+export default MyTournamentView;

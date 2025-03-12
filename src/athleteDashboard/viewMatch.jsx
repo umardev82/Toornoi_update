@@ -101,7 +101,7 @@ const ViewMatch = () => {
 
   return (
     <div className="bg-black text-white">
-    <Toaster/>
+    {/* <Toaster toastOptions={{ duration: 5000 }} /> */}
 
       {/* Header Section */}
       <div>

@@ -19,6 +19,9 @@
   src: url('../src/assets/font/lemon_milk/LEMONMILK-Light.otf') format('opentype'); 
   font-style: normal; 
 }
+body{
+  top: 0 !important;
+}
 
 *{
   box-sizing: border-box;
@@ -88,3 +91,42 @@ button, a{
 .checkout-form input{
   color: white !important;
 }
+.VIpgJd-ZVi9od-ORHb-OEVmcd{
+  display: none;
+}
+.goog-te-banner-frame.skiptranslate { display: none !important; }
+body { top: 0px !important; }
+.goog-te-gadget { font-size: 0 !important; }
+.goog-te-gadget span { display: none; }
+.goog-te-combo{
+  position: fixed !important;
+    bottom: 20px;
+    right: 50px;
+    background: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: black;
+}
+
+/* .goog-te-gadget{
+  display: none !important;
+} */
+
+/* Remove Google Translate hover background */
+.goog-text-highlight {
+  background: none !important;
+  color: inherit !important;
+  box-shadow: none !important;
+}
+
+/* Ensure hovered text remains transparent */
+span[style*="background-color: rgb(255, 255, 153)"] {
+  background-color: transparent !important;
+  color: inherit !important;
+}
+
+/* Remove any forced styles added by Google */
+body * {
+  transition: background-color 0s !important;
+}
+

@@ -19,10 +19,12 @@ const MyTournaments = () => {
   const [completedMatches, setCompletedMatches] = useState([]); // 🔹 Completed matches
 
   const itemsPerPage = 6;
+
   const totalPages = Math.ceil(filteredTournaments.length / itemsPerPage);
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const paginatedTournaments = filteredTournaments.slice(startIndex, endIndex);
+  const paginatedTournaments = filteredTournaments.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+
+  const handlePrevPage = () => setCurrentPage((prev) => Math.max(prev - 1, 1));
+  const handleNextPage = () => setCurrentPage((prev) => Math.min(prev + 1, totalPages));
 
   useEffect(() => {
     fetchTournaments();
@@ -178,7 +180,7 @@ const MyTournaments = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {paginatedTournaments.map((tournament, index) => (
               <Link 
-                to={`/my-account/tournament/${tournament.id}`} 
+                to={`/my-account/my-tournaments/${tournament.id}`} 
                 key={index} 
                 className="bg-gray-900 text-white rounded-2xl border border-gray-700 shadow-lg overflow-hidden min-h-[350px] bg-center bg-cover bg-no-repeat flex flex-col justify-between relative"
                 style={{ 
@@ -195,7 +197,7 @@ const MyTournaments = () => {
                     💳 Registration Fee: {tournament.registration_fee}€
                   </div>
                   <div className="w-fit bg-black/80 text-white text-xs font-medium px-3 py-1 rounded-lg">
-                    🏆 Prize: {tournament.prize_details}
+                    🏆 Prize: {tournament.positions_1}€
                   </div>
                 </div>           
 
@@ -215,25 +217,25 @@ const MyTournaments = () => {
               </Link>
             ))}
           </div>
-          <div className="flex items-center justify-center mt-6 space-x-4">
-            <button
-              onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-              disabled={currentPage === 1}
-              className="py-1 px-3 bg-(--primary) text-white rounded disabled:opacity-50"
-            >
-              Previous
-            </button>
-
-            <span className="text-(--accent) font-bold">{currentPage} / {totalPages}</span>
-
-            <button
-              onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
-              disabled={currentPage === totalPages}
-              className="py-1 px-3 bg-(--primary) text-white rounded disabled:opacity-50"
-            >
-              Next
-            </button>
-          </div>
+          {totalPages > 1 && (   
+   <div className="flex items-center justify-center mt-6 space-x-4">
+     <button
+       onClick={handlePrevPage}
+       disabled={currentPage === 1}
+       className="py-1 px-3 bg-(--primary) text-white rounded disabled:opacity-50"
+     >
+       Previous
+     </button>
+     <span className="text-(--accent) font-bold">{currentPage} / {totalPages}</span>
+     <button
+       onClick={handleNextPage}
+       disabled={currentPage === totalPages}
+       className="py-1 px-3 bg-(--primary) text-white rounded disabled:opacity-50"
+     >
+       Next
+     </button>
+   </div>
+)}
         </>
       ) : (
         <div className="w-full flex justify-center items-center min-h-[300px] text-center font-bold text-white p-4">

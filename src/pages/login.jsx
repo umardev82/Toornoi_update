@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import useSignin from "../hooks/useSignin";
-import logo from "../assets/images/logo.png";
+import logo from "../assets/images/toornoi-logo.png";
 import trophy from "../assets/images/trophy.png";
-import google from "../assets/images/google.png";
+// import google from "../assets/images/google.png";
 import { Toaster } from "react-hot-toast";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
@@ -31,7 +31,7 @@ const Login = () => {
     if (result.success) {
       
       setTimeout(() => {
-        navigate("/my-account/tournaments"); 
+        navigate("/my-account"); 
       }, 2000); 
 
     }
@@ -39,7 +39,7 @@ const Login = () => {
 
   return (
     <>
-      <Toaster className="capitalize"/>
+      {/* <Toaster toastOptions={{ duration: 5000 }} /> */}
       <div className="grid lg:grid-cols-2 min-h-screen bg-(--background) items-center">
       <main id="content" className="w-full max-w-md mx-auto py-10">
               <Link to="/" className="header-logo">
@@ -98,10 +98,10 @@ const Login = () => {
                     </div>
                   </form>
 
-                  <button className="w-full py-2 px-3 bg-(--secondarybg) text-white rounded-sm text-sm mt-3">
+                  {/* <button className="w-full py-2 px-3 bg-(--secondarybg) text-white rounded-sm text-sm mt-3">
                     <img src={google} className="w-4 h-4 inline mr-2" alt="google-img" />
                     Sign in with Google
-                  </button>
+                  </button> */}
                   <div className="flex justify-between items-center">
                   <p className="mt-3 text-sm text-center text-(--textlight)">
                     Don't have an account?

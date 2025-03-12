@@ -66,7 +66,7 @@ const EditAthlete = () => {
 
   return (
     <>
-      <Toaster />
+      {/* <Toaster toastOptions={{ duration: 5000 }} /> */}
       <div>
       <h1 className="lemon-milk-font text-(--textwhite) mb-4">Edit Athlete</h1>
         <form onSubmit={handleSubmit} className="space-y-4">
