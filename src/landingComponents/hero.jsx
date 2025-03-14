@@ -38,7 +38,7 @@ const Hero = () => {
 										<div className="mt-10 flex gap-3 sm:justify-start justify-center sm:space-x-2  rtl:space-x-reverse">
 											
 											<Link to="/login" className="py-3 px-5 btn bg-white text-black rounded-sm">
-											Registre
+											S’inscrire
 											</Link>
 										</div>
 									</div>
@@ -77,7 +77,7 @@ const Hero = () => {
 											className="text-3xl mb-4 font-bold lemon-milk-font text-white">
 											Le meilleur moyen de se lancer dans l'e-sport
 										</h2>
-										<p className="text-white mb-4">La plateforme Sked est le meilleur moyen de s'entraîner, de participer à des matchs d'entraînement et de classement, de participer à des tournois, seul ou en équipe, et à de nombreux jeux !</p>
+										<p className="text-white mb-4">La plateforme Toornoi est le meilleur moyen de s'entraîner, de participer à des matchs d'entraînement et de classement, de participer à des tournois, seul ou en équipe, et à de nombreux jeux !</p>
 										<div className="flex flex-row text-white justify-start items-center gap-x-3">
 											<img src={game} alt="" />
 											<p className="lemon-milk-medium">Rejoignez le jeu</p>
@@ -96,7 +96,7 @@ const Hero = () => {
 										</div>
 										<div className="flex mt-8">
 										<Link to="/login" className="py-3 px-5 bg-cyan-600 text-white rounded-sm">
-										Registre
+										S’inscrire
 											</Link>	
 										</div>
 																		
@@ -215,7 +215,7 @@ const Hero = () => {
 							<div className="mt-5 flex justify-start gap-2">
 											
 											<Link to="/login" className="py-3 px-5 btn bg-white text-black rounded-sm">
-											Registre
+											S’inscrire
 											</Link>
 										</div>
 						</div>
