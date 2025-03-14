@@ -52,18 +52,18 @@ const Contact = () => {
           </Link>
           <div className="p-4 sm:p-7">
             <div className="text-center">
-              <h1 className="block text-2xl font-bold text-white">Contact Us</h1>
-              <p className="text-(--textlight)">We'd love to hear from you. Send us a message!</p>
+              <h1 className="block text-2xl font-bold text-white">Contactez-nous</h1>
+              <p className="text-(--textlight)">Nous serions ravis de vous entendre. Envoyez-nous un message !</p>
             </div>
             <div className="mt-5">
               <form onSubmit={handleSubmit}>
                 <div className="grid gap-y-4">
                   <div>
-                    <label htmlFor="name" className="block text-sm mb-2 text-(--textlight)">Name</label>
+                    <label htmlFor="name" className="block text-sm mb-2 text-(--textlight)">Nom</label>
                     <input
                       type="text"
                       id="name"
-                      placeholder="Enter your name"
+                      placeholder="Entrez votre nom"
                       className="py-2 px-3 block w-full bg-(--secondarybg) rounded-sm text-sm text-(--textlight)"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
@@ -72,11 +72,11 @@ const Contact = () => {
                   </div>
 
                   <div>
-                    <label htmlFor="email" className="block text-sm mb-2 text-(--textlight)">Email</label>
+                    <label htmlFor="email" className="block text-sm mb-2 text-(--textlight)">E-mail</label>
                     <input
                       type="email"
                       id="email"
-                      placeholder="Enter your email"
+                      placeholder="Entrez votre e-mail"
                       className="py-2 px-3 block w-full bg-(--secondarybg) rounded-sm text-sm text-(--textlight)"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
@@ -88,7 +88,7 @@ const Contact = () => {
                     <label htmlFor="message" className="block text-sm mb-2 text-(--textlight)">Message</label>
                     <textarea
                       id="message"
-                      placeholder="Enter your message"
+                      placeholder="Entrez votre message"
                       className="py-2 px-3 block w-full bg-(--secondarybg) rounded-sm text-sm text-(--textlight)"
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
@@ -102,7 +102,7 @@ const Contact = () => {
                     type="submit"
                     className="py-2 px-3 bg-(--accent) text-white w-full rounded-sm text-sm hover:bg-transparent border-(--accent) border transition-all"
                   >
-                    Send Message
+                    Envoyer le message
                   </button>
                 </div>
               </form>

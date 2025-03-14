@@ -51,7 +51,7 @@ const AthleteProfile = () => {
       setTournamentCount(countResponse.data.total_tournamnets_participated);
       setTournamentResults(resultsResponse.data);
     } catch (err) {
-      setApiError(err.response?.data?.message || "Failed to fetch profile data");
+      setApiError(err.response?.data?.message || "Échec de la récupération des données de profil");
     } finally {
       setLoading(false);
     }
@@ -116,7 +116,7 @@ const AthleteProfile = () => {
           </div>
           <div className="">
             <Link to="/my-account/settings" className="md:mt-3 px-4 py-2 bg-(--accent) text-(--textwhite) rounded-md">
-              Edit Profile
+            Modifier le profil
             </Link>
           </div>
         </div>
@@ -128,7 +128,7 @@ const AthleteProfile = () => {
           className={`py-2 px-4 flex items-center md:w-auto w-full gap-2 ${activeTab === "personal" ? "border-b-2 border-blue-500 text-blue-500" : "text-gray-400"}`}
           onClick={() => setActiveTab("personal")}
         >
-          <FaUser /> Personal Details
+          <FaUser /> Détails personnels
         </button>
         {/* <button
           className={`py-2 px-4 flex items-center md:w-auto w-full gap-2 ${activeTab === "profile" ? "border-b-2 border-blue-500 text-blue-500" : "text-gray-400"}`}
@@ -149,23 +149,23 @@ const AthleteProfile = () => {
           <div>
             <div className="mt-4 grid grid-cols-2 gap-3 space-y-3">
               <div className="flex flex-col gap-0 text-(--textwhite)">
-                <p className="font-bold">Full Name:</p>
+                <p className="font-bold">Nom et prénom:</p>
                 <p className="text-(--textlight)">{profile.first_name} {profile.last_name}</p>
               </div>
               <div className="flex flex-col gap-0 text-(--textwhite)">
-                <p className="font-bold">Email:</p>
+                <p className="font-bold">E-mail:</p>
                 <p className="text-(--textlight)">{profile.email}</p>
               </div>
               <div className="flex flex-col gap-0 text-(--textwhite)">
-                <p className="font-bold">Date of Birth:</p>
+                <p className="font-bold">Date de naissance:</p>
                 <p className="text-(--textlight)">{profile.date_of_birth}</p>
               </div>
               <div className="flex flex-col gap-0 text-(--textwhite)">
-                <p className="font-bold">Phone:</p>
+                <p className="font-bold">Téléphone:</p>
                 <p className="text-(--textlight)">{profile.phone_number}</p>
               </div>
               <div className="flex flex-col gap-0 text-(--textwhite)">
-                <p className="font-bold">Location:</p>
+                <p className="font-bold">Emplacement:</p>
                 <p className="text-(--textlight)">{profile.location || "Not provided"}</p>
               </div>
             </div>

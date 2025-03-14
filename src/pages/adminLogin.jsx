@@ -41,18 +41,18 @@ const AdminLogin = () => {
               </Link>
               <div className="p-4 sm:p-7">
                 <div className="text-center">
-                  <h1 className="block text-2xl font-bold text-white">Admin Login</h1>
-                  <p className="text-(--textlight)">Welcome back! Please enter your details.</p>
+                  <h1 className="block text-2xl font-bold text-white">Connexion administrateur</h1>
+                  <p className="text-(--textlight)">Bienvenue ! Veuillez saisir vos coordonnées.</p>
                 </div>
                 <div className="mt-5">
                   <form onSubmit={handleLogin}>
                     <div className="grid gap-y-4">
                       <div>
-                        <label htmlFor="email" className="block text-sm mb-2 text-(--textlight)">Email</label>
+                        <label htmlFor="email" className="block text-sm mb-2 text-(--textlight)">E-mail</label>
                         <input
                           type="email"
                           id="email"
-                          placeholder="Enter your email"
+                          placeholder="Entrez votre email"
                           className="py-2 px-3 block w-full bg-(--secondarybg) rounded-sm text-sm text-(--textlight)"
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
@@ -61,11 +61,11 @@ const AdminLogin = () => {
                       </div>
 
                       <div>
-                        <label htmlFor="password" className="block text-sm mb-2 text-(--textlight)">Password</label>
+                        <label htmlFor="password" className="block text-sm mb-2 text-(--textlight)">Mot de passe</label>
                         <input
                           type="password"
                           id="password"
-                          placeholder="Enter password"
+                          placeholder="Entrez le mot de passe"
                           className="py-2 px-3 block w-full bg-(--secondarybg) rounded-sm text-sm text-(--textlight)"
                           value={password}
                           onChange={(e) => setPassword(e.target.value)}
@@ -80,7 +80,7 @@ const AdminLogin = () => {
                         type="submit"
                         className="py-2 px-3 bg-cyan-600 text-white rounded-sm text-sm hover:bg-cyan-700 transition-all flex items-center justify-center"                       
                       >                       
-                          Sign in                        
+                          Se connecter                       
                       </button>
                     </div>
                   </form>

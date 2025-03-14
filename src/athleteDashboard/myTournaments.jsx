@@ -97,11 +97,13 @@ const MyTournaments = () => {
     const minFee = Math.min(...fees);
     const maxFee = Math.max(...fees);
 
+  
+
     const ranges = [
-      { label: `$${minFee} - $${minFee + 50}`, value: `${minFee}-${minFee + 50}` },
-      { label: `$${minFee + 51} - $${minFee + 100}`, value: `${minFee + 51}-${minFee + 100}` },
-      { label: `$${maxFee - 100} - $${maxFee}`, value: `${maxFee - 100}-${maxFee}` },
-      { label: `$${maxFee}+`, value: `${maxFee}+` },
+      { label: `${minFee} €- ${minFee + 50} €`, value: `${minFee}-${minFee + 50}` },
+      { label: `${minFee + 51} € - ${minFee + 100} €`, value: `${minFee + 51}-${minFee + 100}` },
+      { label: `${maxFee - 100} € - ${maxFee} €`, value: `${maxFee - 100}-${maxFee}` },
+      { label: `${maxFee} € +`, value: `${maxFee}+` },
     ];
 
     setPriceRanges(ranges);
@@ -149,21 +151,21 @@ const MyTournaments = () => {
       <div className="grid md:grid-cols-3 gap-3 mb-4">
         <input
           type="text"
-          placeholder="Search tournament..."
+          placeholder="Rechercher un tournoi..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           className="border border-(--border) p-2 rounded text-white bg-(--primary)"
         />
 
         <select value={category} onChange={(e) => setCategory(e.target.value)} className="border border-(--border) p-2 rounded text-white bg-(--primary)">
-          <option value="">All Categories</option>
+          <option value="">Toutes les catégories</option>
           {categories.map((cat, index) => (
             <option key={index} value={cat}>{cat}</option>
           ))}
         </select>
 
         <select value={priceRange} onChange={(e) => setPriceRange(e.target.value)} className="border p-2 border-(--border) rounded text-white bg-(--primary)">
-          <option value="">All Prices</option>
+          <option value="">Tous les prix</option>
           {priceRanges.map((range, index) => (
             <option key={index} value={range.value}>{range.label}</option>
           ))}
@@ -194,10 +196,10 @@ const MyTournaments = () => {
                       : "Not Set"}
                   </div>
                   <div className="w-fit bg-black/80 text-white text-xs font-medium px-3 py-1 rounded-lg">
-                    💳 Registration Fee: {tournament.registration_fee}€
+                  💳 Frais d'inscription: {tournament.registration_fee}€
                   </div>
                   <div className="w-fit bg-black/80 text-white text-xs font-medium px-3 py-1 rounded-lg">
-                    🏆 Prize: {tournament.positions_1}€
+                    🏆 Prix: {tournament.positions_1}€
                   </div>
                 </div>           
 
@@ -205,7 +207,7 @@ const MyTournaments = () => {
                 <div className="p-4 mt-auto">
                   {/* Fee Badge */}
                   <div className="inline-block bg-(--secondary) text-white text-xs font-medium px-3 py-1 rounded-lg">
-                    Time: {tournament.time ? formatOnlyTime(tournament.time) : "Not Set"}
+                    Temps: {tournament.time ? formatOnlyTime(tournament.time) : "Not Set"}
                   </div>
 
                   {/* Title */}
@@ -224,7 +226,7 @@ const MyTournaments = () => {
        disabled={currentPage === 1}
        className="py-1 px-3 bg-(--primary) text-white rounded disabled:opacity-50"
      >
-       Previous
+       Précédent
      </button>
      <span className="text-(--accent) font-bold">{currentPage} / {totalPages}</span>
      <button
@@ -232,14 +234,14 @@ const MyTournaments = () => {
        disabled={currentPage === totalPages}
        className="py-1 px-3 bg-(--primary) text-white rounded disabled:opacity-50"
      >
-       Next
+       Suivant
      </button>
    </div>
 )}
         </>
       ) : (
         <div className="w-full flex justify-center items-center min-h-[300px] text-center font-bold text-white p-4">
-          No tournaments found.
+          Aucun tournoi trouvé.
         </div>
       )}
 
@@ -249,8 +251,8 @@ const MyTournaments = () => {
           {/* Pending Matches */}
           <div>
             <div className="flex justify-between">
-            <h3 className=" font-bold text-white mb-2">Pending Matches</h3>
-            <Link to="/my-account/matches" className="text-(--accent)">View all</Link>
+            <h3 className=" font-bold text-white mb-2">Matchs en attente</h3>
+            <Link to="/my-account/matches" className="text-(--accent)">Tout voir</Link>
             </div>
            
             {pendingMatches.length > 0 ? (
@@ -261,19 +263,19 @@ const MyTournaments = () => {
                       : "Not Set"}</p> 
                 <p className="text-white font-bold max-w-[70%]">{match.tournament}</p>
                 
-                <p className="text-(--textlight)"><b>Match Result:</b> {match.match_result}</p>               
+                <p className="text-(--textlight)"><b>Résultat du match :</b> {match.match_result}</p>               
               </div>
               ))
             ) : (
-              <p className="text-(--textwhite)">No pending matches.</p>
+              <p className="text-(--textwhite)">Aucune correspondance en attente.</p>
             )}
           </div>
 
           {/* Completed Matches */}
           <div>
             <div className="flex justify-between">           
-            <h3 className=" font-bold text-white mb-2">Completed Matches</h3>
-            <Link to="/my-account/matches" className="text-(--accent)">View all</Link>
+            <h3 className=" font-bold text-white mb-2">Matchs terminés</h3>
+            <Link to="/my-account/matches" className="text-(--accent)">Tout voir</Link>
             </div>
             {completedMatches.length > 0 ? (
               completedMatches.map((match, index) => (
@@ -283,11 +285,11 @@ const MyTournaments = () => {
                       : "Not Set"}</p> 
                 <p className="text-white font-bold max-w-[70%]">{match.tournament}</p>
                 
-                <p className="text-(--textlight)"><b>Match Result:</b> {match.match_result}</p>               
+                <p className="text-(--textlight)"><b>Résultat du match:</b> {match.match_result}</p>               
               </div>
               ))
             ) : (
-              <p className="text-(--textwhite)">No completed matches.</p>
+              <p className="text-(--textwhite)">Aucun match terminé.</p>
             )}
           </div>
         </div>

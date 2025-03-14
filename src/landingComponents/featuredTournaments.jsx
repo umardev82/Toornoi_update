@@ -42,25 +42,25 @@ const FeaturedTournaments = () => {
         >
           {tournament.is_registered && (
             <div className="absolute top-3 right-3 bg-green-800 text-white text-xs font-bold p-1 rounded-lg">
-              ✅ Registered
+              ✅ Enregistré
             </div>
           )}
 
           <div className="p-4 space-y-2">
             <div className="w-fit bg-black/80 text-white text-xs font-medium px-3 py-1 rounded-lg">
-              📅 {tournament.start_date || "Not Set"}
+              📅 {tournament.start_date || "Non défini"}
             </div>
             <div className="w-fit bg-black/80 text-white text-xs font-medium px-3 py-1 rounded-lg">
-              💳 Registration Fee: {tournament.registration_fee}€
+            💳 Frais d'inscription :  {tournament.registration_fee}€
             </div>
             <div className="w-fit bg-black/80 text-white text-xs font-medium px-3 py-1 rounded-lg">
-              🏆 Prize: {tournament.positions_1}€
+            🏆 Prix : {tournament.positions_1}€
             </div>
           </div>
 
           <div className="p-4 mt-auto">
             <div className="inline-block bg-(--secondary) text-white text-xs font-medium px-3 py-1 rounded-lg">
-              Time: {tournament.time || "Not Set"}
+            Heure :  {tournament.time || "Non défini"}
             </div>
             <h3 className="mt-3 text-2xl lemon-milk-medium">{tournament.tournament_name}</h3>
             <p className="text-gray-300 text-sm mt-1 line-clamp-2">{tournament.description}</p>

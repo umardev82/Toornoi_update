@@ -50,7 +50,7 @@ const handleNextPage = () => setCurrentPage((prev) => Math.min(prev + 1, totalPa
       setFilteredMatches(response.data || []);
     } catch (error) {
       console.error("Error fetching matches:", error);
-      toast.error("Failed to fetch matches.");
+      toast.error("Échec de la récupération des correspondances.");
     } finally {
       setLoading(false);
     }
@@ -99,12 +99,12 @@ const handleNextPage = () => setCurrentPage((prev) => Math.min(prev + 1, totalPa
   const handleDeleteMatch = async () => {
     try {
       await axios.delete(`${API_URL}${selectedMatch.id}/`);
-      toast.success("Match deleted successfully!");
+      toast.success("Match supprimé avec succès !");
       fetchMatches();
       setShowDeleteModal(false);
     } catch (error) {
       console.error("Error deleting match:", error);
-      toast.error("Failed to delete match.");
+      toast.error("Échec de la suppression de la correspondance.");
     }
   };
 
@@ -122,7 +122,7 @@ const handleNextPage = () => setCurrentPage((prev) => Math.min(prev + 1, totalPa
           type="text"
           value={searchTerm}
           onChange={handleSearch}
-          placeholder="Search by tournament or player"
+          placeholder="Rechercher par tournoi ou par joueur"
           className="md:w-auto w-full border border-(--border) p-2 rounded text-white bg-(--primary)"
         />
         <select
@@ -130,7 +130,7 @@ const handleNextPage = () => setCurrentPage((prev) => Math.min(prev + 1, totalPa
           onChange={handleTournamentChange}
           className="md:w-auto w-full border border-(--border) p-2 rounded text-white bg-(--primary)"
         >
-          <option value="All">All Tournaments</option>
+          <option value="All">Tous les tournois</option>
           {[...new Set(matches.map((match) => match.tournament?.tournament_name))].map((tournament) => (
             <option key={tournament} value={tournament}>{tournament}</option>
           ))}
@@ -140,25 +140,25 @@ const handleNextPage = () => setCurrentPage((prev) => Math.min(prev + 1, totalPa
           onChange={handleStatusChange}
           className="md:w-auto w-full border border-(--border) p-2 rounded text-white bg-(--primary)"
         >
-          <option value="All">All Statuses</option>
-          <option value="Pending">Pending</option>
-          <option value="Completed">Completed</option>
+          <option value="All">Tous les statuts</option>
+          <option value="Pending">En attente</option>
+          <option value="Completed">Complété</option>
         </select>
         <button onClick={exportToExcel} className="mb-4 px-4 py-2 bg-(--accent) text-white rounded">
-          Export to Excel
+        Exporter vers Excel
         </button>
       </div>
       <div className="overflow-x-auto">
         <table className="w-full table-auto text-left text-white border-separate border-spacing-y-2 border border-transparent">
           <thead className="whitespace-nowrap bg-(--secondary) p-2 rounded-sm text-white">
             <tr className="rounded-2xl">
-              <th className="p-3 font-medium">Tournament</th>
-              <th className="p-3 font-medium">Pool No</th>
-              <th className="p-3 font-medium">Player 1</th>
-              <th className="p-3 font-medium">Player 2</th>
-              <th className="p-3 font-medium">Status</th>
+              <th className="p-3 font-medium">Tournoi</th>
+              <th className="p-3 font-medium">Numéro de pool</th>
+              <th className="p-3 font-medium">Joueur 1</th>
+              <th className="p-3 font-medium">Joueur 2</th>
+              <th className="p-3 font-medium">Statut</th>
               <th className="p-3 font-medium">Date</th>
-              <th className="p-3 font-medium">Actions</th>
+              <th className="p-3 font-medium">Actes</th>
             </tr>
           </thead>
           <tbody className="whitespace-nowrap">
@@ -169,7 +169,7 @@ const handleNextPage = () => setCurrentPage((prev) => Math.min(prev + 1, totalPa
             ) : paginatedMatches.length === 0 ? (
               <tr>
                 <td colSpan="7" className="text-center font-bold text-white p-4">
-                  No matches found.
+                Aucune correspondance trouvée.
                 </td>
               </tr>
             ) : (
@@ -220,7 +220,7 @@ const handleNextPage = () => setCurrentPage((prev) => Math.min(prev + 1, totalPa
        disabled={currentPage === 1}
        className="py-1 px-3 bg-(--primary) text-white rounded disabled:opacity-50"
      >
-       Previous
+       Précédent
      </button>
      <span className="text-(--accent) font-bold">{currentPage} / {totalPages}</span>
      <button
@@ -228,7 +228,7 @@ const handleNextPage = () => setCurrentPage((prev) => Math.min(prev + 1, totalPa
        disabled={currentPage === totalPages}
        className="py-1 px-3 bg-(--primary) text-white rounded disabled:opacity-50"
      >
-       Next
+       Suivant
      </button>
    </div>
 )}
@@ -267,22 +267,22 @@ const handleNextPage = () => setCurrentPage((prev) => Math.min(prev + 1, totalPa
          <div className="flex justify-between items-start">
            <div>
              <h2 className="text-2xl font-bold text-white"><span className="capitalize">{selectedMatch.player_1} </span>vs <span className="capitalize">{selectedMatch.player_2}</span></h2>
-             <p className="text-(--textlight) mt-1">Date: {selectedMatch.date ? new Date(selectedMatch.date).toLocaleDateString() : "TBD"}</p>
-             <p className="text-(--textlight)">Location: {selectedMatch.tournament?.country || "Unknown"}</p>
+             <p className="text-(--textlight) mt-1">Date: {selectedMatch.date ? new Date(selectedMatch.date).toLocaleDateString() : "Inconnu"}</p>
+             <p className="text-(--textlight)">Localisation: {selectedMatch.tournament?.country || "Inconnu"}</p>
            </div>           
          </div>
 
          <div className="mt-4 grid grid-cols-2 gap-6">
            <div>
-             <p className="text-(--textwhite) font-semibold">Organizer</p>
-             <p className="text-(--textlight)">{selectedMatch.tournament?.sponsorship_details || "Unknown"}</p>
+             <p className="text-(--textwhite) font-semibold">Organisateur</p>
+             <p className="text-(--textlight)">{selectedMatch.tournament?.sponsorship_details || "Inconnu"}</p>
            </div>
            <div>
-             <p className="text-(--textwhite) font-semibold">Referee</p>
-             <p className="text-(--textlight)">{selectedMatch.admin_username || "Unknown"}</p>
+             <p className="text-(--textwhite) font-semibold">Arbitre</p>
+             <p className="text-(--textlight)">{selectedMatch.admin_username || "Inconnu"}</p>
            </div>
            <div>
-             <p className="text-(--textwhite) mb-2 font-semibold">Status</p>
+             <p className="text-(--textwhite) mb-2 font-semibold">Statut</p>
              <span className={`px-3 py-1 text-sm rounded-4xl ${
                selectedMatch.status === "Pending" ? "bg-[#433E29] text-[#E5BA18]" :
                selectedMatch.status === "Completed" ? "bg-[#003515] text-[#00BB4C]" : "bg-gray-600"
@@ -291,33 +291,33 @@ const handleNextPage = () => setCurrentPage((prev) => Math.min(prev + 1, totalPa
              </span>
            </div>
            <div>
-             <p className="text-(--textwhite) font-semibold">Match Type</p>
-             <p className="text-(--textlight)">{selectedMatch.tournament?.bracket_type || "Unknown"}</p>
+             <p className="text-(--textwhite) font-semibold">Type de correspondance</p>
+             <p className="text-(--textlight)">{selectedMatch.tournament?.bracket_type || "Inconnu"}</p>
            </div>
            <div>
-             <p className="text-(--textwhite) font-semibold">Pool No</p>
-             <p className="text-(--textlight)">{selectedMatch.pool || "Unknown"}</p>
+             <p className="text-(--textwhite) font-semibold">Pool Number</p>
+             <p className="text-(--textlight)">{selectedMatch.pool || "Inconnu"}</p>
            </div>
          </div>
 
          {/* Match Description */}
          <div className="mt-6">
-           <h3 className="text-xl font-bold text-white">About</h3>
+           <h3 className="text-xl font-bold text-white">À propos</h3>
            <p className="text-(--textlight) mt-2">
-             {selectedMatch.tournament?.description || "No additional information provided."}
+             {selectedMatch.tournament?.description || "Aucune information supplémentaire fournie."}
            </p>
          </div>
 
          {/* Rules & Regulations */}
          <div className="mt-6">
-           <h3 className="text-xl font-bold text-white">Rules and Regulations</h3>
+           <h3 className="text-xl font-bold text-white">Règles et règlements</h3>
            <p className="text-(--textlight) mt-2">
-             {selectedMatch.tournament?.rules_and_regulations || "Standard match rules apply. Please follow the game regulations strictly."}
+             {selectedMatch.tournament?.rules_and_regulations || "Les règles de jeu standard s'appliquent. Veuillez respecter scrupuleusement le règlement du jeu."}
            </p>
          </div>
        </div>
      </div>
-            <button className="px-4 py-2 bg-(--accent) text-white rounded mt-4" onClick={() => setShowViewModal(false)}>Close</button>
+            <button className="px-4 py-2 bg-(--accent) text-white rounded mt-4" onClick={() => setShowViewModal(false)}>Fermer</button>
           </div>
         </div>
       )}
@@ -326,21 +326,21 @@ const handleNextPage = () => setCurrentPage((prev) => Math.min(prev + 1, totalPa
       {showDeleteModal && (
         <div className="fixed h-screen w-full inset-0 flex items-center justify-center bg-black/85 z-50 p-5">
           <div className="text-(--textwhite) bg-(--primary) p-6 rounded-lg shadow-lg md:w-[40%] w-full">
-            <h2 className="text-(--textwhite) mb-4">Confirm Delete</h2>
+            <h2 className="text-(--textwhite) mb-4">Confirmer la suppression</h2>
             <p className="text-(--textlight) mb-4">
-              Are you sure you want to delete this match?
+            Êtes-vous sûr de vouloir supprimer ce match ?
             </p>
             <button
               className="px-4 py-2 bg-red-600 text-white rounded mr-4"
               onClick={handleDeleteMatch}
             >
-              Yes, Delete
+              Oui, supprimer
             </button>
             <button
               className="px-4 py-2 bg-gray-500 text-white rounded"
               onClick={() => setShowDeleteModal(false)}
             >
-              Cancel
+              Annuler
             </button>
           </div>
         </div>

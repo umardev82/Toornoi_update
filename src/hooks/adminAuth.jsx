@@ -20,18 +20,18 @@ const useAuth = () => {
 
     // Displaying the toast promise for success and error handling
     return toast.promise(loginPromise, {
-      loading: "Logging in...",
+      loading: "Connexion...",
       success: (data) => {
         console.log("Login successful, response data:", data);
         const token = data.data.token;
         localStorage.removeItem("userToken"); 
         localStorage.setItem("adminToken", token); // Store token
 
-        return "Login Successful!";
+        return "Connexion réussie!";
       },
       error: (err) => {
-        setError(err.response?.data?.detail || "Invalid credentials. Try again.");
-        return err.response?.data?.detail || "Login failed!";
+        setError(err.response?.data?.detail || "Identifiants non valides. Réessayez.");
+        return err.response?.data?.detail || "La connexion a échoué!";
       },
     }).then((result) => {
       // Return the result from the toast promise

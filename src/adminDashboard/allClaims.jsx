@@ -28,7 +28,7 @@ const AllClaims = () => {
   useEffect(() => {
     const userToken = localStorage.getItem("adminToken");
     if (!userToken) {
-      toast.error("User not authenticated");
+      toast.error("Utilisateur non authentifié");
       return;
     }
     fetchClaims(userToken);
@@ -43,7 +43,7 @@ const AllClaims = () => {
       setClaims(response.data);
       setFilteredClaims(response.data);
     } catch (error) {
-      toast.error("Failed to load support tickets");
+      toast.error("Échec du chargement des tickets d'assistance");
     } finally {
       setLoading(false);
     }
@@ -99,15 +99,15 @@ const AllClaims = () => {
       await axios.delete(`${API_BASE_URL}/claims/${selectedClaim.id}/`);
       setClaims(claims.filter((c) => c.id !== selectedClaim.id));
       setFilteredClaims(filteredClaims.filter((c) => c.id !== selectedClaim.id));
-      toast.success("Support ticket deleted successfully!");
+      toast.success("Ticket d'assistance supprimé avec succès !");
     } catch (error) {
-      toast.error("Failed to delete support ticket");
+      toast.error("Échec de la suppression du ticket d'assistance");
     }
   };
 
  
   const updateClaimStatus = async (claimId, status) => {
-    let toastId = toast.loading("Updating claim status...");
+    let toastId = toast.loading("Mise à jour du statut de la réclamation...");
     try {
       const response = await axios.post(
         `${API_BASE_URL}/claims/${claimId}/update-claim-status/`,
@@ -120,7 +120,7 @@ const AllClaims = () => {
       console.log(response.data); // Debugging
   
       // Check message content to determine success or error
-      const message = response.data.message || "Claim status updated!";
+      const message = response.data.message || "Statut de réclamation mis à jour !";
       
       if (message.toLowerCase().includes("success")) {
         toast.success(message,  { id: toastId });
@@ -141,7 +141,7 @@ const AllClaims = () => {
         toast.error(message, { id: toastId });
       }
     } catch (error) {
-      toast.error(error.response?.data?.message || "Failed to update claim status", { id: toastId });
+      toast.error(error.response?.data?.message || "Échec de la mise à jour du statut de la réclamation", { id: toastId });
     }
   };
   
@@ -161,12 +161,12 @@ const AllClaims = () => {
     {/* <Toaster toastOptions={{ duration: 5000 }} /> */}
 
     <div className="text-white">
-      <div className="md:flex justify-end gap-4 mb-4">
+      <div className="flex flex-wrap justify-end gap-2 mb-4">
         <input
           type="text"
           value={searchTerm}
           onChange={handleSearch}
-          placeholder="Search by user, phone, or subject"
+          placeholder="Rechercher par utilisateur, téléphone ou sujet"
           className="md:w-auto w-full border border-(--border) p-2 rounded text-white bg-(--primary)"
         />
         <input
@@ -175,7 +175,7 @@ const AllClaims = () => {
           onChange={handleDateFilter}
           className="md:w-auto w-full border border-(--border) p-2 rounded text-white bg-(--primary)"
         />
-        <button onClick={exportToExcel} className="px-4 py-2 bg-(--accent) text-white rounded">Export to Excel</button>
+        <button onClick={exportToExcel} className="px-4 py-2 bg-(--accent) text-white rounded">Exporter vers Excel</button>
       </div>
       {loading ? (
         <div className="flex justify-center items-center min-h-[200px]">
@@ -186,11 +186,11 @@ const AllClaims = () => {
           <table className="w-full table-auto text-left text-white border-separate border-spacing-y-2 border border-transparent">
             <thead className="bg-(--secondary) p-2 rounded-sm text-white">
               <tr className="rounded-2xl">
-                <th className="p-3 font-medium rounded-l-md whitespace-nowrap w-max">User</th>
-                <th className="p-3 font-medium whitespace-nowrap w-max">Phone</th>
-                <th className="p-3 font-medium whitespace-nowrap w-max">Subject</th>
-                <th className="p-3 font-medium whitespace-nowrap w-max">Details</th>
-                <th className="p-3 font-medium whitespace-nowrap w-max">Status</th>
+                <th className="p-3 font-medium rounded-l-md whitespace-nowrap w-max">Utilisateur</th>
+                <th className="p-3 font-medium whitespace-nowrap w-max">Téléphone</th>
+                <th className="p-3 font-medium whitespace-nowrap w-max">Sujet</th>
+                <th className="p-3 font-medium whitespace-nowrap w-max">Détails</th>
+                <th className="p-3 font-medium whitespace-nowrap w-max">Statut</th>
                 <th className="p-3 font-medium whitespace-nowrap w-max">Date</th>
                 <th className="p-3 font-medium rounded-r-md whitespace-nowrap w-max">Action</th>
               </tr>
@@ -210,8 +210,8 @@ const AllClaims = () => {
                     onChange={(e) => updateClaimStatus(claim.id, e.target.value)}
                    className="bg-(--primary) text-white p-1 rounded"
 >
-  <option value="Pending">Pending</option>
-  <option value="Resolved">Resolved</option>
+  <option value="Pending">En attente</option>
+  <option value="Resolved">Résolu</option>
 </select>
 
                     </td>
@@ -231,8 +231,8 @@ const AllClaims = () => {
                 ))
               ) : (
                 <tr>
-                  <td colSpan="7" className="text-center font-bold text-white p-4">
-                    No support tickets found.
+                  <td colSpan="7" className="text-center font-bold text-white p-4">                    
+Aucun ticket de support trouvé.
                   </td>
                 </tr>
               )}
@@ -245,7 +245,7 @@ const AllClaims = () => {
                 disabled={currentPage === 1}
                 className="py-1 px-3 bg-(--primary) text-white rounded disabled:opacity-50"
               >
-                Previous
+                Précédent
               </button>
               <span className="text-(--accent) font-bold">{currentPage} / {totalPages}</span>
               <button
@@ -253,7 +253,7 @@ const AllClaims = () => {
                 disabled={currentPage === totalPages}
                 className="py-1 px-3 bg-(--primary) text-white rounded disabled:opacity-50"
               >
-                Next
+                Suivant
               </button>
             </div>
           )}
@@ -261,17 +261,17 @@ const AllClaims = () => {
           {showModal && selectedClaim && (
             <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
               <div className="bg-(--primary) p-6 rounded-lg shadow-lg w-1/3">
-                <h2 className="text-xl font-bold mb-4">Support Ticket Details</h2>
-                <p><strong>User:</strong> {selectedClaim.user}</p>
-                <p><strong>Phone:</strong> {selectedClaim.phone_number}</p>
-                <p><strong>Subject:</strong> {selectedClaim.subject}</p>
-                <p><strong>Details:</strong> {selectedClaim.details}</p>
-                <p><strong>Status:</strong> {selectedClaim.status}</p>
+                <h2 className="text-xl font-bold mb-4">Détails du ticket d'assistance</h2>
+                <p><strong>Utilisateur:</strong> {selectedClaim.user}</p>
+                <p><strong>Téléphone:</strong> {selectedClaim.phone_number}</p>
+                <p><strong>Sujet:</strong> {selectedClaim.subject}</p>
+                <p><strong>Détails:</strong> {selectedClaim.details}</p>
+                <p><strong>Statut:</strong> {selectedClaim.claim_status}</p>
                 <p><strong>Date:</strong> {new Date(selectedClaim.created_at).toLocaleString()}</p>
                 <a href={selectedClaim.image} target="_blank" rel="noopener noreferrer">
                   <img src={selectedClaim.image} alt="" className="mt-2 rounded w-full" />
                 </a>
-                <button className="mt-4 px-4 py-2 bg-(--accent) text-white rounded" onClick={closeModal}>Close</button>
+                <button className="mt-4 px-4 py-2 bg-(--accent) text-white rounded" onClick={closeModal}>Fermer</button>
               </div>
             </div>
           )}
@@ -279,11 +279,12 @@ const AllClaims = () => {
           {showConfirmModal && selectedClaim && (
             <div className="fixed inset-0 flex items-center justify-center bg-black/50">
               <div className="bg-(--primary) p-6 rounded-lg shadow-lg w-1/3">
-                <h2 className="text-xl font-bold mb-4">Confirm Delete</h2>
-                <p>Are you sure you want to delete this support ticket?</p>
+                <h2 className="text-xl font-bold mb-4">Confirmer la suppression</h2>
+                <p>Êtes-vous sûr de vouloir supprimer ce ticket d’assistance ?</p>
                 <div className="mt-4 flex justify-end gap-3">
-                  <button className="px-4 py-2 bg-gray-500 text-white rounded" onClick={() => setShowConfirmModal(false)}>Cancel</button>
-                  <button className="px-4 py-2 bg-red-600 text-white rounded" onClick={deleteClaim}>Delete</button>
+                  <button className="px-4 py-2 bg-gray-500 text-white rounded" onClick={() => setShowConfirmModal(false)}>Annuler</button>
+                  <button className="px-4 py-2 bg-red-600 text-white rounded" onClick={deleteClaim}>
+                  Supprimer</button>
                 </div>
               </div>
             </div>

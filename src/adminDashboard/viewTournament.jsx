@@ -72,15 +72,15 @@ const formatDateTime = (dateTimeString) => {
         {tournamentData.start_date && tournamentData.end_date
     ? `${formatDate(tournamentData.start_date)} - ${formatDate(tournamentData.end_date)}`
     : "Not Set"}</p>
-         <p className=" text-(--textlight)"><span className="text-(--textwhite) font-bold">Registration Deadline: </span> 
+         <p className=" text-(--textlight)"><span className="text-(--textwhite) font-bold">Date limite d'inscription: </span> 
          {tournamentData.registration_deadline
     ? formatDateTime(tournamentData.registration_deadline)
     : "Not Set"} </p>
-        <p className="text-(--textlight)"><span className="text-(--textwhite) font-bold">Registration Fee:</span> {tournamentData?.registration_fee} €</p>
+        <p className="text-(--textlight)"><span className="text-(--textwhite) font-bold">Frais d'inscription:</span> {tournamentData?.registration_fee} €</p>
         </div>
         <div className="text-end">
           <button  className="p-2 bg-(--accent) rounded mr-2 text-sm" onClick={() => navigate(`/dashboard/tournaments/${tournamentData?.id}/registered-athletes`)}>
-        View Registered Athletes
+          Voir les athlètes inscrits
       </button>
 
         <button className="p-2 bg-yellow-700 rounded text-sm">{tournamentData?.status}</button>
@@ -98,65 +98,65 @@ const formatDateTime = (dateTimeString) => {
 
       <div className="grid md:grid-cols-2 gap-4  mt-5 bg-(--primary) p-5 rounded">
         <div>
-          <h2 className="font-bold text-(--textwhite)">Category</h2>
+          <h2 className="font-bold text-(--textwhite)">Catégorie</h2>
           <p className="text-(--textlight)">{tournamentData?.category}</p>
         </div>
         <div>
-          <h2 className="font-bold text-(--textwhite)">Eligibility Criteria</h2>
+          <h2 className="font-bold text-(--textwhite)">Critères d'éligibilité</h2>
           <p className="text-(--textlight)">{tournamentData?.eligibility_criteria}</p>
         </div>
         <div>
-          <h2 className="font-bold text-(--textwhite)">Country</h2>
+          <h2 className="font-bold text-(--textwhite)">Pays</h2>
           <p className="text-(--textlight)">{tournamentData?.country}</p>
         </div>
         <div>
-          <h2 className="font-bold text-(--textwhite)">Region</h2>
+          <h2 className="font-bold text-(--textwhite)">Région</h2>
           <p className="text-(--textlight)">{tournamentData?.region}</p>
         </div>
         <div>
-          <h2 className="font-bold text-(--textwhite)">Tournamnet Type</h2>
+          <h2 className="font-bold text-(--textwhite)">Type de tournoi</h2>
           <p className="text-(--textlight)">{tournamentData?.bracket_type}</p>
         </div>
        
       </div>
       <div className="text-(--textwhite) mt-5 bg-(--primary) p-5 rounded ">
-      <h2 className="font-xl font-bold">Rules and Regulations</h2>
+      <h2 className="font-xl font-bold">Règles et règlements</h2>
       <p>{tournamentData?.rules_and_regulations}</p>
       <hr className="my-5  border-(--border)"/>
-      <h2 className="font-xl font-bold">Match Rules</h2>
+      <h2 className="font-xl font-bold">Règles du match</h2>
       <p>{tournamentData?.match_rules}</p>
       <hr className="my-5  border-(--border)"/>
-      <h2 className="font-xl font-bold">Dispute Resolution Process</h2>
+      <h2 className="font-xl font-bold">Processus de résolution des litiges</h2>
       <p>{tournamentData?.dispute_resolution_Process}</p>
       <hr className="my-5  border-(--border)"/>
-      <h2 className="font-xl font-bold">Sponsorship Details</h2>
+      <h2 className="font-xl font-bold">Détails du parrainage</h2>
       <p>{tournamentData?.sponsorship_details}</p>
       <hr className="my-5  border-(--border)"/>
-      <h2 className="font-xl font-bold">Partnership Info</h2>
+      <h2 className="font-xl font-bold">Informations sur le partenariat</h2>
       <p>{tournamentData?.partnership_info}</p>
       <hr className="my-5  border-(--border)"/>
-      <h2 className="font-xl font-bold">Refund Policy</h2>
+      <h2 className="font-xl font-bold">Politique de remboursement</h2>
       <p>{tournamentData?.refund_policy}</p>
       </div>
       <div className="bg-(--primary) p-5 rounded text-(--textwhite) mt-5">
-      <h2 className="lemon-milk-font">Prize Distribution</h2>
+      <h2 className="lemon-milk-font">Distribution des prix</h2>
       <p>{tournamentData?.prize_distribution}</p>
       <hr className="my-5  border-(--border)"/>
-      <h6 className="mt-2">Winner</h6>
+      <h6 className="mt-2 font-bold">Gagnant</h6>
       <p>{tournamentData?.positions_1}€</p>
-      <h6 className="mt-2">Runner Up</h6>
+      <h6 className="mt-2 font-bold">Finaliste</h6>
       <p>{tournamentData?.positions_2}€</p>
      
       </div>
       <div className="grid md:grid-cols-2 gap-2 ">
         <div className="bg-(--primary) p-5 rounded text-(--textwhite) mt-5">
-         <h2 className="lemon-milk-font mb-4">Sponsor Logo</h2>
+         <h2 className="lemon-milk-font mb-4">Logo du sponsor</h2>
          <img src={tournamentData?.sponsor_logos} alt="" className="h-60 w-full rounded object-cover"/>
         </div>
       </div>
      
       <div className="text-(--textwhite) mt-5">
-      <h2 className="lemon-milk-font">Notes:</h2>
+      <h2 className="lemon-milk-font">Remarques :</h2>
       <p className="italic">{tournamentData?.prize_details}</p>      
       </div>
    
@@ -169,14 +169,14 @@ const formatDateTime = (dateTimeString) => {
       rel="noopener noreferrer" 
       className="bg-(--accent) text-white px-5 py-3 rounded"
     >
-      Code of Conduct
+      Code de conduite
     </a>
   ) : (
     <button 
       disabled 
       className="bg-gray-400 px-5 py-3 cursor-not-allowed rounded"
     >
-      Code of Conduct (Unavailable)
+      Code de conduite (indisponible)
     </button>
   )}
 </div>

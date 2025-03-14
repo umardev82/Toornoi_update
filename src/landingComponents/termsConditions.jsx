@@ -9,8 +9,8 @@ const TermsConditions = () => {
 								<div className=" my-auto">
 									<div className="landing-content">
 										
-											<h1 className="text-white sm:text-4xl text-3xl sm:text-left text-center lemon-milk-font font-semibold lemon-milk-font mb-5">Terms and Conditions of Use</h1>
-									    <h6 className='text-white  sm:text-left text-center lemon-milk-font font-semibold lemon-milk-font'>Terms and Conditions of Use for Toornoi</h6>
+											<h1 className="text-white sm:text-4xl text-3xl sm:text-left text-center lemon-milk-font font-semibold lemon-milk-font mb-5">Conditions générales d'utilisation</h1>
+									    <h6 className='text-white  sm:text-left text-center lemon-milk-font font-semibold lemon-milk-font'>Conditions générales d'utilisation de Toornoi</h6>
 									</div>
 								</div>
 							</div>
@@ -19,75 +19,68 @@ const TermsConditions = () => {
     <div className='bg-(--secondarybg)  text-(--textwhite) '>
       <div className='bg-black container md:p-8 md:w-[80%] w-full p-5 mx-auto'>
 
-    <h1 className=' font-semibold  mb-5'>Welcome to Toornoi! By accessing or using our platform, you agree to these Terms and
-    Conditions. Please read them carefully.</h1>
+    <h1 className=' font-semibold  mb-5'>Bienvenue sur Toornoi ! En accédant à notre plateforme ou en l'utilisant, vous acceptez les présentes Conditions générales. Veuillez les lire attentivement.</h1>
 
-    <h2 className=' font-semibold lemon-milk-font my-5'>1. Acceptance of Terms</h2>
-    <p >By registering, accessing, or using Toornoi, you acknowledge that you have read, understood,
-    and agreed to these terms. If you do not agree, please do not use the platform.</p>
+    <h2 className=' font-semibold lemon-milk-font my-5'>1. Acceptation des conditions</h2>
+    <p >En vous inscrivant, en accédant à ou en utilisant Toornoi, vous reconnaissez avoir lu, compris et accepté les présentes conditions. En cas de désaccord, veuillez ne pas utiliser la plateforme.</p>
 
-    <h2 className=' font-semibold lemon-milk-font my-5'>2. Eligibility</h2>
+    <h2 className=' font-semibold lemon-milk-font my-5'>2. Admissibilité</h2>
     
     <ul>
-        <li>- You must be at least 13 years old (or the legal age in your jurisdiction) to use Toornoi.</li>
-        <li>- If you are under 18, you must have parental or legal guardian consent.</li>
-        <li>- You are responsible for ensuring that your participation in any tournament complies with
-        local laws and regulations.</li>
+        <li>- Vous devez avoir au moins 13 ans (ou l'âge légal dans votre juridiction) pour utiliser Toornoi.</li>
+        <li>- Si vous avez moins de 18 ans, vous devez avoir le consentement de vos parents ou de votre tuteur légal.</li>
+        <li>- Vous êtes responsable de vous assurer que votre participation à tout tournoi est conforme aux lois et réglementations locales.</li>
     </ul>
 
-    <h2 className='font-semibold lemon-milk-font my-5'>3. Account Registration & Security</h2>
+    <h2 className='font-semibold lemon-milk-font my-5'>3. Enregistrement du compte et sécurité</h2>
 
     <ul>
-        <li>- You must provide accurate information when creating an account.</li>
-        <li>- You are responsible for maintaining the confidentiality of your login credentials.</li>
-        <li>- Any unauthorized use of your account should be reported immediately.</li>
-    </ul>
-
-
-    <h2 className=' font-semibold lemon-milk-font my-5'>4. Tournament Participation</h2>
-    <ul>
-        <li>- Players must adhere to the rules of each tournament.</li>
-        <li>- Cheating, match-fixing, or any unfair play will result in disqualification and potential account suspension.</li>
-        <li>- Toornoi reserves the right to modify or cancel tournaments at any time.</li>
+        <li>- Vous devez fournir des informations exactes lors de la création d'un compte.</li>
+        <li>- Vous êtes responsable du maintien de la confidentialité de vos identifiants de connexion.</li>
+        <li>- Toute utilisation non autorisée de votre compte doit être signalée immédiatement.</li>
     </ul>
 
 
-    <h2 className=' font-semibold lemon-milk-font my-5'>5. Code of Conduct</h2>
+    <h2 className=' font-semibold lemon-milk-font my-5'>4. Participation au tournoi</h2>
     <ul>
-        <li>- Respectful behavior is required; harassment, hate speech, or abuse will not be tolerated.</li>
-        <li>- Players must comply with the platform's fair play policies and game-specific rules.</li>
-        <li>- Any violations may result in warnings, bans, or legal action.</li>
-    </ul>
-    <h2 className=' font-semibold lemon-milk-font my-5'>6. Prizes & Rewards</h2>
-    <ul>
-        <li>- Prizes are awarded according to the specific tournament rules.</li>
-        <li>- Toornoi reserves the right to verify player eligibility before distributing prizes.</li>
-        <li>- Any fraudulent activity will lead to forfeiture of prizes and possible legal consequences.</li>
-    </ul>
-    <h2 className=' font-semibold lemon-milk-font my-5'>7. Intellectual Property</h2>
-    <ul>
-        <li>- All content, trademarks, and materials on Toornoi belong to the platform or its licensors.</li>
-        <li>- Users may not copy, distribute, or use any content without permission.</li>
-    </ul>
-    <h2 className=' font-semibold lemon-milk-font my-5'>8. Limitation of Liability</h2>
-    <ul>
-        <li>- Toornoi is not responsible for any technical issues, connectivity problems, or game
-        malfunctions.</li>
-        <li>- We are not liable for any financial loss, damages, or disputes arising from tournament
-        participation.</li>
+        <li>- Les joueurs doivent respecter les règles de chaque tournoi.</li>
+        <li>- La tricherie, le trucage de match ou tout jeu déloyal entraîneront une disqualification et une suspension potentielle du compte.</li>
+        <li>- Toornoi se réserve le droit de modifier ou d'annuler les tournois à tout moment.</li>
     </ul>
 
-    <h2 className=' font-semibold lemon-milk-font my-5'>9. Modifications to Terms</h2>
+
+    <h2 className=' font-semibold lemon-milk-font my-5'>5. Code de conduite</h2>
     <ul>
-        <li>- Toornoi reserves the right to update these Terms at any time.</li>
-        <li>- Continued use of the platform after updates constitutes acceptance of the new Terms.</li>
+        <li>- Un comportement respectueux est requis ; le harcèlement, les discours de haine ou les abus ne seront pas tolérés.</li>
+        <li>- Les joueurs doivent se conformer aux politiques de fair-play de la plateforme et aux règles spécifiques au jeu.</li>
+        <li>- Toute violation peut entraîner des avertissements, des interdictions ou des poursuites judiciaires.</li>
     </ul>
-    <h2 className=' font-semibold lemon-milk-font my-5'>10. Contact Information</h2>
+    <h2 className=' font-semibold lemon-milk-font my-5'>6. Prix et récompenses</h2>
+    <ul>
+        <li>- Les prix sont attribués selon les règles spécifiques du tournoi.</li>
+        <li>- Toornoi se réserve le droit de vérifier l'éligibilité des joueurs avant de distribuer les prix.</li>
+        <li>- Toute activité frauduleuse entraînera la confiscation des prix et d'éventuelles conséquences juridiques.</li>
+    </ul>
+    <h2 className=' font-semibold lemon-milk-font my-5'>7. Propriété intellectuelle</h2>
+    <ul>
+        <li>- Tout le contenu, les marques déposées et les éléments de Toornoi appartiennent à la plateforme ou à ses concédants de licence.</li>
+        <li>- Les utilisateurs ne peuvent pas copier, distribuer ou utiliser aucun contenu sans autorisation.</li>
+    </ul>
+    <h2 className=' font-semibold lemon-milk-font my-5'>8. Limitation de responsabilité</h2>
+    <ul>
+        <li>- Toornoi n'est pas responsable des problèmes techniques, des problèmes de connectivité ou des dysfonctionnements du jeu.</li>
+        <li>- Nous ne sommes pas responsables des pertes financières, dommages ou litiges découlant de la participation au tournoi.</li>
+    </ul>
+
+    <h2 className=' font-semibold lemon-milk-font my-5'>9. Modifications des conditions</h2>
+    <ul>
+        <li>- Toornoi se réserve le droit de mettre à jour ces Conditions à tout moment.</li>
+        <li>- L'utilisation continue de la plateforme après les mises à jour constitue l'acceptation des nouvelles Conditions.</li>
+    </ul>
+    <h2 className=' font-semibold lemon-milk-font my-5'>10. Coordonnées</h2>
     
-        <p>For any questions or concerns regarding these Terms, contact us at: 📧 contact@toornoi.com📍 7
-        rue Anatole de La Forge 75017 Paris</p>
-        <p>By using Toornoi, you agree to abide by these Terms and Conditions. Enjoy the competition and
-        good luck!</p>
+        <p>Pour toute question ou préoccupation concernant ces Conditions, contactez-nous à : 📧 contact@toornoi.com📍 7 rue Anatole de La Forge 75017 Paris</p>
+        <p>En utilisant Toornoi, vous acceptez les présentes Conditions générales. Bon concours et bonne chance !</p>
     
    
     </div>

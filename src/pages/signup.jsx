@@ -33,7 +33,7 @@ const Signup = () => {
     
     // Check if all fields are filled
     if (!formData.username || !formData.email || !formData.password || !formData.confirm_password || !formData.date_of_birth || !formData.phone_number) {
-      setLocalError("Please fill in all fields.");
+      setLocalError("Veuillez remplir tous les champs.");
       return;
     }
 
@@ -55,52 +55,52 @@ const Signup = () => {
           </Link>
           <div className="p-4 sm:p-7">
             <div className="text-center">
-              <h1 className="block text-2xl font-bold text-white">Sign Up</h1>
-              <p className="text-(--textlight)">Create your account</p>
+              <h1 className="block text-2xl font-bold text-white">Inscription</h1>
+              <p className="text-(--textlight)">Créer votre compte</p>
             </div>
             <div className="mt-5">
               <form onSubmit={handleSignup} className="space-y-3">
-              <label htmlFor="username" className="block text-sm mb-2 text-(--textlight)">Username</label>                  
+              <label htmlFor="username" className="block text-sm mb-2 text-(--textlight)">Pseudo FIFA</label>                  
                       <input
                         type="text"
                         name="username"
-                        placeholder="Username"
+                        placeholder="Pseudo FIFA"
                         className="py-2 px-3 bg-(--secondarybg)  rounded-sm text-sm text-(--textlight) w-full"
                         value={formData.username}
                         onChange={handleChange}
                         required
                       />
-                     <label htmlFor="email" className="block text-sm mb-2 text-(--textlight)">Email</label>  
+                     <label htmlFor="email" className="block text-sm mb-2 text-(--textlight)">E-mail</label>  
                       <input
                         type="email"
                         name="email"
-                        placeholder="Email"
+                        placeholder="E-mail"
                         className="py-2 px-3 bg-(--secondarybg) w-full rounded-sm text-sm text-(--textlight)"
                         value={formData.email}
                         onChange={handleChange}
                         required
                       />
-                      <label htmlFor="password" className="block text-sm mb-2 text-(--textlight)">Password</label>  
+                      <label htmlFor="password" className="block text-sm mb-2 text-(--textlight)">Mot de passe</label>  
                       <input
                         type="password"
                         name="password"
-                        placeholder="Password"
+                        placeholder="Mot de passe"
                         className="py-2 px-3 bg-(--secondarybg) w-full rounded-sm text-sm text-(--textlight)"
                         value={formData.password}
                         onChange={handleChange}
                         required
                       />
-                       <label htmlFor="confirm-password" className="block text-sm mb-2 text-(--textlight)">Confirm Password</label>  
+                       <label htmlFor="confirm-password" className="block text-sm mb-2 text-(--textlight)">Confirmer le mot de passe</label>  
                       <input
                         type="password"
                         name="confirm_password"
-                        placeholder="Confirm Password"
+                        placeholder="Confirmer le mot de passe"
                         className="py-2 px-3 bg-(--secondarybg) w-full rounded-sm text-sm text-(--textlight)"
                         value={formData.confirm_password}
                         onChange={handleChange}
                         required
                       />
-                        <label htmlFor="date_of_birth" className="block text-sm mb-2 text-(--textlight)">Date Of Birth</label> 
+                        <label htmlFor="date_of_birth" className="block text-sm mb-2 text-(--textlight)">Date de naissance</label> 
                       <input
                         type="date"
                         name="date_of_birth"
@@ -109,11 +109,11 @@ const Signup = () => {
                         onChange={handleChange}
                         required
                       />
-                         <label htmlFor="phone_number" className="block text-sm mb-2 text-(--textlight)">Phone Number</label> 
+                         <label htmlFor="phone_number" className="block text-sm mb-2 text-(--textlight)">Numéro de téléphone</label> 
                       <input
-                        type="text"
+                        type="number"
                         name="phone_number"
-                        placeholder="Phone Number"
+                        placeholder="Numéro de téléphone"
                         className="py-2 px-3 bg-(--secondarybg) w-full rounded-sm text-sm text-(--textlight)"
                         value={formData.phone_number}
                         onChange={handleChange}
@@ -134,7 +134,7 @@ const Signup = () => {
                 <button type="submit"
                   className="py-2 px-3 bg-(--accent) text-white w-full rounded-sm text-sm hover:bg-transparent border-(--accent) border transition-all flex items-center justify-center"
                   disabled={loading}>
-                  {loading ? "Signing up..." : "Sign Up"}
+                  {loading ? "Inscription..." : "Inscription"}
                 </button>
               </form>
               {localError && <p className="text-red-500 text-sm mt-2">{localError}</p>}
@@ -145,8 +145,8 @@ const Signup = () => {
               </button> */}
 
               <p className="mt-3 text-sm text-center text-(--textlight)">
-                Already have an account?
-                <Link to="/login" className="text-white font-medium ml-1">Login here</Link>
+              Vous avez déjà un compte ?
+                <Link to="/login" className="text-white font-medium ml-1">Connectez-vous ici</Link>
               </p>
             </div>
           </div>

@@ -26,7 +26,7 @@ const Chat = () => {
     try {
       const token = localStorage.getItem("userToken");
       if (!token) {
-        toast.error("No authentication token found!");
+        toast.error("Aucun jeton d'authentification trouvé !");
         return;
       }
       const response = await axios.get(`${API_BASE_URL}/user/matches/${id}/`, {
@@ -38,9 +38,9 @@ const Chat = () => {
       setMatch(response.data);
       setLoading(false);
     } catch (error) {
-      console.error("Error fetching match details:", error.response?.data || error.message);
+      console.error("Erreur lors de la récupération des détails du match :", error.response?.data || error.message);
       setLoading(false);
-      toast.error(error.response?.data?.message || "Failed to fetch match details.");
+      toast.error(error.response?.data?.message || "Échec de la récupération des détails du match.");
     }
   };
 
@@ -48,7 +48,7 @@ const Chat = () => {
     try {
       const token = localStorage.getItem("userToken");
       if (!token) {
-        setErrorMessage("You need to be logged in to view the chat.");
+        setErrorMessage("Vous devez être connecté pour voir le chat.");
         return;
       }
       const response = await axios.get(`${API_BASE_URL}/loge/user/profile/`, {
@@ -57,7 +57,7 @@ const Chat = () => {
       setCurrentUser(response.data.username);
       fetchMessages();
     } catch (error) {
-      setErrorMessage(error.response?.data?.detail || "Failed to load user profile.");
+      setErrorMessage(error.response?.data?.detail || "Échec du chargement du profil utilisateur.");
     }
   };
 
@@ -82,7 +82,7 @@ const Chat = () => {
     try {
       const token = localStorage.getItem("userToken");
       if (!token) {
-        setErrorMessage("You need to be logged in to send messages.");
+        setErrorMessage("Vous devez être connecté pour envoyer des messages.");
         return;
       }
       const response = await axios.post(
@@ -96,7 +96,7 @@ const Chat = () => {
       setNewMessage("");
       scrollToBottom();
     } catch (error) {
-      setErrorMessage(error.response?.data?.detail || "Failed to send message.");
+      setErrorMessage(error.response?.data?.detail || "Échec de l'envoi du message.");
     }
   };
 
@@ -122,7 +122,7 @@ const Chat = () => {
       ) : (
         <div className="bg-(--primary) md:p-8 p-3 rounded-lg">
          {!match ? (
-  <p>Loading match details...</p>
+  <p>Chargement des détails du match...</p>
 ) : (
  
      <div className="flex justify-center gap-3 items-center md:pb-5 pb-3">
@@ -143,9 +143,9 @@ const Chat = () => {
 
           <div className="border border-gray-700 rounded-lg p-4 h-64 overflow-y-auto bg-black">
             {loading ? (
-              <p>Loading messages...</p>
+              <p>Chargement des messages...</p>
             ) : messages.length === 0 ? (
-              <p>No messages yet.</p>
+              <p>Aucun message pour l'instant.</p>
             ) : (
               messages.map((msg, index) => (
                 <div
@@ -181,13 +181,13 @@ const Chat = () => {
               onChange={(e) => setNewMessage(e.target.value)}
               onKeyDown={handleKeyDown}
               className="flex-1 bg-gray-700 text-white p-2 rounded"
-              placeholder="Type a message..."
+              placeholder="Tapez un message..."
             />
             <button
               onClick={handleSendMessage}
               className="bg-(--accent) px-4 py-2 rounded text-white"
             >
-              Send
+              Envoyer
             </button>
           </div>
         </div>

@@ -53,11 +53,11 @@ const EditAthlete = () => {
 
     try {
       await axios.put(API_URL, formData);
-      toast.success("Athlete updated successfully!");
+      toast.success("L'athlète a été mis à jour avec succès !");
     } catch (error) {
       const errorMsg =
         error.response?.data?.message ||
-        "Failed to update athlete. Please check the details.";
+        "Échec de la mise à jour de l'athlète. Veuillez vérifier les détails.";
       toast.error(errorMsg);
     } finally {
       setLoading(false);
@@ -68,13 +68,13 @@ const EditAthlete = () => {
     <>
       {/* <Toaster toastOptions={{ duration: 5000 }} /> */}
       <div>
-      <h1 className="lemon-milk-font text-(--textwhite) mb-4">Edit Athlete</h1>
+      <h1 className="lemon-milk-font text-(--textwhite) mb-4">Modifier l'athlète</h1>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-7 bg-(--primary) md:p-7 p-4 rounded-md border border-(--border)">
             {/* Username */}
             <div className="md:flex flex-row justify-between text-nowrap">
               <label className="flex items-center gap-x-2 md:mb-0 mb-2 text-(--textwhite) min-w-3xs">
-                <FaUserCheck /> Username
+                <FaUserCheck /> Nom d'utilisateur
               </label>
               <input
                 type="text"
@@ -90,7 +90,7 @@ const EditAthlete = () => {
             {/* First Name */}
             <div className="md:flex flex-row justify-between text-nowrap">
               <label className="flex items-center gap-x-2 md:mb-0 mb-2 text-(--textwhite) min-w-3xs">
-                <FaUserGear /> First Name
+                <FaUserGear /> Prénom
               </label>
               <input
                 type="text"
@@ -106,7 +106,7 @@ const EditAthlete = () => {
             {/* Last Name */}
             <div className="md:flex flex-row justify-between text-nowrap">
               <label className="flex items-center gap-x-2 md:mb-0 mb-2 text-(--textwhite) min-w-3xs">
-                <FaUserGear /> Last Name
+                <FaUserGear /> Nom de famille
               </label>
               <input
                 type="text"
@@ -122,7 +122,7 @@ const EditAthlete = () => {
             {/* Email */}
             <div className="md:flex flex-row justify-between text-nowrap">
               <label className="flex items-center gap-x-2 md:mb-0 mb-2 text-(--textwhite) min-w-3xs">
-                <MdEmail /> Email
+                <MdEmail /> E-mail
               </label>
               <input
                 type="email"
@@ -138,7 +138,7 @@ const EditAthlete = () => {
             {/* Password */}
             <div className="md:flex flex-row justify-between text-nowrap">
               <label className="flex items-center gap-x-2 md:mb-0 mb-2 text-(--textwhite) min-w-3xs">
-                <RiLockPasswordFill /> Password
+                <RiLockPasswordFill /> Mot de passe
               </label>
               <input
                 type="password"
@@ -152,7 +152,7 @@ const EditAthlete = () => {
             {/* Date of Birth */}
             <div className="md:flex flex-row justify-between text-nowrap">
               <label className="flex items-center gap-x-2 md:mb-0 mb-2 text-(--textwhite) min-w-3xs">
-                <MdDateRange /> Date of Birth
+                <MdDateRange /> Date de naissance
               </label>
               <input
                 type="date"
@@ -168,7 +168,7 @@ const EditAthlete = () => {
             {/* Phone Number */}
             <div className="md:flex flex-row justify-between text-nowrap">
               <label className="flex items-center gap-x-2 md:mb-0 mb-2 text-(--textwhite) min-w-3xs">
-                <FaPhoneSquareAlt /> Phone Number
+                <FaPhoneSquareAlt /> Numéro de téléphone
               </label>
               <input
                 type="text"
@@ -184,7 +184,7 @@ const EditAthlete = () => {
             {/* Verified Dropdown */}
             <div className="md:flex flex-row justify-between text-nowrap">
               <label className="flex items-center gap-x-2 md:mb-0 mb-2 text-(--textwhite) min-w-3xs">
-                 Verified
+              Vérifié
               </label>
               <select
                 name="is_verified"
@@ -192,8 +192,8 @@ const EditAthlete = () => {
                 onChange={handleChange}
                 className="w-full bg-(--secondary) text-white p-3 rounded-md"
               >
-                <option value="true">Yes</option>
-                <option value="false">No</option>
+                <option value="true">Oui</option>
+                <option value="false">Non</option>
               </select>
             </div>
             <hr className="border-(--border)" />
@@ -201,7 +201,7 @@ const EditAthlete = () => {
             {/* Active Dropdown */}
             <div className="md:flex flex-row justify-between text-nowrap">
               <label className="flex items-center gap-x-2 md:mb-0 mb-2 text-(--textwhite) min-w-3xs">
-                Active
+              Actif
               </label>
               <select
                 name="is_active"
@@ -209,8 +209,8 @@ const EditAthlete = () => {
                 onChange={handleChange}
                 className="w-full bg-(--secondary) text-white p-3 rounded-md"
               >
-                <option value="true">Yes</option>
-                <option value="false">No</option>
+                <option value="true">Oui</option>
+                <option value="false">Non</option>
               </select>
             </div>
             <hr className="border-(--border)" />
@@ -222,7 +222,7 @@ const EditAthlete = () => {
             className="bg-(--accent) text-white px-4 py-2 rounded-md"
             disabled={loading}
           >
-            {loading ? "Updating..." : "Update Athlete"}
+            {loading ? "Mise à jour..." : "Mise à jour de l'athlète"}
           </button>
         </form>
       </div>

@@ -40,7 +40,7 @@ const Profile = () => {
           <p className="text-gray-400">{profile.email}</p></div>
           <div className="md:pt-0 pt-11">
           <Link to="/dashboard/settings" className="md:mt-3 px-4 py-2 bg-(--accent) text-(--textwhite) rounded-md">
-            Edit Profile
+          Modifier le profil
           </Link>
           </div>
           </div>
@@ -48,26 +48,26 @@ const Profile = () => {
 
         {/* Details Section */}
         <div className="mt-6 ">
-          <h3 className="text-lg flex items-center border-b border-(--border) pb-4 gap-2 text-(--textwhite)"><FaUser /><span>Personal Details</span></h3>
+          <h3 className="text-lg flex items-center border-b border-(--border) pb-4 gap-2 text-(--textwhite)"><FaUser /><span>Détails personnels</span></h3>
           <div className="mt-4 grid grid-cols-2 gap-3 space-y-3">
             <div className="flex flex-col gap-0 text-(--textwhite)">
-              <p className="font-bold">Full Name:</p>
+              <p className="font-bold">Nom et prénom:</p>
               <p className="text-(--textlight)">{profile.first_name} {profile.last_name}</p>
             </div>
             <div className="flex flex-col gap-0 text-(--textwhite)">
-              <p className="font-bold">Email:</p>
+              <p className="font-bold">E-mail:</p>
               <p className="text-(--textlight)">{profile.email}</p>
             </div>
             <div className="flex flex-col gap-0 text-(--textwhite)">
-              <p className="font-bold">Date of Birth:</p>
+              <p className="font-bold">Date de naissance:</p>
               <p className="text-(--textlight)">{profile.date_of_birth}</p>
             </div>
             <div className="flex flex-col gap-0 text-(--textwhite)">
-              <p className="font-bold">Phone:</p>
+              <p className="font-bold">Téléphone:</p>
               <p className="text-(--textlight)">{profile.phone_number}</p>
             </div>
             <div className="flex flex-col gap-0 text-(--textwhite)">
-              <p className="font-bold">Location:</p>
+              <p className="font-bold">Emplacement:</p>
               <p className="text-(--textlight)">{profile.location || "Not provided"}</p>
             </div>
             

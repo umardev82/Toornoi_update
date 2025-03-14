@@ -70,26 +70,7 @@ const RegisteredAthletes = () => {
     // Generate Excel file and trigger download
     XLSX.writeFile(workbook, "registered_athletes_list.xlsx");
   };
-  const handleStatusChange = async (id, newStatus) => {
-    setLoadingId(id);
-    const updateToast = toast.loading("Updating status...");
 
-    try {
-      await axios.patch(`${API_URL}${id}/`, { payment_status: newStatus });
-
-      setFilteredRegistrations((prev) =>
-        prev.map((item) =>
-          item.id === id ? { ...item, payment_status: newStatus } : item
-        )
-      );
-
-      toast.success("Payment status updated!", { id: updateToast });
-    } catch (error) {
-      toast.error("Failed to update status.", { id: updateToast });
-    } finally {
-      setLoadingId(null);
-    }
-  };
 
   return (
     <>
@@ -104,7 +85,7 @@ const RegisteredAthletes = () => {
     onChange={handleTournamentFilter}
     className="md:w-auto w-full border border-(--border) p-2 rounded text-white bg-(--primary)"
   >
-    <option value="">All Tournaments</option>
+    <option value="">Tous les tournois</option>
     {tournaments.map((tournament) => (
       <option key={tournament.id} value={tournament.tournament_name}>
         {tournament.tournament_name}
@@ -115,8 +96,8 @@ const RegisteredAthletes = () => {
 <button 
         onClick={exportToExcel} 
         className="mb-4 px-4 py-2 bg-(--accent) text-white rounded"
-      >
-        Export to Excel
+      >        
+Exporter vers Excel
       </button>
       </div>
      
@@ -130,18 +111,18 @@ const RegisteredAthletes = () => {
           <table className="w-full table-auto text-left text-white border-separate border-spacing-y-2 border border-transparent">
             <thead className="bg-(--secondary) p-2 rounded-sm text-white">
               <tr className="rounded-2xl">
-                <th className="p-3 font-medium rounded-l-md whitespace-nowrap w-max">Username</th>
-                <th className="p-3 font-medium whitespace-nowrap w-max">Tournament</th>
-                <th className="p-3 font-medium whitespace-nowrap w-max">Registered At</th>
-                <th className="p-3 font-medium whitespace-nowrap w-max">Payment Status</th>                
-              <th className="p-3 font-medium whitespace-nowrap w-max rounded-r-md">Amount</th>
+                <th className="p-3 font-medium rounded-l-md whitespace-nowrap w-max">Nom d'utilisateur</th>
+                <th className="p-3 font-medium whitespace-nowrap w-max">Tournoi</th>
+                <th className="p-3 font-medium whitespace-nowrap w-max">Enregistré à</th>
+                <th className="p-3 font-medium whitespace-nowrap w-max">Statut de paiement</th>                
+              <th className="p-3 font-medium whitespace-nowrap w-max rounded-r-md">Montant</th>
               </tr>
             </thead>
             <tbody>
               {paginatedRegistrations.length === 0 ? (
                 <tr>
                   <td colSpan="4" className="text-center font-bold text-white p-4">
-                    No registrations found.
+                  Aucune inscription trouvée.
                   </td>
                 </tr>
               ) : (
@@ -170,7 +151,7 @@ const RegisteredAthletes = () => {
        disabled={currentPage === 1}
        className="py-1 px-3 bg-(--primary) text-white rounded disabled:opacity-50"
      >
-       Previous
+       Précédent
      </button>
      <span className="text-(--accent) font-bold">{currentPage} / {totalPages}</span>
      <button
@@ -178,7 +159,7 @@ const RegisteredAthletes = () => {
        disabled={currentPage === totalPages}
        className="py-1 px-3 bg-(--primary) text-white rounded disabled:opacity-50"
      >
-       Next
+       Suivant
      </button>
    </div>
 )}

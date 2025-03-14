@@ -16,7 +16,7 @@ const ClaimPage = () => {
     const userToken = localStorage.getItem("userToken");
 
     if (!userToken) {
-      toast.error("User not authenticated");
+      toast.error("Utilisateur non authentifié");
       return;
     }
 
@@ -34,7 +34,7 @@ const ClaimPage = () => {
       })
       .catch((error) => {
         console.error("Error fetching user phone number:", error);
-        toast.error("Failed to load user data");
+        toast.error("Échec du chargement des données utilisateur");
       });
   }, []);
 
@@ -51,7 +51,7 @@ const ClaimPage = () => {
     const userToken = localStorage.getItem("userToken");
 
     if (!userToken) {
-      toast.error("User not authenticated");
+      toast.error("Utilisateur non authentifié");
       return;
     }
 
@@ -74,12 +74,12 @@ const ClaimPage = () => {
     });
 
     toast.promise(claimPromise, {
-      loading: "Submitting your support ticket...",
+      loading: "Soumission de votre ticket de support...",
       success: (response) => {
         setFormData({ phone_number: formData.phone_number, subject: "", details: "", image: null }); // Reset form except phone number
-        return response.data.message || " Support Ticket submitted successfully!";
+        return response.data.message || " Ticket d'assistance soumis avec succès !";
       },
-      error: (error) => error.response?.data?.message || "Failed to submit support ticket",
+      error: (error) => error.response?.data?.message || "Échec de l'envoi du ticket d'assistance",
     }).finally(() => setLoading(false));
   };
 
@@ -87,7 +87,7 @@ const ClaimPage = () => {
     <>
       {/* <Toaster toastOptions={{ duration: 5000 }} /> */}
       <div className="max-w-md mx-auto mt-10 p-6 bg-(--primary) text-(--textwhite) shadow-md rounded-lg">
-        <h2 className="text-xl font-semibold mb-4">Submit a Support Ticket</h2>
+        <h2 className="text-xl font-semibold mb-4">Soumettre un ticket d'assistance</h2>
         <form onSubmit={handleSubmit}>
           <input type="hidden" name="phone_number" value={formData.phone_number} />
 
@@ -95,7 +95,7 @@ const ClaimPage = () => {
             <input
               type="text"
               name="subject"
-              placeholder="Subject"
+              placeholder="Sujet"
               value={formData.subject}
               onChange={handleChange}
               required
@@ -106,7 +106,7 @@ const ClaimPage = () => {
           <div className="mb-4">
             <textarea
               name="details"
-              placeholder="Details"
+              placeholder="Détails"
               value={formData.details}
               onChange={handleChange}
               required
@@ -129,7 +129,7 @@ const ClaimPage = () => {
             disabled={loading}
             className="bg-(--accent) text-white px-4 py-2 rounded"
           >
-            {loading ? "Submitting..." : "Submit Support Ticket"}
+            {loading ? "Soumission..." : "Soumettre un ticket d'assistance"}
           </button>
         </form>
       </div>

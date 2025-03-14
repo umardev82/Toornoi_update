@@ -17,7 +17,7 @@ export const useTournament = () => {
       setError(null);
     } catch (err) {
       setError(err.message);
-      toast.error("Failed to fetch tournaments", { duration: 5000 });
+      toast.error("Échec de la récupération des tournois", { duration: 5000 });
     } finally {
       setLoading(false);
     }
@@ -30,7 +30,7 @@ export const useTournament = () => {
       const response = await axios.get(`${API_BASE_URL}/tournaments/${id}/`);
       return response.data;
     } catch (err) {
-      toast.error("Failed to fetch tournament", { duration: 5000 });
+      toast.error("Échec de la récupération du tournoi", { duration: 5000 });
       throw err;
     } finally {
       setLoading(false);
@@ -42,12 +42,12 @@ export const useTournament = () => {
     if (err.response?.data) {
       const errorData = err.response.data;
       const errors = Object.entries(errorData).map(([key, value]) => `${key}: ${value[0]}`);
-      const firstErrorMessage = errors[0] || "An error occurred";
+      const firstErrorMessage = errors[0] || "Une erreur s'est produite";
   
       toast.error(firstErrorMessage, { duration: 5000 });
       return firstErrorMessage;
     }
-    return "An error occurred";
+    return "Une erreur s'est produite";
   };
   
   // Add tournament
@@ -61,7 +61,7 @@ export const useTournament = () => {
       });
 
       setTournaments((prev) => [...prev, response.data]);
-      toast.success("Tournament added successfully!", { duration: 5000 });
+      toast.success("Tournoi ajouté avec succès !", { duration: 5000 });
     } catch (err) {
       setError(handleErrorResponse(err));
     } finally {
@@ -83,7 +83,7 @@ export const useTournament = () => {
         prev.map((tournament) => (tournament.id === id ? response.data : tournament))
       );
 
-      toast.success("Tournament updated successfully!", { duration: 5000 });
+      toast.success("Tournoi mis à jour avec succès !", { duration: 5000 });
     } catch (err) {
       setError(handleErrorResponse(err));
     } finally {

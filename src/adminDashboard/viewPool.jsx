@@ -41,10 +41,10 @@ const PoolDetails = () => {
   const handleFinalizeMatches = async () => {
     try {
       const response = await axios.post(`${API_BASE_URL}/pools/${poolId}/finalize-matches/`);
-      setPopupMessage(response.data.message || "Matches finalized successfully.");
+      setPopupMessage(response.data.message || "Matchs terminés avec succès.");
       setShowPopup(true);
     } catch (error) {
-      setPopupMessage(error.response?.data?.error || "An error occurred while finalizing matches.");
+      setPopupMessage(error.response?.data?.error || "Une erreur s'est produite lors de la finalisation des matchs.");
       setShowPopup(true);
     }
   };
@@ -54,13 +54,14 @@ const PoolDetails = () => {
   }
 
   if (!pool) {
-    return <div className="text-center text-white p-4">Pool not found.</div>;
+    return <div className="text-center text-white p-4">
+Piscine introuvable.</div>;
   }
 
   return (
     <>
       <div className="flex justify-between items-center mb-5">
-        <h2 className="text-2xl font-bold  text-white">Pool Details</h2>
+        <h2 className="text-2xl font-bold  text-white">Détails de la piscine</h2>
       
         <button
           type="submit"
@@ -68,23 +69,23 @@ const PoolDetails = () => {
           className="bg-(--accent) text-white py-2 px-5 rounded"
           onClick={handleFinalizeMatches}
         >
-          {loading ? "Finalizing..." : " Finalize Matches"}
+          {loading ? "Finalisation..." : " Finaliser les matchs"}
         </button>
       </div>
       <div className="bg-[url('/src/assets/images/header-1.png')] bg-center bg-cover bg-no-repeat rounded-lg md:p-10 px-3 py-6 text-center">
         <div className="bg-white text-black py-2 w-fit mx-auto px-6 rounded-md mb-5">
-          <h1 className=""><strong> Pool No:</strong> {pool.pool_number}</h1>
+          <h1 className=""><strong> Numéro de piscine :</strong> {pool.pool_number}</h1>
           <h1 className="font-bold"></h1>
-          <h1><strong>Total Players:</strong> {pool.total_participants}</h1>
+          <h1><strong>Nombre total de joueurs :</strong> {pool.total_participants}</h1>
         </div>
         <h1 className="text-white font-bold text-xl mb-3 flex items-center justify-center gap-3">
           <FaTrophy className="text-yellow-600" />{pool.tournament}
         </h1>
         <h1 className="font-bold text-white">
           <span className="w-fit bg-black/80 text-white text-xs font-medium px-3 py-1 rounded-lg">
-            📅 {pool.start_date ? `${formatDateTime(pool.start_date)}` : "Not Set"}
+            📅 {pool.start_date ? `${formatDateTime(pool.start_date)}` : "Non défini"}
           </span> - <span className="w-fit bg-black/80 text-white text-xs font-medium px-3 py-1 rounded-lg">
-            📅 {pool.end_date ? `${formatDateTime(pool.end_date)}` : "Not Set"}
+            📅 {pool.end_date ? `${formatDateTime(pool.end_date)}` : "Non défini"}
           </span>
         </h1>
       </div>
@@ -92,12 +93,12 @@ const PoolDetails = () => {
       <div className="md:grid grid-cols-3 gap-x-3 mt-5">
          {/* Winner Players Table */}
          <div className="">
-          <h3 className="text-xl font-bold mb-2 text-white">All Players</h3>
+          <h3 className="text-xl font-bold mb-2 text-white">Tous les joueurs</h3>
           <table className="w-full table-auto text-left text-white border-separate border-spacing-y-2 border border-transparent">
             <thead className="bg-(--secondary) p-2 rounded-sm text-white">
               <tr>
                 <th className="p-3 font-medium w-[60px]">#</th>
-                <th className="p-3 font-medium">Name</th>
+                <th className="p-3 font-medium">Nom</th>
               </tr>
             </thead>
             <tbody>
@@ -110,7 +111,7 @@ const PoolDetails = () => {
                 ))
               ) : (
                 <tr>
-                  <td className="text-center p-2" colSpan="2">No Players</td>
+                  <td className="text-center p-2" colSpan="2">Aucun joueur</td>
                 </tr>
               )}
             </tbody>
@@ -118,12 +119,12 @@ const PoolDetails = () => {
         </div>
         {/* Winner Players Table */}
         <div className="">
-          <h3 className="text-xl font-bold mb-2 text-white">Winner Players</h3>
+          <h3 className="text-xl font-bold mb-2 text-white">Joueurs gagnants</h3>
           <table className="w-full table-auto text-left text-white border-separate border-spacing-y-2 border border-transparent">
             <thead className="bg-(--secondary) p-2 rounded-sm text-white">
               <tr>
                 <th className="p-3 font-medium w-[60px]">#</th>
-                <th className="p-3 font-medium">Name</th>
+                <th className="p-3 font-medium">Nom</th>
               </tr>
             </thead>
             <tbody>
@@ -136,7 +137,7 @@ const PoolDetails = () => {
                 ))
               ) : (
                 <tr>
-                  <td className="text-center p-2" colSpan="2">No winners</td>
+                  <td className="text-center p-2" colSpan="2">Aucun gagnant</td>
                 </tr>
               )}
             </tbody>
@@ -145,12 +146,12 @@ const PoolDetails = () => {
 
         {/* Loser Players Table */}
         <div className=" md:mt-0 mt-3">
-          <h3 className="text-xl font-bold mb-2 text-white">Loser Players</h3>
+          <h3 className="text-xl font-bold mb-2 text-white">Joueurs perdants</h3>
           <table className="w-full table-auto text-left text-white border-separate border-spacing-y-2 border border-transparent">
             <thead className="bg-(--secondary) p-2 rounded-sm text-white">
               <tr>
                 <th className="p-3 font-medium w-[60px]">#</th>
-                <th className="p-3 font-medium">Name</th>
+                <th className="p-3 font-medium">Nom</th>
               </tr>
             </thead>
             <tbody>
@@ -163,7 +164,7 @@ const PoolDetails = () => {
                 ))
               ) : (
                 <tr>
-                  <td className="text-center p-2" colSpan="2">No losers</td>
+                  <td className="text-center p-2" colSpan="2">Pas de perdants</td>
                 </tr>
               )}
             </tbody>
@@ -180,7 +181,7 @@ const PoolDetails = () => {
               className="mt-4 bg-(--accent) text-white py-2 px-5 rounded"
               onClick={() => setShowPopup(false)}
             >
-              Close
+              Fermer
             </button>
           </div>
         </div>

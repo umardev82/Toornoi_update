@@ -13,7 +13,7 @@ const useEditProfile = () => {
     const token = localStorage.getItem("adminToken");
 
     if (!token) {
-      setError("Authentication token is missing. Please log in.");
+      setError("Jeton d'authentification manquant. Veuillez vous connecter.");
       return;
     }
 
@@ -31,7 +31,7 @@ const useEditProfile = () => {
 
         setProfile(profileData);
       })
-      .catch(() => setError("Failed to fetch profile. Try again."));
+      .catch(() => setError("Échec de la récupération du profil. Veuillez réessayer."));
   }, []);
 
   const updateProfile = async (formData) => {
@@ -66,11 +66,11 @@ const useEditProfile = () => {
 
       // Use toast.promise to avoid duplicate notifications
       toast.promise(
-        Promise.resolve("Profile updated successfully!"), 
+        Promise.resolve("Profil mis à jour avec succès !"), 
         {
-          loading: "Updating profile...",
-          success: "Profile updated successfully!",
-          error: "Profile update failed. Try again.",
+          loading: "Mise à jour du profil...",
+          success: "Profil mis à jour avec succès !",
+          error: "Échec de la mise à jour du profil. Réessayez.",
         }
       );
 
@@ -79,7 +79,7 @@ const useEditProfile = () => {
     } catch (error) {
       // console.error("Update failed:", error);
       // setError("Failed to update profile. Please check required fields.");
-      toast.error("Profile update failed. Try again.");
+      toast.error("Échec de la mise à jour du profil. Réessayez.");
       setLoading(false);
       return { success: false };
     }

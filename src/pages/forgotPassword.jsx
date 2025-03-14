@@ -24,17 +24,17 @@ const ForgotPassword = () => {
           </Link>
           <div className="p-4 sm:p-7">
             <div className="text-center">
-              <h1 className="block text-2xl font-bold text-white">Forgot Your Password?</h1>
-              <p className="text-(--textlight)">Enter your email and we'll send a reset link.</p>
+              <h1 className="block text-2xl font-bold text-white">Mot de passe oublié ?</h1>
+              <p className="text-(--textlight)">Entrez votre adresse e-mail et nous vous enverrons un lien de réinitialisation.</p>
             </div>
             <div className="mt-5">
               <form onSubmit={handleSubmit}>
                 <div className="grid gap-y-4">
                   <div>
-                    <label className="block text-sm mb-2 text-(--textlight)">Email</label>
+                    <label className="block text-sm mb-2 text-(--textlight)">E-mail</label>
                     <input
                       type="email"
-                      placeholder="Enter your email"
+                      placeholder="Entrez votre adresse e-mail"
                       className="py-2 px-3 block w-full bg-(--secondarybg) rounded-sm text-sm text-(--textlight)"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
@@ -47,7 +47,7 @@ const ForgotPassword = () => {
                     className="py-2 px-3 bg-(--accent) text-white w-full rounded-sm text-sm hover:bg-transparent border-(--accent) border transition-all flex items-center justify-center"
                     disabled={loading}
                   >
-                    {loading ? "Sending..." : "Submit"}
+                    {loading ? "Envoi..." : "Envoyer"}
                   </button>
                 </div>
               </form>

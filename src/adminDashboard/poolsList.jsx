@@ -112,20 +112,20 @@ const PoolList = () => {
     });
 
     toast.promise(deletePromise, {
-      loading: "Deleting pool...",
-      success: "Pool deleted successfully!",
-      error: "Failed to delete pool.",
+      loading: "Suppression du pool...",
+      success: "Pool supprimé avec succès !",
+      error: "Échec de la suppression du pool.",
     });
   };
 
   return (
     <>
-      <div className="md:flex justify-end mb-4 gap-2 items-start">
+      <div className="flex flex-wrap  justify-end mb-4 gap-2 items-start">
         <input
           type="text"
           value={searchTerm}
           onChange={handleSearch}
-          placeholder="Search by tournament or pool number"
+          placeholder="Rechercher par numéro de tournoi ou de poule"
           className="md:w-auto w-full border border-(--border) p-2 rounded text-white bg-(--primary)"
         />
         <select
@@ -133,24 +133,24 @@ const PoolList = () => {
           onChange={handleTournamentChange}
           className="md:w-auto w-full border border-(--border) p-2 rounded text-white bg-(--primary)"
         >
-          <option value="All">All Tournaments</option>
+          <option value="All">Tous les tournois</option>
           {[...new Set(pools.map((pool) => pool.tournament))].map((tournament) => (
             <option key={tournament} value={tournament}>{tournament}</option>
           ))}
         </select>
         <button onClick={exportToExcel} className="mb-4 px-4 py-2 bg-(--accent) text-white rounded">
-          Export to Excel
+        Exporter vers Excel
         </button>
       </div>
       <div className="overflow-x-auto">
         <table className="w-full table-auto text-left text-white border-separate border-spacing-y-2 border border-transparent">
           <thead className="bg-(--secondary) p-2 rounded-sm text-white">
             <tr>
-              <th className="p-3 font-medium">Tournament</th>
-              <th className="p-3 font-medium">Pool Number</th>
-              <th className="p-3 font-medium">Start Date</th>
-              <th className="p-3 font-medium">Total Players</th> {/* New Column */}
-              <th className="p-3 font-medium">Actions</th>
+              <th className="p-3 font-medium">Tournoi</th>
+              <th className="p-3 font-medium">Numéro de piscine</th>
+              <th className="p-3 font-medium">Date de début</th>
+              <th className="p-3 font-medium">Nombre total de joueurs</th> {/* New Column */}
+              <th className="p-3 font-medium">Actes</th>
             </tr>
           </thead>
           <tbody>
@@ -160,14 +160,14 @@ const PoolList = () => {
               </tr>
             ) : filteredPools.length === 0 ? (
               <tr>
-                <td colSpan="6" className="text-center font-bold text-white p-4">No pools found.</td>
+                <td colSpan="6" className="text-center font-bold text-white p-4">Aucune piscine trouvée.</td>
               </tr>
             ) : (
               paginatedPools.map((pool) => (
                 <tr key={pool.id} className="bg-(--primary) text-(--textlight)">
                   <td className="p-3">{pool.tournament}</td>
                   <td className="p-3">{pool.pool_number}</td>
-                  <td className="p-3">{pool.start_date ? formatDateTime(pool.start_date) : "Not Set"}</td>
+                  <td className="p-3">{pool.start_date ? formatDateTime(pool.start_date) : "Non défini"}</td>
                   <td className="p-3">{pool.all_players ? pool.all_players.length : 0}</td> {/* Display Total Players */}
                   <td className="p-3">
                     <div className="flex gap-3">
@@ -192,7 +192,7 @@ const PoolList = () => {
               disabled={currentPage === 1}
               className="py-1 px-3 bg-(--primary) text-white rounded disabled:opacity-50"
             >
-              Previous
+              Précédent
             </button>
             <span className="text-(--accent) font-bold">{currentPage} / {totalPages}</span>
             <button
@@ -200,7 +200,7 @@ const PoolList = () => {
               disabled={currentPage === totalPages}
               className="py-1 px-3 bg-(--primary) text-white rounded disabled:opacity-50"
             >
-              Next
+              Suivant
             </button>
           </div>
         )}
@@ -208,16 +208,17 @@ const PoolList = () => {
         {showConfirmModal && selectedPool && (
           <div className="fixed h-screen w-full inset-0 flex items-center justify-center bg-black/85 z-50 p-5">
             <div className="bg-(--primary) p-6 rounded-lg shadow-lg md:w-[40%] w-full">
-              <h2 className="text-(--textwhite) mb-4">Confirm Delete</h2>
+              <h2 className="text-(--textwhite) mb-4">Confirmer la suppression</h2>
               <p className="text-(--textlight) mb-4">
-                Are you sure you want to delete the pool for tournament <strong>{selectedPool.tournament_name}</strong>?
+              Êtes-vous sûr de vouloir supprimer le pool pour le tournoi <strong>{selectedPool.tournament_name}</strong>?
               </p>
               <div className="flex justify-end space-x-3">
                 <button className="px-4 py-2 bg-(--accent) text-(--textwhite) rounded-md" onClick={() => setShowConfirmModal(false)}>
-                  Cancel
+                Annuler
                 </button>
                 <button className="px-4 py-2 bg-red-600 text-white rounded-md" onClick={deletePool}>
-                  Delete
+                  
+                Supprimer
                 </button>
               </div>
             </div>

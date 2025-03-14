@@ -110,57 +110,57 @@ const EditTournament = () => {
   return (
     <>
       {/* <Toaster toastOptions={{ duration: 5000 }} /> */}
-      <h1 className="lemon-milk-font text-(--textwhite) mb-4">Edit Tournament</h1>
+      <h1 className="lemon-milk-font text-(--textwhite) mb-4">Modifier le tournoi</h1>
       <form onSubmit={handleSubmit} className="md:p-5 p-3 bg-(--primary) rounded-lg border border-(--border)">
         <div className="grid md:grid-cols-2 gap-3">
           {/* Tournament Name */}
           <div className="flex flex-col gap-2">
-            <label className="text-(--textwhite)">Tournament name</label>
+            <label className="text-(--textwhite)">Nom du tournoi</label>
             <input
               type="text"
               name="tournament_name"
               value={formData.tournament_name}
               onChange={handleChange}
-              placeholder="Tournament Name"
+              placeholder="Nom du tournoi"
               className="w-full bg-(--secondary) text-white p-3 rounded-md"
             />
           </div>
 
           {/* Category */}
           <div className="flex flex-col gap-2">
-            <label className="text-(--textwhite)">Category</label>
+            <label className="text-(--textwhite)">Catégorie</label>
             <input
               type="text"
               name="category"
               value={formData.category}
               onChange={handleChange}
-              placeholder="Category"
+              placeholder="Catégorie"
               className="w-full bg-(--secondary) text-white p-3 rounded-md"
             />
           </div>
 
           {/* Registration Fee */}
           <div className="flex flex-col gap-2">
-            <label className="text-(--textwhite)">Registration Fee</label>
+            <label className="text-(--textwhite)">Frais d'inscription (€)</label>
             <input
               type="number"
               name="registration_fee"
               value={formData.registration_fee}
               onChange={handleChange}
-              placeholder="Registration Fee (€)"
+              placeholder="Frais d'inscription (€)"
               className="w-full bg-(--secondary) text-white p-3 rounded-md"
             />
           </div>
 
           {/* Slots */}
           <div className="flex flex-col gap-2">
-            <label className="text-(--textwhite)">Slots</label>
+            <label className="text-(--textwhite)">Machines à sous</label>
             <input
               type="number"
               name="slots"
               value={formData.slots}
               onChange={handleChange}
-              placeholder="Slots"
+              placeholder="Machines à sous"
               className="w-full bg-(--secondary) text-white p-3 rounded-md"
             />
           </div>
@@ -168,23 +168,23 @@ const EditTournament = () => {
           {/* Status */}
          {/* Status Dropdown */}
 <div className="flex flex-col gap-2">
-  <label className="text-(--textwhite)">Status</label>
+  <label className="text-(--textwhite)">Statut</label>
   <select
     name="status"
     value={formData.status}
     onChange={handleChange}
     className="w-full bg-(--secondary) text-white p-3 rounded-md"
   >
-       <option value="Open">Open</option>
-        <option value="In Progress">In Progress</option>
-        <option value="Completed">Completed</option>
+        <option value="Open">Ouvrir</option>
+        <option value="In Progress">En cours</option>
+        <option value="Completed">Complété</option>
   </select>
 </div>
 
 
           {/* Registration Deadline */}
           <div className="flex flex-col gap-2">
-            <label className="text-(--textwhite)">Registration Deadline</label>
+            <label className="text-(--textwhite)">Date limite d'inscription</label>
             <input
               type="datetime-local"
               name="registration_deadline"
@@ -196,7 +196,7 @@ const EditTournament = () => {
 
           {/* Start Date */}
           <div className="flex flex-col gap-2">
-            <label className="text-(--textwhite)">Start Date</label>
+            <label className="text-(--textwhite)">Date de début</label>
             <input
               type="date"
               name="start_date"
@@ -208,7 +208,7 @@ const EditTournament = () => {
 
           {/* End Date */}
           <div className="flex flex-col gap-2">
-            <label className="text-(--textwhite)">End Date</label>
+            <label className="text-(--textwhite)">Date de fin</label>
             <input
               type="date"
               name="end_date"
@@ -220,7 +220,7 @@ const EditTournament = () => {
 
           {/* Time */}
           <div className="flex flex-col gap-2">
-            <label className="text-(--textwhite)">Time</label>
+            <label className="text-(--textwhite)">Temps</label>
             <input
               type="time"
               name="time"
@@ -231,15 +231,15 @@ const EditTournament = () => {
           </div>
 
           <div className="flex flex-col gap-2">
-        <label className=" text-(--textwhite)">Bracket Type</label>
-        <input type="text" name="bracket_type" value={formData.bracket_type} onChange={handleChange} placeholder="Bracket Type" className="w-full bg-(--secondary) text-white p-3 rounded-md" />
+        <label className=" text-(--textwhite)">Type de tournoi</label>
+        <input type="text" name="bracket_type" value={formData.bracket_type} onChange={handleChange} placeholder="Type de tournoi" className="w-full bg-(--secondary) text-white p-3 rounded-md" />
         </div>
         <div className="flex flex-col gap-2">
-        <label className=" text-(--textwhite)">Country</label>
-        <input type="text" name="country" value={formData.country} onChange={handleChange} placeholder="Country" className="w-full bg-(--secondary) text-white p-3 rounded-md" />
+        <label className=" text-(--textwhite)">Pays</label>
+        <input type="text" name="country" value={formData.country} onChange={handleChange} placeholder="Pays" className="w-full bg-(--secondary) text-white p-3 rounded-md" />
         </div>
         <div className="flex flex-col gap-2">
-        <label className=" text-(--textwhite)">Region</label>
+        <label className=" text-(--textwhite)">Région</label>
         <input type="text" name="region" value={formData.region} onChange={handleChange} placeholder="Region" className="w-full bg-(--secondary) text-white p-3 rounded-md" />
         </div>
 
@@ -257,98 +257,98 @@ const EditTournament = () => {
 
           {/* Eligibility Criteria */}
           <div className="flex flex-col gap-2">
-            <label className="text-(--textwhite)">Eligibility Criteria</label>
+            <label className="text-(--textwhite)">Critères d'éligibilité</label>
             <textarea
               name="eligibility_criteria"
               value={formData.eligibility_criteria}
               onChange={handleChange}
-              placeholder="Eligibility Criteria"
+              placeholder="Critères d'éligibilité"
               className="w-full bg-(--secondary) text-white p-3 rounded-md"
             />
           </div>
 
           {/* Rules and Regulations */}
           <div className="flex flex-col gap-2">
-            <label className="text-(--textwhite)">Rules and Regulations</label>
+            <label className="text-(--textwhite)">Règles et règlements</label>
             <textarea
               name="rules_and_regulations"
               value={formData.rules_and_regulations}
               onChange={handleChange}
-              placeholder="Rules and Regulations"
+              placeholder="Règles et règlements"
               className="w-full bg-(--secondary) text-white p-3 rounded-md"
             />
           </div>
 
           {/* Match Rules */}
           <div className="flex flex-col gap-2">
-            <label className="text-(--textwhite)">Match Rules</label>
+            <label className="text-(--textwhite)">Règles du match</label>
             <textarea
               name="match_rules"
               value={formData.match_rules}
               onChange={handleChange}
-              placeholder="Match Rules"
+              placeholder="Règles du match"
               className="w-full bg-(--secondary) text-white p-3 rounded-md"
             />
           </div>
 
           {/* Prize Details */}
           <div className="flex flex-col gap-2">
-            <label className="text-(--textwhite)">Prize Details</label>
+            <label className="text-(--textwhite)">Détails du prix</label>
             <textarea
               name="prize_details"
               value={formData.prize_details}
               onChange={handleChange}
-              placeholder="Prize Details"
+              placeholder="Détails du prix"
               className="w-full bg-(--secondary) text-white p-3 rounded-md"
             />
           </div>
 
           {/* Dispute Resolution Process */}
           <div className="flex flex-col gap-2">
-            <label className="text-(--textwhite)">Dispute Resolution Process</label>
+            <label className="text-(--textwhite)">Processus de résolution des litiges</label>
             <textarea
               name="dispute_resolution_Process"
               value={formData.dispute_resolution_Process}
               onChange={handleChange}
-              placeholder="Dispute Resolution Process"
+              placeholder="Processus de résolution des litiges"
               className="w-full bg-(--secondary) text-white p-3 rounded-md"
             />
           </div>
 
           {/* Prize Distribution */}
           <div className="flex flex-col gap-2">
-            <label className="text-(--textwhite)">Prize Distribution</label>
+            <label className="text-(--textwhite)">Distribution des prix</label>
             <textarea
               name="prize_distribution"
               value={formData.prize_distribution}
               onChange={handleChange}
-              placeholder="Prize Distribution"
+              placeholder="Distribution des prix"
               className="w-full bg-(--secondary) text-white p-3 rounded-md"
             />
           </div>
 
           {/* Position 1 */}
           <div className="flex flex-col gap-2">
-            <label className="text-(--textwhite)">Position 1</label>
+            <label className="text-(--textwhite)">Gagnant</label>
             <input
               type="number"
               name="positions_1"
               value={formData.positions_1}
               onChange={handleChange}
-              placeholder="Position 1 Prize"
+              placeholder="Prix ​​(€)"
               className="w-full bg-(--secondary) text-white p-3 rounded-md"
             />
           </div>
 
           {/* Position 2 */}
           <div className="flex flex-col gap-2">
-            <label className="text-(--textwhite)">Position 2</label>
+            <label className="text-(--textwhite)">Finaliste</label>
             <input
               type="number"
               name="positions_2"
               value={formData.positions_2}
               onChange={handleChange}
-              placeholder="Position 2 Prize"
+              placeholder="Prix ​​(€)"
               className="w-full bg-(--secondary) text-white p-3 rounded-md"
             />
           </div>
@@ -368,43 +368,43 @@ const EditTournament = () => {
 
           {/* Sponsorship Details */}
           <div className="flex flex-col gap-2">
-            <label className="text-(--textwhite)">Sponsorship Details</label>
+            <label className="text-(--textwhite)">Détails du parrainage</label>
             <textarea
               name="sponsorship_details"
               value={formData.sponsorship_details}
               onChange={handleChange}
-              placeholder="Sponsorship Details"
+              placeholder="Détails du parrainage"
               className="w-full bg-(--secondary) text-white p-3 rounded-md"
             />
           </div>
 
           {/* Partnership Information */}
           <div className="flex flex-col gap-2">
-            <label className="text-(--textwhite)">Partnership Information</label>
+            <label className="text-(--textwhite)">Informations sur le partenariat</label>
             <textarea
               name="partnership_info"
               value={formData.partnership_info}
               onChange={handleChange}
-              placeholder="Partnership Information"
+              placeholder="Informations sur le partenariat"
               className="w-full bg-(--secondary) text-white p-3 rounded-md"
             />
           </div>
 
           {/* Refund Policy */}
           <div className="flex flex-col gap-2">
-            <label className="text-(--textwhite)">Refund Policy</label>
+            <label className="text-(--textwhite)">Politique de remboursement</label>
             <textarea
               name="refund_policy"
               value={formData.refund_policy}
               onChange={handleChange}
-              placeholder="Refund Policy"
+              placeholder="Politique de remboursement"
               className="w-full bg-(--secondary) text-white p-3 rounded-md"
             />
           </div>
           
           {/* Cover Image */}
           <div className="flex flex-col gap-2">
-            <label className="text-(--textwhite)">Cover Image</label>
+            <label className="text-(--textwhite)">Image de couverture</label>
             <input
               type="file"
               name="cover_image"
@@ -422,7 +422,7 @@ const EditTournament = () => {
 
           {/* Sponsor Logos */}
           <div className="flex flex-col gap-2">
-            <label className="text-(--textwhite)">Sponsor Logo</label>
+            <label className="text-(--textwhite)">Logo du sponsor</label>
             <input
               type="file"
               name="sponsor_logos"
@@ -440,7 +440,7 @@ const EditTournament = () => {
 
        {/* Code Of Conduct */}
 <div className="flex flex-col gap-2">
-  <label className="text-(--textwhite)">Code Of Conduct</label>
+  <label className="text-(--textwhite)">Code de conduite</label>
   <input
     type="file"
     name="code_of_conduct"
@@ -467,7 +467,7 @@ const EditTournament = () => {
               onChange={handleChange}
               className="w-5 h-5"
             />
-            <label className="text-(--textwhite)">Publish Tournament</label>
+            <label className="text-(--textwhite)">Publier le tournoi</label>
           </div>
 
         </div>
@@ -477,7 +477,7 @@ const EditTournament = () => {
           type="submit"
           className="bg-(--accent) text-white py-2 px-4 rounded mt-4 w-full"
         >
-          Update Tournament
+          Tournoi de mise à jour
         </button>
       </form>
     </>

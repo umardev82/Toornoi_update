@@ -48,7 +48,7 @@ const useDashboardStats = () => {
         setStats((prevStats) => ({
           ...prevStats,
           loading: false,
-          error: error.message || 'Error fetching data',
+          error: error.message || 'Erreur lors de la récupération des données',
         }));
       }
     };

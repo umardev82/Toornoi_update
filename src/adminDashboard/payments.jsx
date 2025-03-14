@@ -75,7 +75,7 @@ const Payments = () => {
 
   const handleStatusChange = async (id, newStatus) => {
     setLoadingId(id);
-    const updateToast = toast.loading("Updating status...");
+    const updateToast = toast.loading("Mise à jour du statut...");
 
     try {
       await axios.patch(`${API_URL}${id}/`, { payment_status: newStatus });
@@ -86,9 +86,9 @@ const Payments = () => {
         )
       );
 
-      toast.success("Payment status updated!", { id: updateToast });
+      toast.success("Statut de paiement mis à jour !", { id: updateToast });
     } catch (error) {
-      toast.error("Failed to update status.", { id: updateToast });
+      toast.error("Échec de la mise à jour du statut.", { id: updateToast });
     } finally {
       setLoadingId(null);
     }
@@ -110,12 +110,12 @@ const Payments = () => {
   return (
     <>
       {/* <Toaster toastOptions={{ duration: 5000 }} /> */}
-      <div className="md:flex justify-end gap-2 items-start">
+      <div className="flex flex-wrap justify-end gap-2 items-start">
         <input
           type="text"
           value={searchTerm}
           onChange={handleSearch}
-          placeholder="Search by username, tournament, or status"
+          placeholder="Rechercher par nom d'utilisateur, tournoi ou statut"
           className="md:w-auto w-full border border-(--border) p-2 rounded text-white bg-(--primary)"
         />
         <select
@@ -123,7 +123,7 @@ const Payments = () => {
           onChange={handleTournamentFilter}
           className="md:w-auto w-full border border-(--border) p-2 rounded text-white bg-(--primary)"
         >
-          <option value="">All Tournaments</option>
+          <option value="">Tous les tournois</option>
           {tournaments.map((tournament) => (
             <option key={tournament.id} value={tournament.tournament_name}>
               {tournament.tournament_name}
@@ -134,7 +134,7 @@ const Payments = () => {
           onClick={exportToExcel}
           className="mb-4 px-4 py-2 bg-(--accent) text-white rounded text-nowrap"
         >
-          Export to Excel
+          Exporter vers Excel
         </button>
       </div>
 
@@ -147,19 +147,19 @@ const Payments = () => {
           <table className="w-full table-auto text-left text-white border-separate border-spacing-y-2 border border-transparent">
             <thead className="bg-(--secondary) p-2 rounded-sm text-white">
               <tr className="rounded-2xl">
-                <th className="p-3 font-medium rounded-l-md whitespace-nowrap w-max">Username</th>
-                <th className="p-3 font-medium  whitespace-nowrap w-max">Email</th>
-                <th className="p-3 font-medium whitespace-nowrap w-max">Tournament</th>
-                <th className="p-3 font-medium whitespace-nowrap w-max">Registered At</th>
-                <th className="p-3 font-medium whitespace-nowrap w-max">Payment Status</th>
-                <th className="p-3 font-medium whitespace-nowrap w-max rounded-r-md">Amount</th>
+                <th className="p-3 font-medium rounded-l-md whitespace-nowrap w-max">Nom d'utilisateur</th>
+                <th className="p-3 font-medium  whitespace-nowrap w-max">E-mail	</th>
+                <th className="p-3 font-medium whitespace-nowrap w-max">Tournoi</th>
+                <th className="p-3 font-medium whitespace-nowrap w-max">Enregistré à</th>
+                <th className="p-3 font-medium whitespace-nowrap w-max">Statut de paiement</th>
+                <th className="p-3 font-medium whitespace-nowrap w-max rounded-r-md">Montant</th>
               </tr>
             </thead>
             <tbody>
               {paginatedRegistrations.length === 0 ? (
                 <tr>
                   <td colSpan="5" className="text-center font-bold text-white p-4">
-                    No registrations found.
+                  Aucune inscription trouvée.
                   </td>
                 </tr>
               ) : (
@@ -190,7 +190,7 @@ const Payments = () => {
             disabled={currentPage === 1}
             className="py-1 px-3 bg-(--primary) text-white rounded disabled:opacity-50"
           >
-            Previous
+            Précédent
           </button>
           <span className="text-(--accent) font-bold">{currentPage} / {totalPages}</span>
           <button
@@ -198,7 +198,7 @@ const Payments = () => {
             disabled={currentPage === totalPages}
             className="py-1 px-3 bg-(--primary) text-white rounded disabled:opacity-50"
           >
-            Next
+            Suivant
           </button>
         </div>
       )}

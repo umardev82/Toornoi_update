@@ -79,7 +79,7 @@ const UserMatches = () => {
       <div className="flex flex-wrap gap-2 justify-end items-center mb-4">
         <input
           type="text"
-          placeholder="Search Match..."
+          placeholder="Rechercher une correspondance..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           className="border border-(--border) p-2 rounded text-white md:w-auto w-full bg-(--primary)"
@@ -89,7 +89,7 @@ const UserMatches = () => {
           onChange={(e) => setStatusFilter(e.target.value)}
           className="border border-(--border) p-2 rounded text-white md:w-auto w-full bg-(--primary)"
         >
-          <option value="">All Statuses</option>
+          <option value="">Tous les statuts</option>
           {statuses.map((status, index) => (
             <option key={index} value={status}>{status}</option>
           ))}
@@ -100,12 +100,12 @@ const UserMatches = () => {
         <table className="w-full table-auto text-left text-white border-separate border-spacing-y-2 border border-transparent">
           <thead className="bg-(--secondary) p-2 rounded-sm text-white">
             <tr className="rounded-2xl">
-              <th className="p-3 font-medium whitespace-nowrap">Tournament</th>
-              <th className="p-3 font-medium whitespace-nowrap">Player 1</th>
-              <th className="p-3 font-medium whitespace-nowrap">Player 2</th>
+              <th className="p-3 font-medium whitespace-nowrap">Tournoi</th>
+              <th className="p-3 font-medium whitespace-nowrap">Joueur 1</th>
+              <th className="p-3 font-medium whitespace-nowrap">Joueur 2</th>
               <th className="p-3 font-medium whitespace-nowrap">Date</th>
-              <th className="p-3 font-medium whitespace-nowrap">Status</th>
-              <th className="p-3 font-medium whitespace-nowrap">Actions</th>
+              <th className="p-3 font-medium whitespace-nowrap">Statut</th>
+              <th className="p-3 font-medium whitespace-nowrap">Actes</th>
             </tr>
           </thead>
           <tbody>
@@ -119,24 +119,24 @@ const UserMatches = () => {
               </tr>
             ) : paginatedMatches.length === 0 ? (
               <tr>
-                <td colSpan="6" className="text-center font-bold text-white p-4">No matches found.</td>
+                <td colSpan="6" className="text-center font-bold text-white p-4">Aucune correspondance trouvée.</td>
               </tr>
             ) : (
               paginatedMatches.map((match) => (
                 <tr key={match.id} className="bg-(--primary) text-white">
-                  <td className="p-3 whitespace-nowrap">{match.tournament?.tournament_name || "Pending"}</td>
-                  <td className="p-3 whitespace-nowrap">{match.player_1 || "Pending"}</td>
-                  <td className="p-3 whitespace-nowrap">{match.player_2 || "Pending"}</td>
+                  <td className="p-3 whitespace-nowrap">{match.tournament?.tournament_name || "En attente"}</td>
+                  <td className="p-3 whitespace-nowrap">{match.player_1 || "En attente"}</td>
+                  <td className="p-3 whitespace-nowrap">{match.player_2 || "En attente"}</td>
                   <td className="p-3 whitespace-nowrap">
-                    {match.date ? new Date(match.date).toLocaleString("en-GB") : "Pending"}
+                    {match.date ? new Date(match.date).toLocaleString("en-GB") : "En attente"}
                   </td>
                   <td className="p-3 whitespace-nowrap">
                     <span className={`whitespace-nowrap p-2 pt-1 text-sm rounded ${getStatusClass(match.status)}`}>
-                      {match.status || "Pending"}
+                      {match.status || "En attente"}
                     </span>
                   </td>
                   <td className="p-3 whitespace-nowrap">
-                    <Link to={`/my-account/match/${match.id}`} className="px-3 py-1 bg-(--accent) text-white rounded"> View </Link>
+                    <Link to={`/my-account/match/${match.id}`} className="px-3 py-1 bg-(--accent) text-white rounded">Voir</Link>
                   </td>
                 </tr>
               ))
@@ -151,7 +151,7 @@ const UserMatches = () => {
       disabled={currentPage === 1}
       className="py-1 px-3 bg-(--primary) text-white rounded disabled:opacity-50"
     >
-      Previous
+      Précédent
     </button>
     <span className="text-(--accent) font-bold">{currentPage} / {totalPages}</span>
     <button
@@ -159,7 +159,7 @@ const UserMatches = () => {
       disabled={currentPage === totalPages}
       className="py-1 px-3 bg-(--primary) text-white rounded disabled:opacity-50"
     >
-      Next
+      Suivant
     </button>
   </div>
 

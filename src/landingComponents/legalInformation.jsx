@@ -9,8 +9,8 @@ const LegalInformation = () => {
                                <div className=" my-auto">
                                    <div className="landing-content">
                                        
-                                           <h1 className="text-white sm:text-4xl text-3xl sm:text-left text-center lemon-milk-font font-semibold lemon-milk-font mb-5">Legal Information</h1>
-                                       <h6 className='text-white  sm:text-left text-center lemon-milk-font font-semibold lemon-milk-font'>Legal Information for Toornoi</h6>
+                                           <h1 className="text-white sm:text-4xl text-3xl sm:text-left text-center lemon-milk-font font-semibold lemon-milk-font mb-5">Informations légales</h1>
+                                       <h6 className='text-white  sm:text-left text-center lemon-milk-font font-semibold lemon-milk-font'>Informations légales pour Toornoi</h6>
                                    </div>
                                </div>
                            </div>
@@ -19,64 +19,55 @@ const LegalInformation = () => {
    <div className='bg-(--secondarybg)  text-(--textwhite) '>
      <div className='bg-black container md:p-8 md:w-[80%] w-full p-5 mx-auto'>
 
-   <h1 className=' font-semibold  mb-5'>Welcome to Toornoi. Below, you will find the legal information related to our platform, ensuring
-   transparency and compliance with applicable regulations.</h1>
+   <h1 className=' font-semibold  mb-5'>Bienvenue sur Toornoi. Vous trouverez ci-dessous les informations légales relatives à notre plateforme, garantissant transparence et conformité aux réglementations en vigueur.</h1>
 
-   <h2 className=' font-semibold lemon-milk-font my-5'>1. Website Publisher</h2>
+   <h2 className=' font-semibold lemon-milk-font my-5'>1. Éditeur du site Web</h2>
    <ul>
-       <li>- <b>Company Name:</b> Toornoi - EB Digitech</li>
-       <li>- <b>Legal Status:</b> EI</li>
-       <li>- <b>Registered Address:</b> 7 rue anatole de la Forge 75017 Paris</li>
-       <li>- <b>Registration Number:</b> 940 601 305</li>
-       <li>- <b>Contact Email:</b> contact@toornoi.com</li>
+       <li>- <b>Nom de l'entreprise :</b> Toornoi - EB Digitech</li>
+       <li>- <b>Statut juridique :</b> EI</li>
+       <li>- <b>Adresse du siège social :</b> 7 rue anatole de la Forge 75017 Paris</li>
+       <li>- <b>Numéro d'enregistrement :</b> 940 601 305</li>
+       <li>- <b>E-mail de contact :</b> contact@toornoi.com</li>
    </ul>
 
-   <h2 className=' font-semibold lemon-milk-font my-5'>2. Website Host</h2>
+   <h2 className=' font-semibold lemon-milk-font my-5'>2. Hébergeur du site Web</h2>
    
    <ul>
-       <li>- <b>Hosting Provider:</b> AWS</li>
-       <li>- <b>Registered Address:</b> 440 Terry Ave N, Seattle, WA, US</li>
-       <li>- <b>Contact Email:</b> contact@aws.com</li>
+       <li>- <b>Fournisseur d'hébergement :</b> AWS</li>
+       <li>- <b>Adresse enregistrée :</b> 440 Terry Ave N, Seattle, WA, États-Unis</li>
+       <li>- <b>E-mail de contact :</b> contact@aws.com</li>
       
    </ul>
 
-   <h2 className='font-semibold lemon-milk-font my-5'>3. Intellectual Property</h2>
+   <h2 className='font-semibold lemon-milk-font my-5'>3. Propriété intellectuelle</h2>
 
-   <p>All content on Toornoi, including logos, text, images, and trademarks, is protected by intellectual
-   property laws. Any unauthorized reproduction, modification, or distribution is strictly prohibited.</p>
+   <p>L'ensemble du contenu de Toornoi, y compris les logos, textes, images et marques déposées, est protégé par les lois sur la propriété intellectuelle. Toute reproduction, modification ou distribution non autorisée est strictement interdite.</p>
 
 
-   <h2 className=' font-semibold lemon-milk-font my-5'>4. Personal Data Protection</h2>
-   <p>Toornoi complies with data protection regulations, including the General Data Protection
-Regulation (GDPR). We collect and process user data only for necessary purposes, such as
-account management, tournament organization, and platform security.</p>
-<p>Users have the right to:</p>
+   <h2 className=' font-semibold lemon-milk-font my-5'>4. Protection des données personnelles</h2>
+   <p>Toornoi respecte les réglementations en matière de protection des données, notamment le Règlement général sur la protection des données (RGPD). Nous collectons et traitons les données des utilisateurs uniquement aux fins nécessaires, telles que la gestion des comptes, l'organisation des tournois et la sécurité de la plateforme.</p>
+<p>Les utilisateurs ont le droit de :</p>
    <ul>
-       <li>- Access their personal data</li>
-       <li>- Request corrections or deletions</li>
-       <li>- Withdraw consent for data processing</li>
-       <li>- File complaints with the relevant data protection authority</li>
+       <li>- Accéder à leurs données personnelles</li>
+       <li>- Demander des corrections ou des suppressions</li>
+       <li>- Retirer le consentement au traitement des données</li>
+       <li>- Déposer une plainte auprès de l'autorité compétente en matière de protection des données</li>
    </ul>
-   <p>For more details, please refer to our Privacy Policy.</p>
+   <p>Pour plus de détails, veuillez consulter notre politique de confidentialité.</p>
 
 
-   <h2 className=' font-semibold lemon-milk-font my-5'>5. Liability Disclaimer</h2>
+   <h2 className=' font-semibold lemon-milk-font my-5'>5. Clause de non-responsabilité</h2>
    <ul>
-       <li>- Toornoi is not responsible for any technical failures, data loss, or connectivity issues
-       experienced by users.</li>
-       <li>- We do not guarantee uninterrupted access to the platform and reserve the right to make
-       changes or suspend services at any time.</li>
-       <li>- Users are solely responsible for their actions on the platform, including compliance with
-       tournament rules and fair play policies.</li>
+       <li>- Toornoi n'est pas responsable des défaillances techniques, des pertes de données ou des problèmes de connectivité rencontrés par les utilisateurs.</li>
+       <li>- Nous ne garantissons pas un accès ininterrompu à la plateforme et nous nous réservons le droit d'apporter des modifications ou de suspendre les services à tout moment.</li>
+       <li>- Les utilisateurs sont seuls responsables de leurs actions sur la plateforme, y compris du respect des règles du tournoi et des politiques de fair-play.</li>
    </ul>
-   <h2 className=' font-semibold lemon-milk-font my-5'>6. Governing Law & Jurisdiction</h2>
-  <p>These legal terms are governed by the laws of France. Any disputes arising from the use of
-  Toornoi shall be subject to the exclusive jurisdiction of the courts of France.</p>
-   <h2 className=' font-semibold lemon-milk-font my-5'>7. Contact Information</h2>
+   <h2 className=' font-semibold lemon-milk-font my-5'>6. Loi applicable et juridiction</h2>
+  <p>Les présentes conditions générales sont régies par le droit français. Tout litige découlant de l'utilisation de Toornoi sera soumis à la compétence exclusive des tribunaux français.</p>
+   <h2 className=' font-semibold lemon-milk-font my-5'>7. Coordonnées</h2>
     
-       <p>For any legal inquiries or concerns, you can contact us at: 📧 contact@toornoi.com
-       📍 7 rue Anatole de la Forge 75017 Paris</p>
-       <p>By using Toornoi, you acknowledge and accept the legal information outlined above.</p>
+       <p>Pour toute question ou préoccupation juridique, vous pouvez nous contacter à : 📧 contact@toornoi.com 📍 7 rue Anatole de la Forge 75017 Paris</p>
+       <p>En utilisant Toornoi, vous reconnaissez et acceptez les informations légales décrites ci-dessus.</p>
    
   
    </div>

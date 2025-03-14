@@ -26,7 +26,7 @@ const AllFeaturedTournaments = () => {
         extractCategories(response.data);
       extractPriceRanges(response.data);
       } catch (error) {
-        toast.error("Failed to fetch tournaments");
+        toast.error("Échec de la récupération des tournois");
       } finally {
         setLoading(false);
       }
@@ -93,7 +93,7 @@ const AllFeaturedTournaments = () => {
     <>
       <div className="bg-gradient-to-b from-[#060606] to-[#031d29] flex sm:items-end items-center py-24 px-5 md:h-[70vh] h-[50vh]">
         <div className="container w-full mx-auto">
-          <h1 className="text-white sm:text-4xl text-3xl sm:text-left text-center lemon-milk-font font-semibold mb-5">All Featured Tournaments</h1>
+          <h1 className="text-white sm:text-4xl text-3xl sm:text-left text-center lemon-milk-font font-semibold mb-5">Tous les tournois en vedette</h1>
         </div>
       </div>
     <div className="bg-black px-5 py-14 ">
@@ -101,19 +101,19 @@ const AllFeaturedTournaments = () => {
     <div className="grid md:grid-cols-3 gap-3 mb-4">
       <input
         type="text"
-        placeholder="Search tournament..."
+        placeholder="Rechercher un tournoi..."
         value={search}
         onChange={(e) => setSearch(e.target.value)}
         className="border border-(--border) p-2 rounded text-white bg-(--primary)"
       />
       <select value={category} onChange={(e) => setCategory(e.target.value)} className="border border-(--border) p-2 rounded text-white bg-(--primary)">
-        <option value="">All Categories</option>
+        <option value="">Toutes les catégories</option>
         {categories.map((cat, index) => (
           <option key={index} value={cat}>{cat}</option>
         ))}
       </select>
       <select value={priceRange} onChange={(e) => setPriceRange(e.target.value)} className="border border-(--border) p-2 rounded text-white bg-(--primary)">
-        <option value="">All Prices</option>
+        <option value="">Tous les tarifs</option>
         {priceRanges.map((range, index) => (
           <option key={index} value={range.value}>{range.label}</option>
         ))}
@@ -124,6 +124,12 @@ const AllFeaturedTournaments = () => {
     {loading ? (
       <div className="flex justify-center items-center min-h-[300px]">
         <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-blue-500"></div>
+      </div>
+    ) : paginatedTournaments.length === 0 ? (
+      <div>
+        <p  className="text-center font-bold text-white p-4">
+        Aucun tournoi trouvé.
+        </p>
       </div>
     ) : (
       <>
@@ -139,18 +145,18 @@ const AllFeaturedTournaments = () => {
             >
                          <div className="p-4 space-y-2">
              <div className="w-fit bg-black/80 text-white text-xs font-medium px-3 py-1 rounded-lg">
-               📅 {tournament.start_date || "Not Set"}
+               📅 {tournament.start_date || "Non défini"}
              </div>
              <div className="w-fit bg-black/80 text-white text-xs font-medium px-3 py-1 rounded-lg">
-               💳 Registration Fee: {tournament.registration_fee}€
+             💳 Frais d'inscription: {tournament.registration_fee}€
              </div>
              <div className="w-fit bg-black/80 text-white text-xs font-medium px-3 py-1 rounded-lg">
-               🏆 Prize: {tournament.positions_1}€
+             🏆 Prix: {tournament.positions_1}€
              </div>
               </div>
               <div className="p-4 mt-auto">
               <div className="inline-block bg-(--secondary) text-white text-xs font-medium px-3 py-1 rounded-lg">
-              Time: {tournament.time || "Not Set"}
+              Heure: {tournament.time || "Non défini"}
             </div>
                 <h3 className="mt-3 text-2xl lemon-milk-medium">{tournament.tournament_name}</h3>
                 <p className="text-gray-300 text-sm mt-1 line-clamp-2">{tournament.description}</p>
@@ -166,7 +172,7 @@ const AllFeaturedTournaments = () => {
        disabled={currentPage === 1}
        className="py-1 px-3 bg-(--primary) text-white rounded disabled:opacity-50"
      >
-       Previous
+       Précédent
      </button>
      <span className="text-(--accent) font-bold">{currentPage} / {totalPages}</span>
      <button
@@ -174,7 +180,7 @@ const AllFeaturedTournaments = () => {
        disabled={currentPage === totalPages}
        className="py-1 px-3 bg-(--primary) text-white rounded disabled:opacity-50"
      >
-       Next
+       Suivant
      </button>
    </div>
 )}

@@ -15,13 +15,13 @@ const useSignup = () => {
   const resendVerificationEmail = async () => {
     if (!userEmail) return;
   
-    const toastId = toast.loading("Resending email...");
+    const toastId = toast.loading("Renvoi du courrier électronique...");
   
     try {
       await axios.post(`${API_BASE_URL}/loge/resend-verification-email/`, { email: userEmail });
-      toast.success("Verification email has been resent! 📩", { id: toastId });
+      toast.success("L'e-mail de vérification a été renvoyé ! 📩", { id: toastId });
     } catch (error) {
-      toast.error("Error resending email. Please try again.", { id: toastId });
+      toast.error("Erreur lors du renvoi de l'e-mail. Veuillez réessayer.", { id: toastId });
     }
   };
   
@@ -39,16 +39,16 @@ const useSignup = () => {
       setPopupMessage(`
         <div style="text-align: center;">
           <img src="${check}" style="width:50px; padding-bottom:10px; margin:auto;" />
-          <h2 class="lemon-milk-font" style="margin-bottom:15px;">Please verify your email!</h2>
+          <h2 class="lemon-milk-font" style="margin-bottom:15px;">Veuillez vérifier votre email!</h2>
           <hr style="width:50%; border-color:#dedede; margin:auto;" />
-          <p style="padding-top:15px;">You’re almost there! We sent an email to</p>
+          <p style="padding-top:15px;">Vous y êtes presque ! Nous avons envoyé un e-mail à</p>
           <p><strong>${formData.email}</strong></p>
-          <p>Just click on the link in that email to complete your signup. </p>  
-          <p>If you don't see it, You may need to check your spam folder.</p>  
-          <p>Still can't find the email?</p>   
+          <p>Cliquez simplement sur le lien dans cet e-mail pour terminer votre inscription. </p>  
+          <p>Si vous ne le voyez pas, vous devrez peut-être vérifier votre dossier spam.</p>  
+          <p>Vous ne trouvez toujours pas l'e-mail ?</p>   
 
           <button onclick="window.resendVerificationEmail()" class="mt-4 px-4 py-2 bg-(--accent) text-white rounded ">
-            Resend Email
+            Renvoyer l'e-mail
           </button>
         </div>
       `);
@@ -58,7 +58,7 @@ const useSignup = () => {
 
       return { success: true, data: response.data };
     } catch (error) {
-      let errorMessage = "Something went wrong!";
+      let errorMessage = "Quelque chose s'est mal passé !";
       if (error.response?.data) {
         const errorData = error.response.data;
         errorMessage = typeof errorData === "string" ? errorData : Object.values(errorData)[0];
@@ -68,7 +68,7 @@ const useSignup = () => {
         <div style="text-align: center;">
           <div style="display:flex; align-items:center; gap:10px; justify-content:center; margin-bottom:10px;">
             <img src="${alert}" style="width:30px;"/>
-            <h2 class="lemon-milk-font">Error!</h2>
+            <h2 class="lemon-milk-font">Erreur!</h2>
           </div>
           <p>${errorMessage}</p>
         </div>

@@ -99,9 +99,7 @@ body { top: 0px !important; }
 .goog-te-gadget { font-size: 0 !important; }
 .goog-te-gadget span { display: none; }
 .goog-te-combo{
-  position: fixed !important;
-    bottom: 20px;
-    right: 50px;
+ 
     background: white;
     padding: 10px 20px;
     border-radius: 5px;

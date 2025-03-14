@@ -44,14 +44,14 @@ const AthleteDashboardLayout = () => {
 
   // 🔹 Menu items with submenus
   const menuItems = [
-    { name: "Overview", path: "/my-account", icon: <RiHome3Fill  className="mr-2 w-5 h-5" /> },
-    { name: "All Tournaments", path: "/my-account/tournaments", icon: <HiMiniTrophy  className="mr-2 w-5 h-5" /> },
-    { name: "My Tournaments", path: "/my-account/my-tournaments", icon: <HiMiniTrophy  className="mr-2 w-5 h-5" /> },
-    { name: "Matches", path: "/my-account/matches", icon: <GiAmericanFootballPlayer className="mr-2 w-5 h-5" /> },   
-    { name: "Support Ticket", path: "/my-account/support-ticket", icon: <GrNotes className="mr-2 w-5 h-5" /> }, 
-   { name: "Profile", path: "/my-account/profile", icon: <BiSolidUserRectangle className="mr-2 w-5 h-5" /> },
-    { name: "Settings", path: "/my-account/settings", icon: <BiSolidUserRectangle className="mr-2 w-5 h-5" /> },
-    { name: "Logout", path: "#", icon: <TbLogout2 className="mr-2 w-5 h-5" />, action: handleLogout },
+    { name: "Présentation", path: "/my-account", icon: <RiHome3Fill  className="mr-2 w-5 h-5" /> },
+    { name: "Tous les tournois", path: "/my-account/tournaments", icon: <HiMiniTrophy  className="mr-2 w-5 h-5" /> },
+    { name: "Mes tournois", path: "/my-account/my-tournaments", icon: <HiMiniTrophy  className="mr-2 w-5 h-5" /> },
+    { name: "Matchs", path: "/my-account/matches", icon: <GiAmericanFootballPlayer className="mr-2 w-5 h-5" /> },   
+    { name: "Ticket d'assistance", path: "/my-account/support-ticket", icon: <GrNotes className="mr-2 w-5 h-5" /> }, 
+   { name: "Profil", path: "/my-account/profile", icon: <BiSolidUserRectangle className="mr-2 w-5 h-5" /> },
+    { name: "Paramètres", path: "/my-account/settings", icon: <BiSolidUserRectangle className="mr-2 w-5 h-5" /> },
+    { name: "Déconnexion", path: "#", icon: <TbLogout2 className="mr-2 w-5 h-5" />, action: handleLogout },
   ];
 
   const handleMenuClick = () => {
@@ -99,7 +99,7 @@ const AthleteDashboardLayout = () => {
               ) : (
                 <div>
                   {/* For Logout menu item, use the action */}
-                  {item.name === "Logout" ? (
+                  {item.name === "Logout" || item.name === "Déconnexion" ? (
                     <button
                       onClick={item.action}
                       className="flex items-center p-3 rounded-md w-full text-left hover:bg-(--secondary)"
@@ -140,11 +140,11 @@ const AthleteDashboardLayout = () => {
               <ChevronDown className="w-5 h-5 cursor-pointer" />
             </button>
             {dropdownOpen && (
-              <div className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-md py-2 text-black">
-                <Link to="/my-account/profile" className="block px-4 py-2 hover:bg-gray-100">Profile</Link>
-                <Link to="/my-account/settings" className="block px-4 py-2 hover:bg-gray-100">Settings</Link>
+              <div className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-md py-2 text-black z-50">
+                <Link to="/my-account/profile" className="block px-4 py-2 hover:bg-gray-100">Profil</Link>
+                <Link to="/my-account/settings" className="block px-4 py-2 hover:bg-gray-100">Paramètres</Link>
                 <button className="block w-full text-left px-4 py-2 hover:bg-gray-100 flex items-center" onClick={handleLogout}>
-                  <LogOut className="w-4 h-4 mr-2" /> Logout
+                  <LogOut className="w-4 h-4 mr-2" /> Déconnexion
                 </button>
               </div>
             )}

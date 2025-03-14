@@ -73,9 +73,9 @@ const AllAthletes = () => {
     try {
       await axios.delete(`${API_URL}${selectedUser.id}/`);
       setUsers(users.filter((user) => user.id !== selectedUser.id));
-      toast.success("User deleted successfully!");
+      toast.success("Utilisateur supprimé avec succès !");
     } catch (error) {
-      toast.error("Failed to delete user.");
+      toast.error("Échec de la suppression de l'utilisateur.");
     }
   };
 
@@ -87,39 +87,39 @@ const AllAthletes = () => {
       
         <input 
           type="text" 
-          placeholder="Search by username" 
+          placeholder="Rechercher par nom d'utilisateur" 
           className="md:w-auto w-full border border-(--border) p-2  rounded text-white bg-(--primary)" 
           value={searchQuery} 
           onChange={(e) => setSearchQuery(e.target.value)} 
         />
         <select className="md:w-auto  w-full border border-(--border) p-2 rounded text-white bg-(--primary)" value={verifiedFilter} onChange={(e) => setVerifiedFilter(e.target.value)}>
-          <option value="all">All</option>
-          <option value="verified">Verified</option>
-          <option value="not_verified">Not Verified</option>
+          <option value="all">Tout</option>
+          <option value="verified">Vérifié</option>
+          <option value="not_verified">Non vérifié</option>
         </select>
         <select className="md:w-auto  w-full border border-(--border) p-2 rounded text-white bg-(--primary)" value={activeFilter} onChange={(e) => setActiveFilter(e.target.value)}>
-          <option value="all">All</option>
-          <option value="active">Active</option>
-          <option value="inactive">Inactive</option>
+          <option value="all">Tout</option>
+          <option value="active">Actif</option>
+          <option value="inactive">Inactif</option>
         </select>
        
         <button 
         onClick={exportToExcel} 
         className="mb-4 px-4 py-2 bg-(--accent) text-white rounded"
       >
-        Export to Excel
+        Exporter vers Excel
       </button>
       </div>
       <div className="overflow-x-auto">
       <table className="w-full table-auto text-left whitespace-nowrap text-white border-separate border-spacing-y-2 border border-transparent">
         <thead className="bg-(--secondary) p-2 rounded-sm text-white">
           <tr>
-            <th className="p-3 font-medium rounded-l-md">Username</th>
-            <th className="p-3 font-medium">Email</th>
-            <th className="p-3 font-medium">Phone</th>
-            <th className="p-3 font-medium">Verified</th>
-            <th className="p-3 font-medium">Active</th>
-            <th className="p-3 font-medium rounded-r-md">Actions</th>
+            <th className="p-3 font-medium rounded-l-md">Nom d'utilisateur</th>
+            <th className="p-3 font-medium">E-mail</th>
+            <th className="p-3 font-medium">Téléphone</th>
+            <th className="p-3 font-medium">Vérifié</th>
+            <th className="p-3 font-medium">Actif</th>
+            <th className="p-3 font-medium rounded-r-md">Actes</th>
           </tr>
         </thead>
         <tbody>
@@ -129,7 +129,7 @@ const AllAthletes = () => {
             </tr>
           ) : paginatedUsers.length === 0 ? (
             <tr>
-              <td colSpan="6" className="text-center p-4">No users found.</td>
+              <td colSpan="6" className="text-center p-4">Aucun utilisateur trouvé.</td>
             </tr>
           ) : (
             paginatedUsers.map((user) => (
@@ -163,36 +163,36 @@ const AllAthletes = () => {
             {showViewModal && selectedUser && (
         <div className="fixed inset-0 flex items-center justify-center bg-black/80 p-5 z-50">
           <div className="bg-(--primary) p-6 rounded-lg shadow-lg w-96">
-            <h1 className="text-white lemon-milk-font mb-4">Athlete Details</h1>
+            <h1 className="text-white lemon-milk-font mb-4">Détails de l'athlète</h1>
             <div className="text-(--textlight) space-y-2">
               <p>
-                <strong className="text-white">Username:</strong> {selectedUser.username}
+                <strong className="text-white">Nom d'utilisateur:</strong> {selectedUser.username}
               </p>
               <p>
-                <strong className="text-white">First Name:</strong> {selectedUser.first_name}
+                <strong className="text-white">Prénom:</strong> {selectedUser.first_name}
               </p>
               <p>
-                <strong className="text-white">Last Name:</strong> {selectedUser.last_name}
+                <strong className="text-white">Nom de famille:</strong> {selectedUser.last_name}
               </p>
               <p>
-                <strong className="text-white">Email:</strong> {selectedUser.email}
+                <strong className="text-white">E-mail:</strong> {selectedUser.email}
               </p>
               <p>
-                <strong className="text-white">Phone Number:</strong> {selectedUser.phone_number}
+                <strong className="text-white">Numéro de téléphone :</strong> {selectedUser.phone_number}
               </p>
               <p>
-                <strong className="text-white">Date of Birth:</strong> {selectedUser.date_of_birth}
+                <strong className="text-white">Date de naissance :</strong> {selectedUser.date_of_birth}
               </p>
               <p>
-                <strong className="text-white">Verified:</strong>{" "}
+                <strong className="text-white">Vérifié:</strong>{" "}
                 <span className={selectedUser.is_verified ? "text-green-500" : "text-red-500"}>
-                  {selectedUser.is_verified ? "Yes" : "No"}
+                  {selectedUser.is_verified ? "Oui" : "Non"}
                 </span>
               </p>
               <p>
-                <strong className="text-white">Active:</strong>{" "}
+                <strong className="text-white">Actif :</strong>{" "}
                 <span className={selectedUser.is_active ? "text-green-500" : "text-red-500"}>
-                  {selectedUser.is_active ? "Yes" : "No"}
+                  {selectedUser.is_active ? "Oui" : "Non"}
                 </span>
               </p>
             </div>
@@ -201,7 +201,7 @@ const AllAthletes = () => {
                 className="px-4 py-2 bg-(--accent) text-white rounded-md"
                 onClick={() => setShowViewModal(false)}
               >
-                Close
+                Fermer
               </button>
             </div>
           </div>
@@ -212,16 +212,16 @@ const AllAthletes = () => {
       {showConfirmModal && selectedUser && (
         <div className="fixed inset-0 flex items-center justify-center bg-black/80 p-5 z-50">
           <div className="bg-(--primary) p-6 rounded-lg shadow-lg w-96">
-            <h1 className="text-white lemon-milk-font mb-4">Confirm Delete</h1>
+            <h1 className="text-white lemon-milk-font mb-4">Confirmer la suppression</h1>
             <p className="text-(--textlight) mb-4">
-              Are you sure you want to delete <strong>{selectedUser.username}</strong>? This action cannot be undone.
+            Êtes-vous sûr de vouloir supprimer <strong>{selectedUser.username}</strong>? Cette action est irréversible.
             </p>
             <div className="flex justify-end space-x-3">
               <button className="px-4 py-2 bg-(--accent) text-white rounded-md" onClick={() => setShowConfirmModal(false)}>
-                Cancel
+              Annuler
               </button>
               <button className="px-4 py-2 bg-red-600 text-white rounded-md" onClick={deleteUser}>
-                Delete
+              Supprimer
               </button>
             </div>
           </div>
@@ -234,7 +234,7 @@ const AllAthletes = () => {
        disabled={currentPage === 1}
        className="py-1 px-3 bg-(--primary) text-white rounded disabled:opacity-50"
      >
-       Previous
+       Précédent
      </button>
      <span className="text-(--accent) font-bold">{currentPage} / {totalPages}</span>
      <button
@@ -242,7 +242,7 @@ const AllAthletes = () => {
        disabled={currentPage === totalPages}
        className="py-1 px-3 bg-(--primary) text-white rounded disabled:opacity-50"
      >
-       Next
+       Suivant
      </button>
    </div>
 )}

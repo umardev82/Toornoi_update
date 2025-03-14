@@ -9,7 +9,7 @@ const useAthleteProfile = () => {
 
   useEffect(() => {
     if (!token) {
-      setError("Authentication token is missing. Please log in.");
+      setError("Jeton d'authentification manquant. Veuillez vous connecter.");
       return;
     }
 
@@ -29,7 +29,7 @@ const useAthleteProfile = () => {
       })
       .catch((error) => {
         console.error("Error fetching profile data:", error);
-        setError("Authentication failed. Please check your token.");
+        setError("Échec de l'authentification. Veuillez vérifier votre jeton.");
       });
   }, [token]);
 

@@ -46,39 +46,39 @@ const AdminDashboardLayout = () => {
   };
 
   const menuItems = [
-    { name: "Home", path: "/dashboard", icon: <RiHome3Fill className="mr-2 w-5 h-5" /> },
+    { name: "Accueil", path: "/dashboard", icon: <RiHome3Fill className="mr-2 w-5 h-5" /> },
     {
-      name: "Tournaments",
+      name: "Tournois",
       icon: <HiMiniTrophy className="mr-2 w-5 h-5" />,
       subMenu: [
-        { name: "All Tournaments", path: "/dashboard/all-tournaments", icon: <FiChevronsRight className="mr-2 w-5 h-5" /> },
-        { name: "Add New Tournament", path: "/dashboard/add-tournament", icon: <FiChevronsRight className="mr-2 w-5 h-5" /> },
+        { name: "Tous les tournois", path: "/dashboard/all-tournaments", icon: <FiChevronsRight className="mr-2 w-5 h-5" /> },
+        { name: "Ajouter un nouveau tournoi", path: "/dashboard/add-tournament", icon: <FiChevronsRight className="mr-2 w-5 h-5" /> },
       ],
     },
     {
-      name: "Athletes",
+      name: "Athlètes",
       icon: <FaPersonRunning className="mr-2 w-5 h-5" />,
       subMenu: [
-        { name: "All Athletes", path: "/dashboard/all-athletes", icon: <FiChevronsRight className="mr-2 w-5 h-5" /> },
-        { name: "Add New Athlete", path: "/dashboard/add-athlete", icon: <FiChevronsRight className="mr-2 w-5 h-5" /> },
-        { name: "Registered Athletes", path: "/dashboard/registered-athletes", icon: <FiChevronsRight className="mr-2 w-5 h-5" /> },
+        { name: "Tous les athlètes", path: "/dashboard/all-athletes", icon: <FiChevronsRight className="mr-2 w-5 h-5" /> },
+        { name: "Ajouter un nouvel athlète", path: "/dashboard/add-athlete", icon: <FiChevronsRight className="mr-2 w-5 h-5" /> },
+        { name: "Athlètes inscrits", path: "/dashboard/registered-athletes", icon: <FiChevronsRight className="mr-2 w-5 h-5" /> },
       ],
     },
-    { name: "Matches", path: "/dashboard/all-matches", icon: <GiAmericanFootballPlayer className="mr-2 w-5 h-5" /> },
+    { name: "Matchs", path: "/dashboard/all-matches", icon: <GiAmericanFootballPlayer className="mr-2 w-5 h-5" /> },
     {
-      name: "Pools",
+      name: "Piscines",
       icon: <GiAmericanFootballPlayer className="mr-2 w-5 h-5" />,
       subMenu: [
-        { name: "Pools", path: "/dashboard/pools", icon: <FiChevronsRight className="mr-2 w-5 h-5" /> },
-        { name: "Create Pools", path: "/dashboard/create-pools", icon: <FiChevronsRight className="mr-2 w-5 h-5" /> },
+        { name: "Piscines", path: "/dashboard/pools", icon: <FiChevronsRight className="mr-2 w-5 h-5" /> },
+        { name: "Créer une piscine", path: "/dashboard/create-pools", icon: <FiChevronsRight className="mr-2 w-5 h-5" /> },
       ],
     },
-    { name: "All Support Tickets", path: "/dashboard/support-tickets", icon: <GrNotes className="mr-2 w-5 h-5" /> },
-    { name: "Prizes", path: "/dashboard/prizes", icon: <GiTargetPrize className="mr-2 w-5 h-5" /> },
-    { name: "Payments", path: "/dashboard/payments", icon: <MdPayments className="mr-2 w-5 h-5" /> },
-    { name: "Profile", path: "/dashboard/profile", icon: <BiSolidUserRectangle className="mr-2 w-5 h-5" /> },
-    { name: "Settings", path: "/dashboard/settings", icon: <BiSolidUserRectangle className="mr-2 w-5 h-5" /> },
-    { name: "Logout", path: "#", icon: <TbLogout2 className="mr-2 w-5 h-5" />, action: handleLogout },
+    { name: "Tous les tickets de soutien", path: "/dashboard/support-tickets", icon: <GrNotes className="mr-2 w-5 h-5" /> },
+    { name: "Prix", path: "/dashboard/prizes", icon: <GiTargetPrize className="mr-2 w-5 h-5" /> },
+    { name: "Paiements", path: "/dashboard/payments", icon: <MdPayments className="mr-2 w-5 h-5" /> },
+    { name: "Profil", path: "/dashboard/profile", icon: <BiSolidUserRectangle className="mr-2 w-5 h-5" /> },
+    { name: "Paramètres", path: "/dashboard/settings", icon: <BiSolidUserRectangle className="mr-2 w-5 h-5" /> },
+    { name: "Déconnexion", path: "#", icon: <TbLogout2 className="mr-2 w-5 h-5" />, action: handleLogout },
   ];
 
   return (
@@ -119,7 +119,7 @@ const AdminDashboardLayout = () => {
                 </>
               ) : (
                 <div>
-                  {item.name === "Logout" ? (
+                  {item.name === "Logout" || item.name === "Déconnexion" ? (
                     <button
                       onClick={item.action}
                       className="flex items-center p-3 rounded-md w-full text-left hover:bg-(--secondary)"
@@ -160,10 +160,10 @@ const AdminDashboardLayout = () => {
               </button>
               {profileDropdownOpen && (
                 <div className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-md py-2 text-black">
-                  <Link to="/dashboard/profile" className="block px-4 py-2 hover:bg-gray-100">Profile</Link>
-                  <Link to="/dashboard/settings" className="block px-4 py-2 hover:bg-gray-100">Settings</Link>
+                  <Link to="/dashboard/profile" className="block px-4 py-2 hover:bg-gray-100">Profil</Link>
+                  <Link to="/dashboard/settings" className="block px-4 py-2 hover:bg-gray-100">Paramètres</Link>
                   <button className="block w-full text-left px-4 py-2 hover:bg-gray-100 flex items-center" onClick={handleLogout}>
-                    <LogOut className="w-4 h-4 mr-2" /> Logout
+                    <LogOut className="w-4 h-4 mr-2" /> Déconnexion
                   </button>
                 </div>
               )}

@@ -11,7 +11,7 @@ const useSignin = () => {
     setLoading(true);
     setError(null);
 
-    let toastId = toast.loading("Logging in...");
+    let toastId = toast.loading("Connexion...");
 
     try {
       const response = await axios.post(
@@ -25,14 +25,14 @@ const useSignin = () => {
       localStorage.setItem("userToken", token); // Store token
       
 
-      toast.success("Login Successful!", { id: toastId });
+      toast.success("Connexion réussie!", { id: toastId });
 
       return { success: true, token };
     } catch (error) {
       const errorMessage =
         error.response?.data?.non_field_errors?.[0] ||  // Extracts "Invalid email or password."
         error.response?.data?.detail || 
-        "Login failed! Please try again.";
+        "Échec de la connexion ! Veuillez réessayer.";
       setError(errorMessage);
       toast.error(errorMessage, { id: toastId });
 

@@ -70,7 +70,7 @@ const AthleteOverview = () => {
   }
 
   const pieData = {
-    labels: ['Wins', 'Losses'],
+    labels: ['Victoires', 'Pertes'],
     datasets: [
       {
         data: [tournamentResults.tournaments_won, tournamentResults.tournaments_lost],
@@ -93,7 +93,7 @@ const AthleteOverview = () => {
 
   return (
     <>
-     <p className=" capitalize  text-white  font-bold text-2xl mb-4 border-l-4 pl-4 border-(--accent)">Welcome back, <span>{profile.first_name} {profile.last_name}! </span></p>
+     <p className=" capitalize  text-white  font-bold text-2xl mb-4 border-l-4 pl-4 border-(--accent)">Bienvenue, <span>{profile.first_name} {profile.last_name}! </span></p>
       <div className="h-44" >
         <img src={userProfileCover} alt="Cover" className="w-full h-full object-cover rounded-lg" />
        
@@ -118,7 +118,7 @@ const AthleteOverview = () => {
           </div>
           <div className="">
             <Link to="/my-account/profile" className="md:mt-3 px-4 py-2 bg-(--accent) text-(--textwhite) rounded-md">
-              View Profile
+            Voir le profil
             </Link>
           </div>
         </div>
@@ -129,13 +129,14 @@ const AthleteOverview = () => {
           className={`py-2 px-4 flex items-center md:w-auto w-full gap-2 ${activeTab === "profile" ? "border-b-2 border-blue-500 text-blue-500" : "text-gray-400"}`}
           onClick={() => setActiveTab("profile")}
         >
-          <FaChartLine /> Performance Overview
+          <FaChartLine /> Aperçu des performances
         </button>
         <button
           className={`py-2 px-4 flex items-center md:w-auto w-full gap-2 ${activeTab === "stats" ? "border-b-2 border-blue-500 text-blue-500" : "text-gray-400"}`}
           onClick={() => setActiveTab("stats")}
         >
-          <FaTrophy /> Stats & Achievements
+          <FaTrophy /> Statistiques et réalisations
+
         </button>
       </div>
 
@@ -149,7 +150,7 @@ const AthleteOverview = () => {
                 </div>
                 <div>
                   <p className="text-3xl text-white">{tournamentCount}</p>
-                  <h4 className="text-(--textlight)">Total Tournaments Participated</h4>
+                  <h4 className="text-(--textlight)">Nombre total de tournois auxquels vous avez participé</h4>
                 </div>
               </div>
             </div>
@@ -160,26 +161,27 @@ const AthleteOverview = () => {
                 </div>
                 <div>
                   <p className="text-3xl text-white">{tournamentResults.total_prize}</p>
-                  <h4 className="text-(--textlight)">Total Points Earned</h4>
+                  <h4 className="text-(--textlight)">Total des points gagnés</h4>
                 </div>
               </div>
             </div>
             <div className="bg-(--primary) rounded-lg">
               <div>
-                <h4 className="text-white border-b border-(--border) p-4">Win/Loss Ratio</h4>
+                <h4 className="text-white border-b border-(--border) p-4">Ratio victoires/défaites</h4>
               </div>
               <div className="md:flex justify-between items-center p-4">
                 <div className="w-[200px]">
                   <Pie data={pieData} />
                 </div>
                 <div>
-                  <h4 className="text-(--textlight) mt-3">Tournaments Participated <span className="pl-4">{tournamentCount}</span></h4>
+                  <h4 className="text-(--textlight) mt-3">Tournois auxquels vous avez participé <span className="pl-4">{tournamentCount}</span></h4>
                   <div className="flex items-center md:justify-end text-(--textlight)">
-                    <div className="flex items-center pr-5"><GoDotFill className="text-[#62B2FD]" /> Wins</div>
+                    <div className="flex items-center pr-5"><GoDotFill className="text-[#62B2FD]" /> Victoires</div>
                     <h1 className="text-white text-xl font-bold"> {tournamentResults.tournaments_won}</h1>
                   </div>
                   <div className="flex items-center md:justify-end text-(--textlight)">
-                    <div className="flex items-center pr-5"><GoDotFill className="text-[#9BDFC4]" /> Losses</div>
+                    <div className="flex items-center pr-5"><GoDotFill className="text-[#9BDFC4]" /> Pertes
+                    </div>
                     <h1 className="text-white text-xl font-bold">{tournamentResults.tournaments_lost}</h1>
                   </div>
                 </div>
@@ -191,24 +193,24 @@ const AthleteOverview = () => {
         {activeTab === "stats" && (
           <>
             <div className="w-full">
-              <h3 className="text-white text-lg font-semibold mb-4">Tournaments Played</h3>
+              <h3 className="text-white text-lg font-semibold mb-4">Tournois joués</h3>
               <div className="md:w-1/2">
                 <Bar data={barData} className="bg-(--primary) p-5 rounded-lg !w-full !h-full" />
               </div>
             </div>
             <div>
-              <h3 className="text-white text-lg font-semibold my-5">Stats</h3>
+              <h3 className="text-white text-lg font-semibold my-5">Statistiques</h3>
               <div className="mt-4 md:grid grid-cols-2 gap-3 space-y-1">
                 <div className="flex flex-col gap-0 text-(--textwhite)">
-                  <p className="font-bold">Tournaments Played</p>
+                  <p className="font-bold">Tournois joués</p>
                   <p className="text-(--textlight)">{tournamentCount}</p>
                 </div>
                 <div className="flex flex-col gap-0 text-(--textwhite)">
-                  <p className="font-bold">Wins/Losses</p>
+                  <p className="font-bold">Victoires/Défaites</p>
                   <p className="text-(--textlight)">{tournamentResults.tournaments_won}/{tournamentResults.tournaments_lost}</p>
                 </div>
                 <div className="flex flex-col gap-0 text-(--textwhite)">
-                  <p className="font-bold">Total Prizes Earned</p>
+                  <p className="font-bold">Total des prix gagnés</p>
                   <p className="text-(--textlight)">{tournamentResults.total_prize}</p>
                 </div>
               </div>

@@ -52,17 +52,17 @@ const ResetPassword = () => {
           </Link>
           <div className="">
             <div className="text-center">
-              <h1 className="block text-2xl font-bold text-white">Reset Password</h1>
-              <p className="text-(--textlight)">Enter your new password.</p>
+              <h1 className="block text-2xl font-bold text-white">Réinitialiser le mot de passe</h1>
+              <p className="text-(--textlight)">Saisissez votre nouveau mot de passe.</p>
             </div>
             <div className="mt-5">
               <form onSubmit={handleSubmit}>
                 <div className="grid gap-y-4">
                   <div>
-                    <label className="block text-sm mb-2 text-(--textlight)">New Password</label>
+                    <label className="block text-sm mb-2 text-(--textlight)">Nouveau mot de passe</label>
                     <input
                       type="password"
-                      placeholder="Enter new password"
+                      placeholder="Saisissez le nouveau mot de passe"
                       className="py-2 px-3 block w-full bg-(--secondarybg) rounded-sm text-sm text-(--textlight)"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
@@ -70,10 +70,10 @@ const ResetPassword = () => {
                     />
                   </div>
                   <div>
-                    <label className="block text-sm mb-2 text-(--textlight)">Confirm Password</label>
+                    <label className="block text-sm mb-2 text-(--textlight)">Confirmer le mot de passe</label>
                     <input
                       type="password"
-                      placeholder="Confirm new password"
+                      placeholder="Confirmer le nouveau mot de passe"
                       className="py-2 px-3 block w-full bg-(--secondarybg) rounded-sm text-sm text-(--textlight)"
                       value={confirmPassword}
                       onChange={(e) => setConfirmPassword(e.target.value)}
@@ -86,7 +86,7 @@ const ResetPassword = () => {
                     className="py-2 px-3 bg-(--accent) text-white w-full rounded-sm text-sm hover:bg-transparent border-(--accent) border transition-all flex items-center justify-center"
                     disabled={loading}
                   >
-                    {loading ? "Resetting..." : "Reset Password"}
+                    {loading ? "Réinitialisation...." : "Réinitialiser le mot de passe"}
                   </button>
                 </div>
               </form>

@@ -38,7 +38,7 @@ const AddAthlete = () => {
   
     try {
       await axios.post(API_URL, formData);
-      toast.success("Athlete added successfully!");
+      toast.success("Athlète ajouté avec succès !");
       setFormData({
         username: "",
         first_name: "",
@@ -58,7 +58,7 @@ const AddAthlete = () => {
             toast.error(errorMessages[0], { duration: 4000 }); // Show only the first error
           }
         } else {
-          toast.error("Failed to add athlete.");
+          toast.error("Impossible d'ajouter l'athlète.");
         }
       }
        finally {
@@ -72,13 +72,14 @@ const AddAthlete = () => {
     <>
      
       <div>
-        <h1 className="lemon-milk-font text-(--textwhite) mb-4">Add New Athlete</h1>
+        <h1 className="lemon-milk-font text-(--textwhite) mb-4">Ajouter un nouvel athlète
+        </h1>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-7 bg-(--primary) md:p-7 p-4 rounded-md border border-(--border)">
             {/* Username */}
             <div className="md:flex flex-row justify-between text-nowrap">
               <label className="flex items-center gap-x-2 md:mb-0 mb-2 text-(--textwhite) min-w-3xs">
-                <FaUserCheck /> Username
+                <FaUserCheck /> Nom d'utilisateur
               </label>
               <input
                 type="text"
@@ -94,7 +95,7 @@ const AddAthlete = () => {
             {/* First Name */}
             <div className="md:flex flex-row justify-between text-nowrap">
               <label className="flex items-center gap-x-2 md:mb-0 mb-2 text-(--textwhite) min-w-3xs">
-                <FaUserGear /> First Name
+                <FaUserGear /> Prénom
               </label>
               <input
                 type="text"
@@ -110,7 +111,7 @@ const AddAthlete = () => {
             {/* Last Name */}
             <div className="md:flex flex-row justify-between text-nowrap">
               <label className="flex items-center gap-x-2 md:mb-0 mb-2 text-(--textwhite) min-w-3xs">
-                <FaUserGear /> Last Name
+                <FaUserGear /> Nom de famille
               </label>
               <input
                 type="text"
@@ -126,7 +127,7 @@ const AddAthlete = () => {
             {/* Email */}
             <div className="md:flex flex-row justify-between text-nowrap">
               <label className="flex items-center gap-x-2 md:mb-0 mb-2 text-(--textwhite) min-w-3xs">
-                <MdEmail /> Email
+                <MdEmail /> E-mail
               </label>
               <input
                 type="email"
@@ -142,7 +143,7 @@ const AddAthlete = () => {
             {/* Password */}
             <div className="md:flex flex-row justify-between text-nowrap">
               <label className="flex items-center gap-x-2 md:mb-0 mb-2 text-(--textwhite) min-w-3xs">
-                <RiLockPasswordFill /> Password
+                <RiLockPasswordFill /> Mot de passe
               </label>
               <input
                 type="password"
@@ -158,7 +159,7 @@ const AddAthlete = () => {
             {/* Date of Birth */}
             <div className="md:flex flex-row justify-between text-nowrap">
               <label className="flex items-center gap-x-2 md:mb-0 mb-2 text-(--textwhite) min-w-3xs">
-                <MdDateRange /> Date of Birth
+                <MdDateRange /> Date de naissance
               </label>
               <input
                 type="date"
@@ -174,7 +175,7 @@ const AddAthlete = () => {
             {/* Phone Number */}
             <div className="md:flex flex-row justify-between text-nowrap">
               <label className="flex items-center gap-x-2 md:mb-0 mb-2 text-(--textwhite) min-w-3xs">
-                <FaPhoneSquareAlt /> Phone Number
+                <FaPhoneSquareAlt /> Numéro de téléphone
               </label>
               <input
                 type="number"
@@ -190,7 +191,7 @@ const AddAthlete = () => {
             {/* Is Verified */}
             <div className="md:flex flex-row justify-between text-nowrap">
               <label className="flex items-center gap-x-2 md:mb-0 mb-2 text-(--textwhite) min-w-3xs">
-                Is Verified
+              Est vérifié
               </label>
               <select
                 name="is_verified"
@@ -198,8 +199,8 @@ const AddAthlete = () => {
                 onChange={handleSelectChange}
                 className="w-full bg-(--secondary) text-white p-3 rounded-md"
               >
-                <option value="true">Yes</option>
-                <option value="false">No</option>
+                <option value="true">Oui</option>
+                <option value="false">Non</option>
               </select>
             </div>
             <hr className="border-(--border)" />
@@ -207,7 +208,7 @@ const AddAthlete = () => {
             {/* Is Active */}
             <div className="md:flex flex-row justify-between text-nowrap">
               <label className="flex items-center gap-x-2 md:mb-0 mb-2 text-(--textwhite) min-w-3xs">
-                Is Active
+              Est actif
               </label>
               <select
                 name="is_active"
@@ -215,8 +216,8 @@ const AddAthlete = () => {
                 onChange={handleSelectChange}
                 className="w-full bg-(--secondary) text-white p-3 rounded-md"
               >
-                <option value="true">Yes</option>
-                <option value="false">No</option>
+                <option value="true">Oui</option>
+                <option value="false">Non</option>
               </select>
             </div>
           </div>
@@ -227,7 +228,7 @@ const AddAthlete = () => {
             className="bg-(--accent) text-white px-4 py-2 rounded-md"
             disabled={loading}
           >
-            {loading ? "Adding..." : "Add Athlete"}
+            {loading ? "Ajout..." : "Ajouter un athlète"}
           </button>
         </form>
       </div>

@@ -47,18 +47,18 @@ const Login = () => {
               </Link>
               <div className="p-4 sm:p-7">
                 <div className="text-center">
-                  <h1 className="block text-2xl font-bold text-white">Login</h1>
-                  <p className="text-(--textlight)">Welcome back! Please enter your details.</p>
+                  <h1 className="block text-2xl font-bold text-white">Connexion</h1>
+                  <p className="text-(--textlight)">Bonjour ! Veuillez saisir vos coordonnées.</p>
                 </div>
                 <div className="mt-5">
                   <form onSubmit={handleLogin}>
                     <div className="grid gap-y-4">
                       <div>
-                        <label htmlFor="email" className="block text-sm mb-2 text-(--textlight)">Email</label>
+                        <label htmlFor="email" className="block text-sm mb-2 text-(--textlight)">E-mail</label>
                         <input
                           type="email"
                           id="email"
-                          placeholder="Enter your email"
+                          placeholder="Saisissez votre adresse e-mail"
                           className="py-2 px-3 block w-full bg-(--secondarybg) rounded-sm text-sm text-(--textlight)"
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
@@ -70,7 +70,7 @@ const Login = () => {
                        <input
         type={showPassword ? "text" : "password"} // Hidden by default
         id="password"
-        placeholder="Enter password"
+        placeholder="Saisissez votre mot de passe"
         className="py-2 px-3 block w-full bg-(--secondarybg) rounded-sm text-sm text-(--textlight) pr-10"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
@@ -93,7 +93,7 @@ const Login = () => {
                         type="submit"
                         className="py-2 px-3 bg-(--accent) text-white w-full rounded-sm text-sm hover:bg-transparent  border-(--accent) border transition-all flex items-center justify-center "                       
                       >                       
-                          Sign in                        
+                         Connexion                     
                       </button>
                     </div>
                   </form>
@@ -104,11 +104,11 @@ const Login = () => {
                   </button> */}
                   <div className="flex justify-between items-center">
                   <p className="mt-3 text-sm text-center text-(--textlight)">
-                    Don't have an account?
-                    <Link to="/signup" className="text-white font-medium ml-1">Sign up here</Link>
+                  Pas de compte ? 
+                    <Link to="/signup" className="text-white font-medium ml-1">Inscrivez-vous ici</Link>
                   </p>
                   <p className="mt-3 text-sm text-center text-(--accent)">
-                    <Link to="/forgot-password" className="text-(--accent) font-medium ml-1">Forgot Password?</Link>
+                    <Link to="/forgot-password" className="text-(--accent) font-medium ml-1">Mot de passe oublié ?</Link>
                   </p></div>
                 </div>
               </div>

@@ -25,12 +25,12 @@ ChartJS.register(
 const Overview = () => {
   const { totalAthletes, totalTournaments, pendingCount, totalPaidAmount, totalPositions, totalClaim, loading, error } = useDashboardStats();
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error}</p>;
+  if (loading) return <p>Chargement...</p>;
+  if (error) return <p>Erreur: {error}</p>;
 
   // Dynamic data for the pie chart
   const incomePrizeGraphData = {
-    labels: ['Total Income', 'Total Prizes'],
+    labels: [' Revenu total ', 'Total des prix'],
     datasets: [
       {
         data: [totalPaidAmount, totalPositions], // Use dynamic data here
@@ -47,42 +47,42 @@ const Overview = () => {
         <div className="card flex gap-x-3 bg-(--primary) p-6 rounded-lg border border-(--border)">
           <FaPersonRunning className='w-10 text-3xl text-(--textwhite)' />
           <div>
-            <h2 className="lemon-milk-medium text-(--textwhite)">Total Athletes</h2>
+            <h2 className="lemon-milk-medium text-(--textwhite)">Total des athlètes</h2>
             <p className="text-xl lemon-milk-medium text-(--textwhite)">{totalAthletes}</p>
           </div>
         </div>
         <div className="card flex gap-x-3 bg-(--primary) p-6 rounded-lg border border-(--border)">
           <HiMiniTrophy className='w-10 text-3xl text-(--textwhite)' />
           <div>
-            <h2 className="lemon-milk-medium text-(--textwhite)">Total Tournaments</h2>
+            <h2 className="lemon-milk-medium text-(--textwhite)">Total des tournois</h2>
             <p className="text-xl lemon-milk-medium text-(--textwhite)">{totalTournaments}</p>
           </div>
         </div>
         <div className="card flex gap-x-3 bg-(--primary) p-6 rounded-lg border border-(--border)">
           <CgGames className='w-10 text-3xl text-(--textwhite)' />
           <div>
-            <h2 className="lemon-milk-medium text-(--textwhite)">Active Matches</h2>
+            <h2 className="lemon-milk-medium text-(--textwhite)">Matchs actifs</h2>
             <p className="text-xl lemon-milk-medium text-(--textwhite)">{pendingCount}</p>
           </div>
         </div>
         <div className="card flex gap-x-3 bg-(--primary) p-6 rounded-lg border border-(--border)">
           <GrCurrency className='w-10 text-3xl text-(--textwhite)' />
           <div>
-            <h2 className="lemon-milk-medium text-(--textwhite)">Total Income</h2>
+            <h2 className="lemon-milk-medium text-(--textwhite)">Total des revenus</h2>
             <p className="text-xl lemon-milk-medium text-(--textwhite)">{totalPaidAmount}</p>
           </div>
         </div>
         <div className="card flex gap-x-3 bg-(--primary) p-6 rounded-lg border border-(--border)">
           <GiTargetPrize className='w-10 text-3xl text-(--textwhite)' />
           <div>
-            <h2 className="lemon-milk-medium text-(--textwhite)">Total Prizes</h2>
+            <h2 className="lemon-milk-medium text-(--textwhite)">Total des prix</h2>
             <p className="text-xl lemon-milk-medium text-(--textwhite)">{totalPositions}</p>
           </div>
         </div>
         <div className="card flex gap-x-3 bg-(--primary) p-6 rounded-lg border border-(--border)">
           <FaUserShield className='w-10 text-3xl text-(--textwhite)' />
           <div>
-            <h2 className="lemon-milk-medium text-(--textwhite)">Total Claims</h2>
+            <h2 className="lemon-milk-medium text-(--textwhite)">Total des réclamations</h2>
             <p className="text-xl lemon-milk-medium text-(--textwhite)">{totalClaim}</p>
           </div>
         </div>
@@ -91,7 +91,7 @@ const Overview = () => {
       <div className="grid md:grid-cols-2 gap-4">
           
         <div className="bg-(--primary) p-6 rounded-lg border border-(--border) h-full">
-          <h2 className="text-xl text-(--textwhite) mb-4 text-center">Income vs Prizes</h2>
+          <h2 className="text-xl text-(--textwhite) mb-4 text-center">Revenus vs prix</h2>
           <hr className='mb-4 border-(--border)' />
           <Pie data={incomePrizeGraphData} />
         </div>

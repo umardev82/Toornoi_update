@@ -41,7 +41,7 @@ const EditProfile = () => {
     );
   
     if (!hasChanges) {
-      toast("Your profile is already up to date!");
+      toast("Votre profil est déjà à jour !");
       return;
     }
   
@@ -73,7 +73,7 @@ const EditProfile = () => {
             <div className="space-y-7 bg-(--primary) md:p-7 p-4 rounded-md border border-(--border)">
           {/* Username */}
           <div className="md:flex flex-row justify-between text-nowrap">
-            <label className="flex items-center gap-x-2 md:mb-0 mb-2 text-(--textwhite) min-w-3xs"><FaUserCheck />Username</label>
+            <label className="flex items-center gap-x-2 md:mb-0 mb-2 text-(--textwhite) min-w-3xs"><FaUserCheck />Nom d'utilisateur</label>
             <input
               type="text"
               name="username"
@@ -87,7 +87,7 @@ const EditProfile = () => {
           {/* Full Name */}
           
             <div className="md:flex flex-row justify-between  text-nowrap">
-              <label className="flex items-center gap-x-2 md:mb-0 mb-2 text-(--textwhite) min-w-3xs"><FaUserGear />First Name</label>
+              <label className="flex items-center gap-x-2 md:mb-0 mb-2 text-(--textwhite) min-w-3xs"><FaUserGear />Prénom</label>
               <input
                 type="text"
                 name="first_name"
@@ -99,7 +99,7 @@ const EditProfile = () => {
             </div>
              <hr  className="border-(--border)"/>
             <div className="md:flex flex-row justify-between  text-nowrap">
-              <label className="flex items-center gap-x-2 md:mb-0 mb-2 text-(--textwhite) min-w-3xs"><FaUserGear />Last Name</label>
+              <label className="flex items-center gap-x-2 md:mb-0 mb-2 text-(--textwhite) min-w-3xs"><FaUserGear />Nom de famille</label>
               <input
                 type="text"
                 name="last_name"
@@ -114,7 +114,7 @@ const EditProfile = () => {
 
           {/* Email */}
           <div className="md:flex flex-row justify-between  text-nowrap">
-            <label className="flex items-center gap-x-2 md:mb-0 mb-2 text-(--textwhite) min-w-3xs"><MdEmail />Email</label>
+            <label className="flex items-center gap-x-2 md:mb-0 mb-2 text-(--textwhite) min-w-3xs"><MdEmail />E-mail</label>
             <input
               type="email"
               name="email"
@@ -127,11 +127,12 @@ const EditProfile = () => {
           <hr  className="border-(--border)"/>
           {/* Password (Optional for Updates) */}
           <div className="md:flex flex-row justify-between  text-nowrap">
-            <label className="flex items-center gap-x-2 md:mb-0 mb-2 text-(--textwhite) min-w-3xs"><RiLockPasswordFill />Password</label>
+            <label className="flex items-center gap-x-2 md:mb-0 mb-2 text-(--textwhite) min-w-3xs"><RiLockPasswordFill />Mot de passe</label>
             <input
               type="password"
               name="password"
-              placeholder="Enter new password (leave blank to keep current)"
+              placeholder="Entrez un nouveau mot de passe (laissez vide pour le conserver à jour)
+"
               onChange={handleChange}
               className="w-full bg-(--secondary) text-white p-3 rounded-md"
             />
@@ -139,7 +140,7 @@ const EditProfile = () => {
            <hr  className="border-(--border)"/>
           {/* Date of Birth */}
           <div className="md:flex flex-row justify-between  text-nowrap">
-            <label className="flex items-center gap-x-2 md:mb-0 mb-2 text-(--textwhite) min-w-3xs"><MdDateRange />Date of Birth</label>
+            <label className="flex items-center gap-x-2 md:mb-0 mb-2 text-(--textwhite) min-w-3xs"><MdDateRange />Date de naissance</label>
             <input
               type="date"
               name="date_of_birth"
@@ -152,7 +153,7 @@ const EditProfile = () => {
            <hr  className="border-(--border)"/>
           {/* Phone */}
           <div className="md:flex flex-row justify-between  text-nowrap">
-            <label className="flex items-center gap-x-2 md:mb-0 mb-2 text-(--textwhite) min-w-3xs"><FaPhoneSquareAlt />Phone Number</label>
+            <label className="flex items-center gap-x-2 md:mb-0 mb-2 text-(--textwhite) min-w-3xs"><FaPhoneSquareAlt />Numéro de téléphone</label>
             <input
               type="text"
               name="phone_number"
@@ -166,7 +167,7 @@ const EditProfile = () => {
 
           {/* Location */}
           <div className="md:flex flex-row justify-between  text-nowrap">
-            <label className="flex items-center gap-x-2 md:mb-0 mb-2 text-(--textwhite) min-w-3xs"><FaLocationDot />Location</label>
+            <label className="flex items-center gap-x-2 md:mb-0 mb-2 text-(--textwhite) min-w-3xs"><FaLocationDot />Emplacement</label>
             <input
               type="text"
               name="location"
@@ -179,13 +180,13 @@ const EditProfile = () => {
           
           {/* Profile Photo */}
           <div className="md:flex flex-row   text-nowrap">
-            <label className="flex items-center gap-x-2 md:mb-0 mb-2 text-(--textwhite) min-w-3xs"><ImProfile />Profile Photo</label>
+            <label className="flex items-center gap-x-2 md:mb-0 mb-2 text-(--textwhite) min-w-3xs"><ImProfile />Photo de profil</label>
           
             <div className="flex items-center justify-center space-x-4 w-full bg-(--secondary) text-white p-3 rounded-md">
             
              <label className="flex flex-col items-center justify-center h-40 cursor-pointer">
                 <img src={photoPreview || profile.photo || profileUpload } alt="" className="w-24 h-24 object-cover rounded-full border border-black mb-4"/>
-          <p className="text-white">Click to upload or drag and drop</p>
+          <p className="text-white">Cliquez pour télécharger ou faites glisser et déposez</p>
           <input 
             type="file" 
             accept="image/*" 
@@ -203,7 +204,7 @@ const EditProfile = () => {
             className=" bg-(--accent) text-white px-4 py-2 rounded-md"
             disabled={loading}
           >
-            {loading ? "Updating..." : "Save Changes"}
+            {loading ? "Mise à jour..." : "Enregistrer les modifications"}
           </button>
         </form>
       </div>

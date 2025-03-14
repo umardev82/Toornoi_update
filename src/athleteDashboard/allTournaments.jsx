@@ -56,10 +56,10 @@ const AllTournaments = () => {
     const maxFee = Math.max(...fees);
 
     const ranges = [
-      { label: `$${minFee} - $${minFee + 50}`, value: `${minFee}-${minFee + 50}` },
-      { label: `$${minFee + 51} - $${minFee + 100}`, value: `${minFee + 51}-${minFee + 100}` },
-      { label: `$${maxFee - 100} - $${maxFee}`, value: `${maxFee - 100}-${maxFee}` },
-      { label: `$${maxFee}+`, value: `${maxFee}+` },
+      { label: `${minFee} €- ${minFee + 50} €`, value: `${minFee}-${minFee + 50}` },
+      { label: `${minFee + 51} € - ${minFee + 100} €`, value: `${minFee + 51}-${minFee + 100}` },
+      { label: `${maxFee - 100} € - ${maxFee} €`, value: `${maxFee - 100}-${maxFee}` },
+      { label: `${maxFee} € +`, value: `${maxFee}+` },
     ];
 
     setPriceRanges(ranges);
@@ -116,21 +116,21 @@ const formatOnlyTime = (timeString) => {
       <div className="grid md:grid-cols-3 gap-3 mb-4">
         <input
           type="text"
-          placeholder="Search tournament..."
+          placeholder="Rechercher un tournoi..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           className="border border-(--border) p-2 rounded text-white bg-(--primary)"
         />
 
         <select value={category} onChange={(e) => setCategory(e.target.value)} className="border border-(--border) p-2 rounded text-white bg-(--primary)">
-          <option value="">All Categories</option>
+          <option value="">Toutes les catégories</option>
           {categories.map((cat, index) => (
             <option key={index} value={cat}>{cat}</option>
           ))}
         </select>
 
         <select value={priceRange} onChange={(e) => setPriceRange(e.target.value)} className="border p-2 border-(--border) rounded text-white bg-(--primary)">
-          <option value="">All Prices</option>
+          <option value="">Tous les prix</option>
           {priceRanges.map((range, index) => (
             <option key={index} value={range.value}>{range.label}</option>
           ))}
@@ -156,7 +156,7 @@ const formatOnlyTime = (timeString) => {
               {/* Registered Tag */}
         {tournament.is_registered && (
           <div className="absolute top-3 right-3 bg-green-800 text-white text-xs font-bold p-1 rounded-lg">
-            ✅ Registered
+            ✅ Enregistré            
           </div>
         )}
      
@@ -165,15 +165,15 @@ const formatOnlyTime = (timeString) => {
              <div className="w-fit  bg-black/80 text-white text-xs font-medium px-3 py-1 rounded-lg">
               📅  {tournament.start_date 
         ? `${formatDate(tournament.start_date)}`
-        : "Not Set"}
+        : "Non défini"}
             </div>
            
             <div className="w-fit  bg-black/80 text-white text-xs font-medium px-3 py-1 rounded-lg">
-            💳 Registration Fee: {tournament.registration_fee}€
+            💳 Frais d'inscription: {tournament.registration_fee}€
             </div>
             
             <div className="w-fit  bg-black/80 text-white text-xs font-medium px-3 py-1 rounded-lg">
-            🏆 Prize: {tournament.positions_1}€
+            🏆 Prix: {tournament.positions_1}€
             </div>
             </div>           
            
@@ -182,7 +182,7 @@ const formatOnlyTime = (timeString) => {
             <div className="p-4 mt-auto">
               {/* Fee Badge */}
               <div className="inline-block bg-(--secondary) text-white text-xs font-medium px-3 py-1 rounded-lg">
-                Time: {tournament.time ? formatOnlyTime(tournament.time) : "Not Set"}
+              Temps: {tournament.time ? formatOnlyTime(tournament.time) : "Non défini"}
               </div>
     
               {/* Title */}
@@ -203,7 +203,7 @@ const formatOnlyTime = (timeString) => {
        disabled={currentPage === 1}
        className="py-1 px-3 bg-(--primary) text-white rounded disabled:opacity-50"
      >
-       Previous
+       Précédent
      </button>
      <span className="text-(--accent) font-bold">{currentPage} / {totalPages}</span>
      <button
@@ -211,13 +211,13 @@ const formatOnlyTime = (timeString) => {
        disabled={currentPage === totalPages}
        className="py-1 px-3 bg-(--primary) text-white rounded disabled:opacity-50"
      >
-       Next
+      Suivant
      </button>
    </div>
 )}
         </>
       ) : (
-        <div className="w-full text-center font-bold text-white p-4">No tournaments found.</div>
+        <div className="w-full text-center font-bold text-white p-4">Aucun tournoi trouvé.</div>
       )}
     </>
   );

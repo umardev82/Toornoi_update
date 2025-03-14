@@ -57,72 +57,75 @@ const AddTournament = () => {
   return (
     <>
      {/* <Toaster toastOptions={{ duration: 5000 }} /> */}
-      <h1 className="lemon-milk-font text-(--textwhite) mb-4">Add Tournaments</h1>
+      <h1 className="lemon-milk-font text-(--textwhite) mb-4">Ajouter des tournois</h1>
       <form onSubmit={handleSubmit} className="p-5 bg-(--primary) rounded-lg border border-(--border) ">
         <div className="grid md:grid-cols-2 gap-3">
         <div className="flex flex-col gap-2">
-      <label className=" text-(--textwhite)">Tournament name</label>
-        <input type="text" name="tournament_name" value={formData.tournament_name} onChange={handleChange} placeholder="Tournament Name" className="w-full bg-(--secondary) text-white p-3 rounded-md" required/>
+      <label className=" text-(--textwhite)">Nom du tournoi
+</label>
+        <input type="text" name="tournament_name" value={formData.tournament_name} onChange={handleChange} placeholder="Nom du tournoi
+" className="w-full bg-(--secondary) text-white p-3 rounded-md" required/>
         </div>
        <div className="flex flex-col gap-2">
-        <label className=" text-(--textwhite)">Category</label>
-        <input type="text" name="category" value={formData.category} onChange={handleChange} placeholder="Category" className="w-full bg-(--secondary) text-white p-3 rounded-md" />
+        <label className=" text-(--textwhite)">Catégorie</label>
+        <input type="text" name="category" value={formData.category} onChange={handleChange} placeholder="Catégorie" className="w-full bg-(--secondary) text-white p-3 rounded-md" />
         </div>
         <div className="flex flex-col gap-2">
-        <label className=" text-(--textwhite)">Tournamnet Type</label>
-        <input type="text" name="bracket_type" value={formData.bracket_type} onChange={handleChange} placeholder="Tournamnet Type" className="w-full bg-(--secondary) text-white p-3 rounded-md" />
+        <label className=" text-(--textwhite)">Type de tournoi</label>
+        <input type="text" name="bracket_type" value={formData.bracket_type} onChange={handleChange} placeholder="Type de tournoi" className="w-full bg-(--secondary) text-white p-3 rounded-md" />
         </div>
         <div className="flex flex-col gap-2">
-        <label className=" text-(--textwhite)">Country</label>
-        <input type="text" name="country" value={formData.country} onChange={handleChange} placeholder="Country" className="w-full bg-(--secondary) text-white p-3 rounded-md" />
+        <label className=" text-(--textwhite)">Pays</label>
+        <input type="text" name="country" value={formData.country} onChange={handleChange} placeholder="Pays" className="w-full bg-(--secondary) text-white p-3 rounded-md" />
         </div>
         <div className="flex flex-col gap-2">
-        <label className=" text-(--textwhite)">Region</label>
-        <input type="text" name="region" value={formData.region} onChange={handleChange} placeholder="Region" className="w-full bg-(--secondary) text-white p-3 rounded-md" />
+        <label className=" text-(--textwhite)">Région</label>
+        <input type="text" name="region" value={formData.region} onChange={handleChange} placeholder="Région" className="w-full bg-(--secondary) text-white p-3 rounded-md" />
         </div>
          <div className="flex flex-col gap-2">
-        <label className=" text-(--textwhite)">Registration Fee</label>
-        <input type="number" name="registration_fee" value={formData.registration_fee} onChange={handleChange} placeholder="Registration Fee (€)" className="w-full bg-(--secondary) text-white p-3 rounded-md" />
+        <label className=" text-(--textwhite)">Frais d'inscription</label>
+        <input type="number" name="registration_fee" value={formData.registration_fee} onChange={handleChange} placeholder="Frais d'inscription (€)" className="w-full bg-(--secondary) text-white p-3 rounded-md" />
         </div>
         <div className="flex flex-col gap-2">
-        <label className=" text-(--textwhite)">Slots</label>
-        <input type="number" name="slots" value={formData.slots} onChange={handleChange} placeholder="Slots" className="w-full bg-(--secondary) text-white p-3 rounded-md" />
+        <label className=" text-(--textwhite)">Machines à sous</label>
+        <input type="number" name="slots" value={formData.slots} onChange={handleChange} placeholder="Machines à sous" className="w-full bg-(--secondary) text-white p-3 rounded-md" />
         </div>
         <div className="flex flex-col gap-2">
-        <label className="text-(--textwhite)">Status</label>
+        <label className="text-(--textwhite)">Statut</label>
         <select name="status"  value={formData.status} onChange={handleChange} className="w-full bg-(--secondary) text-white p-3 rounded-md" >
-        <option value="Open">Open</option>
-        <option value="In Progress">In Progress</option>
-        <option value="Completed">Completed</option>
+        <option value="Open">Ouvrir</option>
+        <option value="In Progress">En cours</option>
+        <option value="Completed">Complété</option>
         </select>
         </div>
 
         <div className="flex flex-col gap-2">
-        <label className=" text-(--textwhite)">Registration Deadline</label>
+        <label className=" text-(--textwhite)">Date limite d'inscription</label>
         <input type="datetime-local" name="registration_deadline" value={formData.registration_deadline} onChange={handleChange} className="w-full bg-(--secondary) text-white p-3 rounded-md" />
         </div>
          <div className="flex flex-col gap-2">
-        <label className=" text-(--textwhite)">Start Date</label>
+        <label className=" text-(--textwhite)">Date de début</label>
         <input type="date" name="start_date" value={formData.start_date} onChange={handleChange} className="w-full bg-(--secondary) text-white p-3 rounded-md" />
         </div>
         <div className="flex flex-col gap-2">
-        <label className=" text-(--textwhite)">End Date</label>
+        <label className=" text-(--textwhite)">Date de fin</label>
         <input type="date" name="end_date" value={formData.end_date} onChange={handleChange} className="w-full bg-(--secondary) text-white p-3 rounded-md" />
         </div>
         <div className="flex flex-col gap-2">
-        <label className=" text-(--textwhite)">Time</label>
+        <label className=" text-(--textwhite)">Temps
+        </label>
         <input type="time" name="time" value={formData.time} onChange={handleChange} className="w-full bg-(--secondary) text-white p-3 rounded-md" />
         </div>
         <div className="flex flex-col gap-2">
-        <label className=" text-(--textwhite)">Cover Image</label>
+        <label className=" text-(--textwhite)">Image de couverture</label>
         <input type="file" name="cover_image" onChange={handleChange} className="w-full bg-(--secondary) text-white p-3 rounded-md" />
         </div>
          <div className="flex flex-col gap-2">
-        <label className=" text-(--textwhite)">Sponsor Logo</label>
+        <label className=" text-(--textwhite)">Logo du sponsor</label>
         <input type="file" name="sponsor_logos" onChange={handleChange} className="w-full bg-(--secondary) text-white p-3 rounded-md" />
         </div>
         <div className="flex flex-col gap-2">
-        <label className=" text-(--textwhite)">Code Of Conduct</label>
+        <label className=" text-(--textwhite)">Code de conduite</label>
         <input type="file" name="code_of_conduct" onChange={handleChange} className="w-full bg-(--secondary) text-white p-3 rounded-md" />
         </div>
          <div className="flex flex-col gap-2">
@@ -130,52 +133,53 @@ const AddTournament = () => {
         <textarea name="description" value={formData.description} onChange={handleChange} placeholder="Description" className="w-full bg-(--secondary) text-white p-3 rounded-md" />
         </div>
         <div className="flex flex-col gap-2"> 
-        <label className=" text-(--textwhite)">Eligibility Criteria</label>
-        <textarea name="eligibility_criteria" value={formData.eligibility_criteria} onChange={handleChange} placeholder="Eligibility Criteria" className="w-full bg-(--secondary) text-white p-3 rounded-md" />
+        <label className=" text-(--textwhite)">Critères d'éligibilité</label>
+        <textarea name="eligibility_criteria" value={formData.eligibility_criteria} onChange={handleChange} placeholder="Critères d'éligibilité" className="w-full bg-(--secondary) text-white p-3 rounded-md" />
         </div>
          <div className="flex flex-col gap-2">
-        <label className=" text-(--textwhite)">Rules and Regulations</label>
-        <textarea name="rules_and_regulations" value={formData.rules_and_regulations} onChange={handleChange} placeholder="Rules and Regulations" className="w-full bg-(--secondary) text-white p-3 rounded-md" />
+        <label className=" text-(--textwhite)">Règles et règlements</label>
+        <textarea name="rules_and_regulations" value={formData.rules_and_regulations} onChange={handleChange} placeholder="Règles et règlements" className="w-full bg-(--secondary) text-white p-3 rounded-md" />
         </div>
         <div className="flex flex-col gap-2">
-        <label className=" text-(--textwhite)">Match Rules</label>
-        <textarea name="match_rules" value={formData.match_rules} onChange={handleChange} placeholder="Match Rules" className="w-full bg-(--secondary) text-white p-3 rounded-md" />
+        <label className=" text-(--textwhite)">Règles du match</label>
+        <textarea name="match_rules" value={formData.match_rules} onChange={handleChange} placeholder="Règles du match" className="w-full bg-(--secondary) text-white p-3 rounded-md" />
         </div>
          <div className="flex flex-col gap-2">
-        <label className=" text-(--textwhite)">Prize Details</label>
-        <textarea name="prize_details" value={formData.prize_details} onChange={handleChange} placeholder="Prize Details" className="w-full bg-(--secondary) text-white p-3 rounded-md" />
+        <label className=" text-(--textwhite)">Détails du prix</label>
+        <textarea name="prize_details" value={formData.prize_details} onChange={handleChange} placeholder="Détails du prix" className="w-full bg-(--secondary) text-white p-3 rounded-md" />
         </div>
          <div className="flex flex-col gap-2">
-        <label className=" text-(--textwhite)">Dispute Resolution Process</label>
-        <textarea name="dispute_resolution_Process" value={formData.dispute_resolution_Process} onChange={handleChange} placeholder="Dispute Resolution Process" className="w-full bg-(--secondary) text-white p-3 rounded-md" />
+        <label className=" text-(--textwhite)">Processus de résolution des litiges</label>
+        <textarea name="dispute_resolution_Process" value={formData.dispute_resolution_Process} onChange={handleChange} placeholder="Processus de résolution des litiges" className="w-full bg-(--secondary) text-white p-3 rounded-md" />
         </div>
          <div className="flex flex-col gap-2">
-        <label className=" text-(--textwhite)">Prize Distribution</label>
-        <textarea name="prize_distribution" value={formData.prize_distribution} onChange={handleChange} placeholder="Prize Distribution" className="w-full bg-(--secondary) text-white p-3 rounded-md" />
+        <label className=" text-(--textwhite)">Distribution des prix</label>
+        <textarea name="prize_distribution" value={formData.prize_distribution} onChange={handleChange} placeholder="Distribution des prix" className="w-full bg-(--secondary) text-white p-3 rounded-md" />
         </div>
         <div className="flex flex-col gap-2">
-        <label className=" text-(--textwhite)">Winner</label>
-        <input type="number" name="positions_1" value={formData.positions_1} onChange={handleChange} placeholder="Prize (€)" className="w-full bg-(--secondary) text-white p-3 rounded-md" />
+        <label className=" text-(--textwhite)">Gagnant</label>
+        <input type="number" name="positions_1" value={formData.positions_1} onChange={handleChange} placeholder="Prix ​​(€)" className="w-full bg-(--secondary) text-white p-3 rounded-md" />
         </div>
          <div className="flex flex-col gap-2">
-        <label className=" text-(--textwhite)">Runner Up</label>
-        <input type="number" name="positions_2" value={formData.positions_2} onChange={handleChange} placeholder="Prize (€)" className="w-full bg-(--secondary) text-white p-3 rounded-md" />
+        <label className=" text-(--textwhite)">Finaliste</label>
+        <input type="number" name="positions_2" value={formData.positions_2} onChange={handleChange} placeholder="Prix ​​(€)" className="w-full bg-(--secondary) text-white p-3 rounded-md" />
         </div>
          {/* <div className="flex flex-col gap-2">
         <label className=" text-(--textwhite)">Position 3</label>
         <textarea name="positions_3" value={formData.positions_3} onChange={handleChange} placeholder="Position 3" className="w-full bg-(--secondary) text-white p-3 rounded-md" />
         </div> */}
         <div className="flex flex-col gap-2">
-        <label className=" text-(--textwhite)">Sponsorship Details</label>
-        <textarea name="sponsorship_details" value={formData.sponsorship_details} onChange={handleChange} placeholder="Sponsorship Details" className="w-full bg-(--secondary) text-white p-3 rounded-md" />
+        <label className=" text-(--textwhite)">Détails du parrainage</label>
+        <textarea name="sponsorship_details" value={formData.sponsorship_details} onChange={handleChange} placeholder="Détails du parrainage
+" className="w-full bg-(--secondary) text-white p-3 rounded-md" />
         </div>
         <div className="flex flex-col gap-2">
-        <label className=" text-(--textwhite)">Partnership Info</label>
-        <textarea name="partnership_info" value={formData.partnership_info} onChange={handleChange} placeholder="Partnership Info" className="w-full bg-(--secondary) text-white p-3 rounded-md" />
+        <label className=" text-(--textwhite)">Informations sur le partenariat</label>
+        <textarea name="partnership_info" value={formData.partnership_info} onChange={handleChange} placeholder="Informations sur le partenariat" className="w-full bg-(--secondary) text-white p-3 rounded-md" />
         </div>
         <div className="flex flex-col gap-2">
-        <label className=" text-(--textwhite)">Refund Policy</label>
-        <textarea name="refund_policy" value={formData.refund_policy} onChange={handleChange} placeholder="Refund Policy" className="w-full bg-(--secondary) text-white p-3 rounded-md" />
+        <label className=" text-(--textwhite)">Politique de remboursement</label>
+        <textarea name="refund_policy" value={formData.refund_policy} onChange={handleChange} placeholder="Politique de remboursement" className="w-full bg-(--secondary) text-white p-3 rounded-md" />
         </div>
         <div className="flex items-center gap-2">
             <input
@@ -185,7 +189,7 @@ const AddTournament = () => {
               onChange={handleChange}
               className="w-5 h-5"
             />
-            <label className="text-(--textwhite)">Publish Tournament</label>
+            <label className="text-(--textwhite)">Publier le tournoi</label>
           </div>
 
         </div>

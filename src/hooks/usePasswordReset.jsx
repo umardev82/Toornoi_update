@@ -9,7 +9,7 @@ const usePasswordReset = () => {
 
   // Function to extract error messages properly
   const extractErrorMessage = (error) => {
-    let errorMessage = "Something went wrong. Try again!";
+    let errorMessage = "Une erreur s'est produite. Réessayez !";
     
     if (error.response?.data) {
       if (typeof error.response.data === "string") {
@@ -31,11 +31,11 @@ const usePasswordReset = () => {
   // Forgot Password
   const forgotPassword = async (email) => {
     setLoading(true);
-    let toastId = toast.loading("Sending reset link...");
+    let toastId = toast.loading("Envoi du lien de réinitialisation...");
 
     try {
       await axios.post(`${API_BASE_URL}/loge/forgot-password/`, { email });
-      toast.success("Reset link sent! Check your email.", { id: toastId });
+      toast.success("Lien de réinitialisation envoyé ! Consultez votre boîte de réception.", { id: toastId });
       return { success: true };
     } catch (error) {
       const errorMessage = extractErrorMessage(error);
@@ -51,7 +51,7 @@ const usePasswordReset = () => {
   const resetPassword = async (password, confirmPassword, token) => {
     setLoading(true);
     setError(null);
-    let toastId = toast.loading("Resetting password...");
+    let toastId = toast.loading("Réinitialisation du mot de passe...");
 
     try {
       const response = await axios.post(
@@ -60,7 +60,7 @@ const usePasswordReset = () => {
         { headers: { "Content-Type": "application/json" } }
       );
 
-      toast.success("Password reset successful! Redirecting...", { id: toastId });
+      toast.success("Réinitialisation du mot de passe réussie ! Redirection...", { id: toastId });
       return { success: true, data: response.data };
     } catch (error) {
       const errorMessage = extractErrorMessage(error);

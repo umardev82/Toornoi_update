@@ -117,9 +117,9 @@ const TournamentList = () => {
     });
 
     toast.promise(deletePromise, {
-      loading: "Deleting tournament...",
-      success: "Tournament deleted successfully!",
-      error: "Failed to delete tournament.",
+      loading: "Suppression du tournoi...",
+      success: "Tournoi supprimé avec succès !",
+      error: "Échec de la suppression du tournoi.",
     });
   };
 
@@ -129,7 +129,7 @@ const TournamentList = () => {
       <div className="flex flex-wrap md:justify-end items-start gap-3 mb-4">
         <input
           type="text"
-          placeholder="Search tournament..."
+          placeholder="Rechercher un tournoi..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           className="md:w-auto w-full border border-(--border) p-2 rounded text-white bg-(--primary)"
@@ -140,17 +140,17 @@ const TournamentList = () => {
           onChange={(e) => setStatusFilter(e.target.value)}
           className="md:w-auto w-full border border-(--border) p-2 rounded text-white bg-(--primary)"
         >
-          <option value="">All Statuses</option>
-          <option value="Open">Open</option>
-          <option value="In Progress">In Progress</option>
-          <option value="Pending">Pending</option>
+          <option value="">Tous les statuts</option>
+          <option value="Open">Ouvrir</option>
+        <option value="In Progress">En cours</option>
+        <option value="Completed">Complété</option>
         </select>
 
         <button 
         onClick={exportToExcel} 
         className="mb-4 px-4 py-2 bg-(--accent) text-white rounded"
       >
-        Export to Excel
+        Exporter vers Excel
       </button>
       </div>
 
@@ -158,12 +158,12 @@ const TournamentList = () => {
         <table className="w-full table-auto text-left text-white border-separate border-spacing-y-2 border border-transparent">
           <thead className="bg-(--secondary) p-2 rounded-sm text-white">
             <tr className="rounded-2xl">
-              <th className="p-3 font-medium rounded-l-md whitespace-nowrap w-max">Tournament</th>
-              <th className="p-3 font-medium whitespace-nowrap w-max">Registration Fee</th>
-              <th className="p-3 font-medium whitespace-nowrap w-max">Status</th>
-              <th className="p-3 font-medium whitespace-nowrap w-max">Slots</th>
+              <th className="p-3 font-medium rounded-l-md whitespace-nowrap w-max">Tournoi</th>
+              <th className="p-3 font-medium whitespace-nowrap w-max">Frais d'inscription</th>
+              <th className="p-3 font-medium whitespace-nowrap w-max">Statut</th>
+              <th className="p-3 font-medium whitespace-nowrap w-max">Machines à sous</th>
               <th className="p-3 font-medium whitespace-nowrap w-max">Date</th>
-              <th className="p-3 font-medium rounded-r-md whitespace-nowrap w-max">Actions</th>
+              <th className="p-3 font-medium rounded-r-md whitespace-nowrap w-max">Actes</th>
             </tr>
           </thead>
           <tbody>
@@ -178,7 +178,7 @@ const TournamentList = () => {
             ) : paginatedTournaments.length === 0 ? (
               <tr>
                 <td colSpan="6" className="text-center font-bold text-white p-4">
-                  No tournaments found.
+                Aucun tournoi trouvé.
                 </td>
               </tr>
             ) : (
@@ -198,11 +198,11 @@ const TournamentList = () => {
                       {tournament.status}
                     </span>
                   </td>
-                  <td className="p-3 whitespace-nowrap w-max">{tournament.slots || "Not Set"}</td>
+                  <td className="p-3 whitespace-nowrap w-max">{tournament.slots || "Non défini"}</td>
                   <td className="p-3 whitespace-nowrap w-max">
                     {tournament.start_date && tournament.end_date
                       ? `${formatDate(tournament.start_date)} - ${formatDate(tournament.end_date)}`
-                      : "Not Set"}
+                      : "Non défini"}
                   </td>
                   <td className="p-3 whitespace-nowrap w-max">
                     <div className="flex gap-3">
@@ -231,7 +231,7 @@ const TournamentList = () => {
        disabled={currentPage === 1}
        className="py-1 px-3 bg-(--primary) text-white rounded disabled:opacity-50"
      >
-       Previous
+      Précédent
      </button>
      <span className="text-(--accent) font-bold">{currentPage} / {totalPages}</span>
      <button
@@ -239,7 +239,7 @@ const TournamentList = () => {
        disabled={currentPage === totalPages}
        className="py-1 px-3 bg-(--primary) text-white rounded disabled:opacity-50"
      >
-       Next
+       Suivant
      </button>
    </div>
 )}
@@ -248,23 +248,23 @@ const TournamentList = () => {
         {showConfirmModal && selectedTournament && (
           <div className="fixed h-screen w-full inset-0 flex items-center justify-center bg-black/85 z-50 p-5">
             <div className="bg-(--primary) p-6 rounded-lg shadow-lg md:w-[40%] w-full">
-              <h2 className="text-(--textwhite) mb-4 lemon-milk-font">Confirm Delete</h2>
+              <h2 className="text-(--textwhite) mb-4 lemon-milk-font">Confirmer la suppression</h2>
               <p className="text-(--textlight) mb-4">
-                Are you sure you want to delete the tournament{" "}
-                <strong>{selectedTournament.tournament_name}</strong>? This action cannot be undone.
+              Êtes-vous sûr de vouloir supprimer le tournoi{" "}
+                <strong>{selectedTournament.tournament_name}</strong>? Cette action est irréversible.
               </p>
               <div className="flex justify-end space-x-3">
                 <button
                   className="px-4 py-2 bg-(--accent) text-(--textwhite) rounded-md"
                   onClick={() => setShowConfirmModal(false)}
                 >
-                  Cancel
+                  Annuler
                 </button>
                 <button
                   className="px-4 py-2 bg-red-600 text-white rounded-md"
                   onClick={deleteTournament}
                 >
-                  Delete
+                  Supprimer
                 </button>
               </div>
             </div>

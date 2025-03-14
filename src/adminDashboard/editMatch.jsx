@@ -68,7 +68,7 @@ const EditMatch = () => {
           }));
         }
       } catch (error) {
-        toast.error("Failed to fetch data.");
+        toast.error("Échec de la récupération des données.");
       } finally {
         setLoading(false);
       }
@@ -77,7 +77,7 @@ const EditMatch = () => {
     if (id) {
       fetchData();
     } else {
-      toast.error("Match ID is missing.");
+      toast.error("L'ID de correspondance est manquant.");
     }
   }, [id]);
   
@@ -121,12 +121,12 @@ const EditMatch = () => {
       });
   
       if (response.status === 200) {
-        toast.success("Match updated successfully!");
+        toast.success("Match mis à jour avec succès !");
       } else {
-        toast.error("Failed to update match.");
+        toast.error("Échec de la mise à jour de la correspondance.");
       }
     } catch (error) {
-      toast.error(error.response?.data?.message || "Something went wrong.");
+      toast.error(error.response?.data?.message || "Quelque chose s'est mal passé.");
     }
   };
 
@@ -153,7 +153,7 @@ const EditMatch = () => {
   return (
     <>
       {/* <Toaster toastOptions={{ duration: 5000 }} /> */}
-      <h1 className="lemon-milk-font text-(--textwhite) mb-4">Edit Match</h1>
+      <h1 className="lemon-milk-font text-(--textwhite) mb-4">Modifier la correspondance</h1>
 
       {loading ? (
         <p className="text-white">Loading...</p>
@@ -163,7 +163,7 @@ const EditMatch = () => {
 
             {/* Tournament Dropdown */}
             <div className="flex flex-col gap-2">
-              <label className="text-(--textwhite)">Tournament</label>
+              <label className="text-(--textwhite)">Tournoi</label>
               <select
                 name="tournament"
                 className="w-full bg-(--secondary) text-white p-3 rounded-md"
@@ -171,7 +171,7 @@ const EditMatch = () => {
                 value={matchData.tournament}
                 onChange={handleChange}
               >
-                <option value="">Select Tournament</option>
+                <option value="">Sélectionnez le tournoi</option>
                 {tournaments.map((tournament) => (
                   <option key={tournament.id} value={tournament.id}>
                     {tournament.tournament_name}
@@ -182,7 +182,7 @@ const EditMatch = () => {
 
             {/* Player 1 Dropdown */}
             <div className="flex flex-col gap-2">
-              <label className="text-(--textwhite)">Player 1</label>
+              <label className="text-(--textwhite)">Joueur 1</label>
               <select
                 name="player_1"
                 className="w-full bg-(--secondary) text-white p-3 rounded-md"
@@ -190,7 +190,7 @@ const EditMatch = () => {
                 value={matchData.player_1}
                 onChange={handleChange}
               >
-                <option value="">Select Player 1</option>
+                <option value="">Sélectionnez le joueur 1</option>
                 {players.map((player) => (
                   <option key={player.id} value={player.id}>
                     {player.username}
@@ -201,7 +201,7 @@ const EditMatch = () => {
 
             {/* Player 2 Dropdown */}
             <div className="flex flex-col gap-2">
-              <label className="text-(--textwhite)">Player 2</label>
+              <label className="text-(--textwhite)">Joueur 2</label>
               <select
                 name="player_2"
                 className="w-full bg-(--secondary) text-white p-3 rounded-md"
@@ -209,7 +209,7 @@ const EditMatch = () => {
                 value={matchData.player_2}
                 onChange={handleChange}
               >
-                <option value="">Select Player 2</option>
+                <option value="">Sélectionnez le joueur 2</option>
                 {players.map((player) => (
                   <option key={player.id} value={player.id}>
                     {player.username}
@@ -220,7 +220,7 @@ const EditMatch = () => {
             
             {/* Date Input */}
             <div className="flex flex-col gap-2">
-              <label className="text-(--textwhite)">Date & Time</label>
+              <label className="text-(--textwhite)">Date et heure</label>
               <input
                 type="datetime-local"
                 name="date"
@@ -232,28 +232,29 @@ const EditMatch = () => {
             </div>
               {/* Status Dropdown */}
               <div className="flex flex-col gap-2">
-              <label className="text-(--textwhite)">Status</label>
+              <label className="text-(--textwhite)">Statut</label>
               <select
                 name="status"
                 className="w-full bg-(--secondary) text-white p-3 rounded-md"
                 value={matchData.status}
                 onChange={handleChange}
               >
-                <option value="Pending">Pending</option>
-                <option value="Completed">Completed</option>
+                <option value="Pending">En attente</option>
+                <option value="Completed">Complété</option>
               </select>
             </div>
 
             {/* Winner Dropdown */}
             <div className="flex flex-col gap-2">
-              <label className="text-(--textwhite)">Winner</label>
+              <label className="text-(--textwhite)">Gagnant
+              </label>
               <select
                 name="winner"
                 className="w-full bg-(--secondary) text-white p-3 rounded-md"
                 value={matchData.winner || ""}
                 onChange={handleChange}
               >
-                <option value="">Select Winner</option>
+                <option value="">Sélectionnez le gagnant</option>
                 {players.map((player) => (
                   <option key={player.id} value={player.id}>
                     {player.username}
@@ -265,12 +266,12 @@ const EditMatch = () => {
             {/* Player Scores */}
             <div className="flex flex-col gap-2">
               <label className="text-(--textwhite)">
-                {players.find(p => p.id === matchData.player_1)?.username || "Player 1"} Score
+                {players.find(p => p.id === matchData.player_1)?.username || "Joueur 1"} Score de
               </label>
               <input
                 type="number"
                 name="player_1_score"
-                placeholder="Enter Score"
+                placeholder="Entrez le score"
                 className="w-full bg-(--secondary) text-white p-3 rounded-md"
                 value={matchData.result?.player_1_score || ""}
                 onChange={handleChange}
@@ -279,12 +280,12 @@ const EditMatch = () => {
 
             <div className="flex flex-col gap-2">
               <label className="text-(--textwhite)">
-                {players.find(p => p.id === matchData.player_2)?.username || "Player 2"} Score
+                {players.find(p => p.id === matchData.player_2)?.username || "Joueur 2"} Score de
               </label>
               <input
                 type="number"
                 name="player_2_score"
-                placeholder="Enter Score"
+                placeholder="Entrez le score"
                 className="w-full bg-(--secondary) text-white p-3 rounded-md"
                 value={matchData.result?.player_2_score || ""}
                 onChange={handleChange}
@@ -294,7 +295,7 @@ const EditMatch = () => {
             {/* Player 1 Screenshot Upload */}
             <div className="flex flex-col gap-2">
               <label className="text-(--textwhite)">
-                {players.find(p => p.id === matchData.player_1)?.username || "Player 1"} Screenshot
+                {players.find(p => p.id === matchData.player_1)?.username || "Joueur 1"} Capture d'écran
               </label>
               <input
                 type="file"
@@ -307,7 +308,7 @@ const EditMatch = () => {
                 <div className="mt-2">
                   <img
                     src={getImageUrl(matchData.result?.player_1_screenshot)}
-                    alt="Player 1 Screenshot"
+                    alt="Capture d'écran du joueur 1"
                     className="w-[200px] h-auto rounded-md"
                   />
                 </div>
@@ -317,7 +318,7 @@ const EditMatch = () => {
             {/* Player 2 Screenshot Upload */}
             <div className="flex flex-col gap-2">
               <label className="text-(--textwhite)">
-                {players.find(p => p.id === matchData.player_2)?.username || "Player 2"} Screenshot
+                {players.find(p => p.id === matchData.player_2)?.username || "Joueur 2"} Capture d'écran
               </label>
               <input
                 type="file"
@@ -330,7 +331,7 @@ const EditMatch = () => {
                 <div className="mt-2">
                   <img
                     src={getImageUrl(matchData.result?.player_2_screenshot)}
-                    alt="Player 2 Screenshot"
+                    alt="Capture d'écran du joueur 2"
                     className="w-[200px] h-auto rounded-md"
                   />
                 </div>
@@ -339,7 +340,7 @@ const EditMatch = () => {
           </div>
 
           <button type="submit" className="px-4 py-2 bg-(--accent) mt-5 text-white rounded">
-            Update Match
+          Mettre à jour la correspondance
           </button>
         </form>
       )}
